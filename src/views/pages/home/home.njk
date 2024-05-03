@@ -1,0 +1,40 @@
+{% extends 'basePage.njk' %} {% block head %}
+<link rel="stylesheet" href="/public/css/home.css" />
+{% endblock %} {% block body %}
+
+<div class="">
+  <h1 class="">Blank Page</h1>
+  <p class="">You have just reached a work-in-progress!</p>
+  <a class="" href="/">Back to the Home Page</a>
+</div>
+
+<div class="mapContainer">
+  <div class="mapWrapper">
+    <div id="map" class="map"></div>
+  </div>
+
+  <div id="mapCenterMarker" class="mapCenterMarker hide"></div>
+</div>
+
+{% if showSurvey %}
+  <div> Contribuye con tus datos</div>
+  <div>
+          {% include "./addForm.html" %}
+    </di>
+{% endif %}
+
+
+
+{% endblock %} 
+
+{% block script %}
+
+
+<script>
+
+</script>
+
+
+
+
+{% endblock %}

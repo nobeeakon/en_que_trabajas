@@ -1,0 +1,42 @@
+{
+    "name": "en_que_trabajas",
+    "version": "1.0.0",
+    "description": "En que trabajas",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm run format && ts-node src/index.ts",
+        "browserify": "browserify src/views/js/map -o src/public/map  ",
+        "build": "npm run format && tsc",
+        "serve": "node dist/index.js",
+        "prepare": "husky install",
+        "format": "prettier . --write"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@total-typescript/ts-reset": "^0.5.1",
+        "@types/nunjucks": "^3.2.6",
+        "escape-html": "^1.0.3",
+        "leaflet": "^1.9.4",
+        "nunjucks": "^3.2.4",
+        "pug": "^3.0.2",
+        "sqlite": "^5.1.1",
+        "sqlite3": "^5.1.7",
+        "uuidv4": "^6.2.13",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.11.19",
+        "express": "^4.18.2",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "prettier": "^3.2.5",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.3.3"
+    },
+    "lint-staged": {
+        "*.{js,css,md}": "prettier --write"
+    }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block meta %} {% endblock %}
+    <!-- Title -->
+    <title>{{ title }}</title>
+
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    {# SOME STYLESHEETS HERE #} 
+    <link rel="stylesheet" href='/public/css/baseStyles.css' />
+    <link rel="stylesheet" href='/public/css/footer.css' />
+   
+   <!-- Modules -->
+    <script src="public/js/escape-html/index.js" ></script>
+    {% block head %}
+     <!-- CSS Customization -->
+    {% endblock %}
+  </head>
+
+  <body>
+    {# margin to accommodate header bar #}
+    <main class="main">
+      {# HEADER #} 
+      {% include "header.njk"%} 
+      <div class="mainContent">
+        {% block body %}{% endblock %} 
+      </div>
+      {# FOOTER #} 
+       {% include "footer.njk"%}
+    </main>
+
+    {# SOME SCRIPTS HERE #}
+    {%block script%} {%endblock%}
+   
+
+  </body>
+</html>

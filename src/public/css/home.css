@@ -1,0 +1,32 @@
+.mapContainer {
+    height: 300px;
+    position: relative;
+}
+
+.mapWrapper {
+    width: 100%;
+    height: 100%;
+    isolation: isolate;
+}
+.map {
+    width: 100%;
+    height: 100%;
+}
+
+.mapCenterMarker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 3px solid blue;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tabs {
+    display: flex;
+}
+.tabs *[active] {
+    border: red 2px solid;
+}

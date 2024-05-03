@@ -1,0 +1,385 @@
+<form id="start-survey">
+    <div>
+        <div>Selecciona tus estudios</div>
+        <div>
+            <label
+                ><input name="degree" type="checkbox" value="tsu" /> Técnico
+                Superior Universitario
+            </label>
+            <label
+                ><input name="degree" type="checkbox" value="lic" />
+                Licenciatura
+            </label>
+            <label
+                ><input name="degree" type="checkbox" value="esp" />
+                Especialidad
+            </label>
+            <label
+                ><input name="degree" type="checkbox" value="msc" /> Maestría
+            </label>
+            <label
+                ><input name="degree" type="checkbox" value="phd" /> Doctorado
+            </label>
+            <label
+                ><input name="degree" type="checkbox" value="postdoc" />
+                Posdoctorado
+            </label>
+        </div>
+        <div>
+            <div>Género</div>
+            <div>
+                <label
+                    ><input name="gender" type="radio" value="male" /> Masculino
+                </label>
+                <label
+                    ><input name="gender" type="radio" value="female" />
+                    Femenino
+                </label>
+                <label
+                    ><input name="gender" type="radio" value="other" /> Otro
+                </label>
+            </div>
+        </div>
+        <button type="submit">Siguiente</button>
+    </div>
+</form>
+
+<form id="studies-survey" class="hide">
+    <div id="studies-survey-content"></div>
+    <button type="submit">Siguiente</button>
+</form>
+
+<form id="job-survey" class="hide">
+    <div>De tu trabajo que representa tu fuente principal de ingresos</div>
+    <div id="job-survey-content"></div>
+    <button type="submit">Siguiente</button>
+</form>
+
+<div id="finish-form" class="hide">Gracias :)</div>
+
+<script>
+    const startSurveyForm = document.getElementById('start-survey');
+    const studiesSurvey = document.getElementById('studies-survey');
+    const studiesSurveyContent = document.getElementById(
+        'studies-survey-content'
+    );
+    const jobSurveyForm = document.getElementById('job-survey');
+    const jobSurveyContent = document.getElementById('job-survey-content');
+    const finishFormThanks = document.getElementById('finish-form');
+
+    const buildRandomIds = (length) =>
+        Array(length)
+            .fill(null)
+            .map(() => Math.round(Math.random() * 100000).toString());
+
+    const STUDY_LEVEL_NAMES = {
+        tsu: { id: 'tsu', name: 'Técnico Superior Universitario' },
+        lic: { id: 'lic', name: 'Licenciatura' },
+        esp: { id: 'esp', name: 'Especialidad' },
+        msc: { id: 'msc', name: 'Maestría' },
+        phd: { id: 'phd', name: 'Doctorado' },
+        postdoc: { id: 'postdoc', name: 'Posdoctorado' },
+    };
+
+    const ESTADOS = {
+        ags: 'Aguascalientes',
+        baja: 'Baja California',
+        bajaSur: 'Baja California Sur',
+        camp: 'Campeche',
+        chia: 'Chiapas',
+        chi: 'Chihuahua',
+        cdmx: 'Ciudad de México',
+        coah: 'Coahuila de Zaragoza',
+        col: 'Colima',
+        dur: 'Durango',
+        gto: 'Guanajuato',
+        gro: 'Guerrero',
+        hgo: 'Hidalgo',
+        jal: 'Jalisco',
+        edomex: 'Estado de México',
+        mich: 'Michoacán de Ocampo',
+        mor: 'Morelos',
+        nay: 'Nayarit',
+        nvoLeon: 'Nuevo León',
+        oax: 'Oaxaca',
+        pue: 'Puebla',
+        qro: 'Querétaro',
+        qroo: 'Quintana Roo',
+        slp: 'San Luis Potosí',
+        sin: 'Sinaloa',
+        son: 'Sonora',
+        tab: 'Tabasco',
+        tamps: 'Tamaulipas',
+        tlax: 'Tlaxcala',
+        ver: 'Veracruz de Ignacio de la Llave',
+        yuc: 'Yucatán',
+        zac: 'Zacatecas',
+    };
+
+    const buildStudyItem = (studyDegree, index) => {
+        const container = document.createElement('div');
+
+        const currentYear = new Date().getFullYear();
+
+        const [inputTitleId, institutionId, startYearId, stateId] =
+            buildRandomIds(10);
+
+        const studyItemHtmlString = `
+          <div>${STUDY_LEVEL_NAMES[studyDegree].name}</div>
+          <input name="${`${index}-degree`}" type="hidden" value="${studyDegree}">
+          <div>
+            <label for="${inputTitleId}">Título</label>
+            <input  name="${`${index}-title`}"  type="text" name="" id="${inputTitleId}" placeholder="Ej: Biólogo">
+          </div>
+          <div>
+            <label for="${institutionId}">Institución</label>
+            <input  name="${`${index}-institution`}"  type="text" name="" id="${institutionId}" placeholder="Ej: Universidad Nacional Autónoma de México">
+          </div>
+
+          <div>
+            <label for="${startYearId}">Año en que entraste</label>
+            <select  name="${`${index}-startYear`}"  id="${startYearId}">
+              <option></option>
+              ${Array(60)
+                  .fill(null)
+                  .map((_, i) => {
+                      const targetYear = currentYear - i;
+                      return `<option value="${targetYear}">${targetYear}</option>`;
+                  })
+                  .join('')}
+            </select>
+          </div>
+      `;
+
+        container.innerHTML = studyItemHtmlString;
+        return container;
+    };
+
+    const LABORAL_SITUATION = [
+        { id: 'full', name: 'Tiempo completo' },
+        { id: 'mid', name: 'Medio tiempo' },
+        { id: 'independent', name: 'Empleado independiente' },
+        { id: 'autoemployment', name: 'Autoempleo' },
+    ];
+
+    const JOB_FORM_CONTENT_INPUT_NAMES = {
+        jobSituation: 'laboral-situation',
+        salary: 'salary',
+        employer: 'employer',
+        laboralArea: 'laboral-area',
+        position: 'position',
+        yearsOfExperience: 'years-of-experience',
+        mexicanState: 'mexican-state',
+        degreeJobRelated: 'degree-job-related',
+    };
+
+    const buildJobFormContent = (studyDegrees) => {
+        const container = document.createElement('div');
+
+        const currentYear = new Date().getFullYear();
+
+        const [
+            laboralSituationInputId,
+            salaryInputId,
+            institutionId,
+            yearsOfExperienceInputId,
+            jobAreaInputId,
+            positionInputId,
+            stateInputId,
+            degreeJobRelatedInputId,
+        ] = buildRandomIds(10);
+
+        const studyItemHtmlString = `
+          <div>
+            <label for="${laboralSituationInputId}">Situación laboral</label>
+            <select  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.jobSituation
+            }"  id="${laboralSituationInputId}">
+              <option></option>
+              ${LABORAL_SITUATION.map(
+                  (laborSituationItem) =>
+                      `<option value="${laborSituationItem.id}">${laborSituationItem.name}</option>`
+              ).join('')}
+            </select>
+          </div>
+
+          <div>
+            <label for="${salaryInputId}">Salario mensual (pesos mexicanos)</label>
+            <input  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.salary
+            }" type="number" min="0" id="${salaryInputId}">
+          </div>
+
+          <div>
+            <label for="${institutionId}">Empresa o institución</label>
+            <input  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.employer
+            }"  type="text" id="${institutionId}" placeholder="Ej: Universidad Nacional Autónoma de México">
+          </div>
+
+          <div>
+            <label for="${jobAreaInputId}">Área laboral</label>
+            <input  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.laboralArea
+            }" type="text"  id="${jobAreaInputId}">
+          </div>
+
+          <div>
+            <label for="${positionInputId}">Cargo</label>
+            <input  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.position
+            }" type="text"  id="${positionInputId}">
+          </div>
+
+          <div>
+            <label for="${yearsOfExperienceInputId}">Cuántos años llevas en esa área</label>
+            <input  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.yearsOfExperience
+            }" type="number" min="0" max="40" name="" id="${yearsOfExperienceInputId}">
+          </div>
+
+          <div>
+            <label for=${stateInputId}> Estado</label>
+            <select  name="${
+                JOB_FORM_CONTENT_INPUT_NAMES.mexicanState
+            }"  id=${stateInputId}>
+              <option></option>
+              ${Object.entries(ESTADOS)
+                  .map(
+                      ([stateId, stateName]) =>
+                          `<option value="${stateId}">${stateName}</option>`
+                  )
+                  .join('')}
+            </select>
+          </div>
+
+          <div>
+            <label for=${degreeJobRelatedInputId}> ¿Cuál de tus grados está relacionado con este trabajo?</label>
+            ${studyDegrees
+                .map(
+                    (degreeItem, degreeIndex) =>
+                        `<div><label> <input type="checkbox" name="${
+                            JOB_FORM_CONTENT_INPUT_NAMES.degreeJobRelated
+                        }" value="${degreeIndex}"> ${
+                            STUDY_LEVEL_NAMES[degreeItem.degree].name
+                        } - ${degreeItem.title} </label></div>`
+                )
+                .join('')}
+          </div>
+      `;
+
+        container.innerHTML = studyItemHtmlString;
+        return container;
+    };
+
+    const surveyData = {};
+    let numberOfDegrees = 0;
+
+    // form Actions
+
+    startSurveyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const studiedDegrees = formData.getAll('degree');
+        const gender = formData.get('gender');
+
+        surveyData.gender = gender;
+
+        const cleanDegrees = studiedDegrees.filter((degreeItem) =>
+            Object.keys(STUDY_LEVEL_NAMES).includes(degreeItem)
+        );
+
+        if (cleanDegrees.length === 0) return;
+
+        const isTsuOrLicOnly =
+            cleanDegrees.length === 1 &&
+            (cleanDegrees[0] === STUDY_LEVEL_NAMES.tsu.id ||
+                cleanDegrees[0] === STUDY_LEVEL_NAMES.lic.id);
+        const shouldIncludeUnderGrad =
+            !isTsuOrLicOnly && !cleanDegrees.includes(STUDY_LEVEL_NAMES.lic.id);
+        if (shouldIncludeUnderGrad) {
+            cleanDegrees.unshift(STUDY_LEVEL_NAMES.lic.id);
+        }
+        numberOfDegrees = cleanDegrees.length;
+
+        cleanDegrees.forEach((degreeItem, index) => {
+            studiesSurveyContent.appendChild(buildStudyItem(degreeItem, index));
+        });
+
+        startSurveyForm.classList.add('hide');
+        studiesSurvey.classList.toggle('hide');
+    });
+
+    studiesSurvey.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const degreesData = [...Array(numberOfDegrees)].map((_, index) => {
+            const degree = formData.get(`${index}-degree`); // TODO clean this up
+            const title = formData.get(`${index}-title`);
+            const institution = formData.get(`${index}-institution`);
+            const startYear = formData.get(`${index}-startYear`);
+
+            return {
+                degree,
+                title,
+                institution,
+                startYear,
+            };
+        });
+
+        surveyData.degrees = degreesData;
+
+        jobSurveyContent.appendChild(buildJobFormContent(surveyData.degrees));
+        studiesSurvey.classList.toggle('hide');
+        jobSurveyForm.classList.toggle('hide');
+    });
+
+    jobSurveyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+
+        const laboralSituation = formData.get(
+            JOB_FORM_CONTENT_INPUT_NAMES.jobSituation
+        );
+        const salary = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.salary);
+        const employer = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.employer);
+        const laboralArea = formData.get(
+            JOB_FORM_CONTENT_INPUT_NAMES.laboralArea
+        );
+        const position = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.position);
+        const yearsOfExperience = formData.get(
+            JOB_FORM_CONTENT_INPUT_NAMES.yearsOfExperience
+        );
+        const mexicanState = formData.get(
+            JOB_FORM_CONTENT_INPUT_NAMES.mexicanState
+        );
+        const degreeIndexJobRelated = formData
+            .getAll(JOB_FORM_CONTENT_INPUT_NAMES.degreeJobRelated)
+            .map((degreeItem) => parseInt(degreeItem, 10))
+            .filter((degreeItem) => degreeItem >= 0);
+
+        const degreeJobRelatedInfo = [...surveyData.degrees].map(
+            (degreeItem, degreeIndex) => ({
+                ...degreeItem,
+                isJobRelated: degreeIndexJobRelated.includes(degreeIndex),
+            })
+        );
+
+        surveyData.degrees = degreeJobRelatedInfo;
+        surveyData.job = {
+            laboralSituation,
+            salary,
+            employer,
+            laboralArea,
+            position,
+            yearsOfExperience,
+            mexicanState,
+        };
+
+        console.log(surveyData);
+
+        jobSurveyForm.classList.toggle('hide');
+        finishFormThanks.classList.toggle('hide');
+    });
+</script>

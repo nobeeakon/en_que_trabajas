@@ -1,0 +1,61 @@
+export const TABLE_NAMES = {
+    user: 'User',
+    institution: 'Institution',
+    degreeTitle: 'DegreeTitle',
+    employer: 'Employer',
+    laboralArea: 'LaboralArea',
+    laboralAreaPosition: 'LaboralAreaPosition',
+    userDegree: 'UserDegree',
+    userJob: 'UserJob',
+};
+
+export const STUDY_LEVEL_NAMES = {
+    tsu: { id: 'tsu', name: 'Técnico Superior Universitario' },
+    lic: { id: 'lic', name: 'Licenciatura' },
+    esp: { id: 'esp', name: 'Especialidad' },
+    msc: { id: 'msc', name: 'Maestría' },
+    phd: { id: 'phd', name: 'Doctorado' },
+    postdoc: { id: 'postdoc', name: 'Posdoctorado' },
+} as const;
+
+export const ESTADOS = {
+    ags: 'Aguascalientes',
+    baja: 'Baja California',
+    bajaSur: 'Baja California Sur',
+    camp: 'Campeche',
+    chia: 'Chiapas',
+    chi: 'Chihuahua',
+    cdmx: 'Ciudad de México',
+    coah: 'Coahuila de Zaragoza',
+    col: 'Colima',
+    dur: 'Durango',
+    gto: 'Guanajuato',
+    gro: 'Guerrero',
+    hgo: 'Hidalgo',
+    jal: 'Jalisco',
+    edomex: 'Estado de México',
+    mich: 'Michoacán de Ocampo',
+    mor: 'Morelos',
+    nay: 'Nayarit',
+    nvoLeon: 'Nuevo León',
+    oax: 'Oaxaca',
+    pue: 'Puebla',
+    qro: 'Querétaro',
+    qroo: 'Quintana Roo',
+    slp: 'San Luis Potosí',
+    sin: 'Sinaloa',
+    son: 'Sonora',
+    tab: 'Tabasco',
+    tamps: 'Tamaulipas',
+    tlax: 'Tlaxcala',
+    ver: 'Veracruz de Ignacio de la Llave',
+    yuc: 'Yucatán',
+    zac: 'Zacatecas',
+} as const;
+
+export const LABORAL_SITUATION = [
+    { id: 'full', name: 'Tiempo completo' },
+    { id: 'mid', name: 'Medio tiempo' },
+    { id: 'independent', name: 'Empleado independiente' },
+    { id: 'autoemployment', name: 'Autoempleo' },
+] as const;
