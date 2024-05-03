@@ -4,6 +4,6 @@ import UserInfoRoutes from './userInfo';
 
 const router = Router();
 
-router.use('/words', UserInfoRoutes);
+router.use('/userInfo', UserInfoRoutes);
 
 export default router;

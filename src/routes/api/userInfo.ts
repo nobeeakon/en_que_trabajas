@@ -125,7 +125,7 @@ router.post('/', async (req, res, next) => {
                 laboralAreaId: createdLaboralArea.id,
                 name: job.position,
             });
-        const createdUserJobModel = await UserJobModel.create({
+        const createdUserJob = await UserJobModel.create({
             userId: createdUser.id,
             laboralSituation: job.laboralSituation,
             salary: job.salary,
@@ -153,7 +153,7 @@ router.post('/', async (req, res, next) => {
                     titleId: createdDegreeTitle.id,
                     institutionId: createdInstitution.id,
                     startYear: degreeItem.startYear,
-                    isJobRelated: degreeItem.isJobRelated, // TODO update this, this should point to an specific job item. Maybe update this to be mainJobId. Also related vs helped to get there...
+                    mainUserJobId: createdUserJob.id,
                 };
 
                 await UserDegreeModel.create(degreeData);
@@ -164,6 +164,10 @@ router.post('/', async (req, res, next) => {
     } catch (err) {
         next(err);
     }
+});
+
+router.get('/', (req, res, next) => {
+    return res.json({ hola: 22 });
 });
 
 export default router;

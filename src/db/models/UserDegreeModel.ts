@@ -10,7 +10,7 @@ const create = async ({
     titleId,
     institutionId,
     startYear,
-    isJobRelated,
+    mainUserJobId,
 }: Pick<
     UserDegree,
     | 'userId'
@@ -18,7 +18,7 @@ const create = async ({
     | 'titleId'
     | 'institutionId'
     | 'startYear'
-    | 'isJobRelated'
+    | 'mainUserJobId'
 >) => {
     const db = await openDb();
     const id = uuid();
@@ -26,8 +26,8 @@ const create = async ({
 
     await db.run(
         `
-        INSERT INTO ${TABLE_NAMES.userDegree}(id, createdAt, userId, degree, titleId, institutionId, startYear, isJobRelated) 
-            VALUES(:id, :createdAt, :userId, :degree, :titleId, :institutionId, :startYear, :isJobRelated)
+        INSERT INTO ${TABLE_NAMES.userDegree}(id, createdAt, userId, degree, titleId, institutionId, startYear, mainUserJobId) 
+            VALUES(:id, :createdAt, :userId, :degree, :titleId, :institutionId, :startYear, :mainUserJobId)
     `,
         {
             ':id': id,
@@ -37,7 +37,7 @@ const create = async ({
             ':titleId': titleId,
             ':institutionId': institutionId,
             ':startYear': startYear,
-            ':isJobRelated': isJobRelated,
+            ':mainUserJobId': mainUserJobId,
         }
     );
 

@@ -49,7 +49,7 @@ export type UserDegree = {
     titleId: string;
     institutionId: string;
     startYear: number;
-    isJobRelated: boolean;
+    mainUserJobId?: string;
 };
 
 export type MexicanStates = keyof typeof ESTADOS;
