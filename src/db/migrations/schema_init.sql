@@ -10,28 +10,34 @@ CREATE TABLE User (
 CREATE TABLE Institution (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "normalizedName" TEXT NOT NULL
 );
+
 
 -- create table
 CREATE TABLE DegreeTitle (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "normalizedName" TEXT NOT NULL,
+    "degreeLevel" TEXT NOT NULL
 );
 
 -- create table
 CREATE TABLE Employer (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "normalizedName" TEXT NOT NULL
 );
 
 -- create table
 CREATE TABLE LaboralArea (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "normalizedName" TEXT NOT NULL
 );
 
 -- create table
@@ -39,6 +45,7 @@ CREATE TABLE LaboralAreaPosition (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "normalizedName" TEXT NOT NULL,
     "laboralAreaId" TEXT NOT NULL,
     CONSTRAINT "Validation_laboral_area_id_fkey" FOREIGN KEY ("id") REFERENCES LaboralArea("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -48,11 +55,10 @@ CREATE TABLE UserDegree (
     "id" TEXT NOT NULL PRIMARY KEY,
     "createdAt" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "degree" TEXT NOT NULL,
     "titleId" TEXT NOT NULL,
     "institutionId" TEXT NOT NULL,
     "startYear" INTEGER NOT NULL,
-    "mainUserJobId" TEXT NOT NULL,
+    "mainUserJobId" TEXT ,
     CONSTRAINT "Validation_user_id_fkey" FOREIGN KEY ("userId") REFERENCES User("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Validation_title_id_fkey" FOREIGN KEY ("titleId") REFERENCES DegreeTitle("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Validation_institution_id_fkey" FOREIGN KEY ("institutionId") REFERENCES Institution("id") ON DELETE RESTRICT ON UPDATE CASCADE,

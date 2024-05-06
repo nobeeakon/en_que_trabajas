@@ -261,7 +261,7 @@
                         `<div><label> <input type="checkbox" name="${
                             JOB_FORM_CONTENT_INPUT_NAMES.degreeJobRelated
                         }" value="${degreeIndex}"> ${
-                            STUDY_LEVEL_NAMES[degreeItem.degree].name
+                            STUDY_LEVEL_NAMES[degreeItem.degreeLevel].name
                         } - ${degreeItem.title} </label></div>`
                 )
                 .join('')}
@@ -315,16 +315,16 @@
         const formData = new FormData(e.target);
 
         const degreesData = [...Array(numberOfDegrees)].map((_, index) => {
-            const degree = formData.get(`${index}-degree`); // TODO clean this up
+            const degreeLevel = formData.get(`${index}-degree`); // TODO clean this up
             const title = formData.get(`${index}-title`);
             const institution = formData.get(`${index}-institution`);
-            const startYear = formData.get(`${index}-startYear`);
+            const startYearString = formData.get(`${index}-startYear`);
 
             return {
-                degree,
+                degreeLevel,
                 title,
                 institution,
-                startYear,
+                startYear: parseInt(startYearString, 10),
             };
         });
 
@@ -342,13 +342,13 @@
         const laboralSituation = formData.get(
             JOB_FORM_CONTENT_INPUT_NAMES.jobSituation
         );
-        const salary = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.salary);
+        const salaryString = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.salary);
         const employer = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.employer);
         const laboralArea = formData.get(
             JOB_FORM_CONTENT_INPUT_NAMES.laboralArea
         );
         const position = formData.get(JOB_FORM_CONTENT_INPUT_NAMES.position);
-        const yearsOfExperience = formData.get(
+        const yearsOfExperienceString = formData.get(
             JOB_FORM_CONTENT_INPUT_NAMES.yearsOfExperience
         );
         const mexicanState = formData.get(
@@ -369,17 +369,31 @@
         surveyData.degrees = degreeJobRelatedInfo;
         surveyData.job = {
             laboralSituation,
-            salary,
+            salary: parseInt(salaryString, 10),
             employer,
             laboralArea,
             position,
-            yearsOfExperience,
+            yearsOfExperience: parseInt(yearsOfExperienceString, 10),
             mexicanState,
         };
 
         console.log(surveyData);
 
-        jobSurveyForm.classList.toggle('hide');
-        finishFormThanks.classList.toggle('hide');
+        fetch('/api/userInfo', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(surveyData),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    jobSurveyForm.classList.toggle('hide');
+                    finishFormThanks.classList.toggle('hide');
+                } else {
+                    // TODO
+                }
+            })
+            .catch((error) => console.error(error)); // TODO
     });
 </script>

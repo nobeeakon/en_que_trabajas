@@ -2,7 +2,7 @@ import path from 'path';
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 
-const DB_FILE_NAME = 'words.db';
+const DB_FILE_NAME = 'data.db';
 
 // TODO sql injection escaping
 export const openDb = async () =>

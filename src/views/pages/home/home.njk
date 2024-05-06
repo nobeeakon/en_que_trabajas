@@ -23,6 +23,19 @@
     </di>
 {% endif %}
 
+<div>
+ Cantidad de comentarios: {{ stats['reviewsCount'] }}
+
+</div>
+<div>
+ {% for degreeCount in stats.countByDegreeLevel %}
+  <div>
+  {{ degreeCount["count"] }} {{ degreeCount["degreeLevelName"] }}
+  </div>
+ {% endfor %}
+
+</div>
+
 
 
 {% endblock %} 

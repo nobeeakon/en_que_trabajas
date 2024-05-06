@@ -1,41 +1,46 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidV4 } from 'uuid';
 import type { LaboralAreaPosition } from '../types';
 import { openDb } from '../dbClient';
-import { getDateISOString } from '../utils';
+import { getDateISOString, normalizeString, stringCleanSpaces } from '../utils';
 import { TABLE_NAMES } from '../constants';
 
 const createIfNotExists = async ({
-    name,
+    name: inputName,
     laboralAreaId,
 }: Pick<LaboralAreaPosition, 'name' | 'laboralAreaId'>) => {
     const db = await openDb();
-    const id = uuid();
+    const id = uuidV4();
     const createdAt = getDateISOString();
+    const name = stringCleanSpaces(inputName);
+    const normalizedName = normalizeString(inputName);
 
-    const records = await db.get(
+    const records = await db.all<LaboralAreaPosition[]>(
         ` SELECT * FROM ${TABLE_NAMES.laboralAreaPosition}
-        WHERE name = :name AND laboralAreaId = :laboralAreaId
+        WHERE normalizedName = :normalizedName AND laboralAreaId = :laboralAreaId
         COLLATE NOCASE
         `,
         {
-            ':name': name,
+            ':normalizedName': normalizedName,
             ':laboralAreaId': laboralAreaId,
         }
     );
 
-    // TODO check that this one is ok
-    if (records.length === 1 && records?.[0]?.id) return { id: records[0].id };
+    if (records.length > 0) {
+        const itemWithId = records.find((recordItem) => recordItem.id);
+        if (itemWithId) return { id: itemWithId.id };
+    }
 
     await db.run(
         `
-        INSERT INTO ${TABLE_NAMES.laboralAreaPosition}(id, name, laboralAreaId, createdAt) 
-            VALUES(:id, :name, :laboralAreaId, :createdAt)
+        INSERT INTO ${TABLE_NAMES.laboralAreaPosition}(id, name, laboralAreaId, createdAt, normalizedName) 
+            VALUES(:id, :name, :laboralAreaId, :createdAt, :normalizedName)
     `,
         {
             ':id': id,
             ':name': name,
             ':laboralAreaId': laboralAreaId,
             ':createdAt': createdAt,
+            ':normalizedName': normalizedName,
         }
     );
 
@@ -47,8 +52,7 @@ const getByLaborAreaId = async ({
 }: Pick<LaboralAreaPosition, 'laboralAreaId'>) => {
     const db = await openDb();
 
-    // TODO check that this one is ok
-    const records = await db.get(
+    const records = await db.all<LaboralAreaPosition[]>(
         ` SELECT * FROM ${TABLE_NAMES.laboralAreaPosition}
         WHERE laboralAreaId = :laboralAreaId
         `,
@@ -58,7 +62,18 @@ const getByLaborAreaId = async ({
     return { records };
 };
 
+const count = async () => {
+    const db = await openDb();
+
+    const data = await db.get<{ count: number }>(
+        `SELECT COUNT(1) AS count FROM ${TABLE_NAMES.laboralAreaPosition}`
+    );
+
+    return data;
+};
+
 export default {
     createIfNotExists,
     getByLaborAreaId,
+    count,
 };

@@ -12,40 +12,50 @@ export type Institution = {
     id: string;
     createdAt: string;
     name: string;
+    normalizedName: string;
 };
+
+export type DegreeLevel = keyof typeof STUDY_LEVEL_NAMES;
+
+const STUDY_LEVEL_SET = new Set(Object.keys(STUDY_LEVEL_NAMES));
+export const isDegreeLevelTypeGuard = (
+    degreeLevel: string
+): degreeLevel is DegreeLevel => STUDY_LEVEL_SET.has(degreeLevel);
 
 export type DegreeTitle = {
     id: string;
     createdAt: string;
     name: string;
+    normalizedName: string;
+    degreeLevel: DegreeLevel;
 };
 
 export type Employer = {
     id: string;
     createdAt: string;
     name: string;
+    normalizedName: string;
 };
 
 export type LaboralArea = {
     id: string;
     createdAt: string;
     name: string;
+    normalizedName: string;
 };
 
 export type LaboralAreaPosition = {
     id: string;
     createdAt: string;
     name: string;
+    normalizedName: string;
     laboralAreaId: string;
 };
-
-export type DegreeLevel = keyof typeof STUDY_LEVEL_NAMES;
 
 export type UserDegree = {
     id: string;
     createdAt: string;
     userId: string;
-    degree: DegreeLevel;
     titleId: string;
     institutionId: string;
     startYear: number;
@@ -62,8 +72,8 @@ export type UserJob = {
     laboralSituation: LaboralSituation;
     salary: number;
     employerId: string;
-    laboralAreaId: boolean;
-    laboralAreaPositionId: boolean;
+    laboralAreaId: string;
+    laboralAreaPositionId: string;
     yearsOfExperience: number;
     mexicanState?: MexicanStates;
 };

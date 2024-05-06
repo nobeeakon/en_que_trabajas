@@ -1,5 +1,6 @@
 import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 
 import nunjucks from 'nunjucks';
 import '@total-typescript/ts-reset';
@@ -24,12 +25,15 @@ nunjucks.configure(path.join(__dirname, 'views'), {
 
 const PORT = 3000;
 
+app.use(cookieParser('hola')); // TODO update this
+
 app.use('/api', apiRoutes);
 app.get('/', frontEnd);
 
 // serve static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+// TODO improve error handling, currently logging all to the client :(
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
 

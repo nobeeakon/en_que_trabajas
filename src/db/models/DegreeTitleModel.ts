@@ -1,34 +1,43 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidV4 } from 'uuid';
 import type { DegreeTitle } from '../types';
 import { openDb } from '../dbClient';
-import { getDateISOString } from '../utils';
+import { getDateISOString, normalizeString, stringCleanSpaces } from '../utils'; // 1
 import { TABLE_NAMES } from '../constants';
 
-const createIfNotExists = async ({ name }: Pick<DegreeTitle, 'name'>) => {
+const createIfNotExists = async ({
+    name: inputName,
+    degreeLevel,
+}: Pick<DegreeTitle, 'name' | 'degreeLevel'>) => {
     const db = await openDb();
-    const id = uuid();
+    const id = uuidV4();
     const createdAt = getDateISOString();
+    const name = stringCleanSpaces(inputName);
+    const normalizedName = normalizeString(inputName);
 
-    const records = await db.get(
+    const records = await db.all<DegreeTitle[]>(
         ` SELECT * FROM ${TABLE_NAMES.degreeTitle}
-        WHERE name = :name 
+        WHERE normalizedName = :normalizedName AND degreeLevel = :degreeLevel
         COLLATE NOCASE
         `,
-        { ':name': name }
+        { ':normalizedName': normalizedName, ':degreeLevel': degreeLevel }
     );
 
-    // TODO check that this one is ok
-    if (records.length === 1 && records?.[0]?.id) return { id: records[0].id };
+    if (records.length > 0) {
+        const itemWithId = records.find((recordItem) => recordItem.id);
+        if (itemWithId) return { id: itemWithId.id };
+    }
 
     await db.run(
         `
-        INSERT INTO ${TABLE_NAMES.degreeTitle}(id, name, createdAt) 
-            VALUES(:id, :name, :createdAt)
+        INSERT INTO ${TABLE_NAMES.degreeTitle}(id, name, createdAt, normalizedName, degreeLevel) 
+            VALUES(:id, :name, :createdAt, :normalizedName, :degreeLevel) 
     `,
         {
             ':id': id,
             ':name': name,
             ':createdAt': createdAt,
+            ':normalizedName': normalizedName,
+            ':degreeLevel': degreeLevel,
         }
     );
 
@@ -38,8 +47,7 @@ const createIfNotExists = async ({ name }: Pick<DegreeTitle, 'name'>) => {
 const getByName = async ({ name }: Pick<DegreeTitle, 'name'>) => {
     const db = await openDb();
 
-    // TODO check that this one is ok
-    const records = await db.get(
+    const records = await db.all<DegreeTitle[]>(
         ` SELECT * FROM ${TABLE_NAMES.degreeTitle}
         WHERE name LIKE '%:name%' 
         COLLATE NOCASE
@@ -50,7 +58,32 @@ const getByName = async ({ name }: Pick<DegreeTitle, 'name'>) => {
     return { records };
 };
 
+const count = async () => {
+    const db = await openDb();
+
+    const data = await db.all<{ name: string; degreeLevel: string }[]>(
+        `SELECT  name, degreeLevel FROM ${TABLE_NAMES.degreeTitle}
+            GROUP BY normalizedName, degreeLevel
+            LIMIT 20
+        `
+    );
+
+    const countByDegreeLevel = await db.all<
+        { count: number; degreeLevel: string }[]
+    >(
+        ` SELECT COUNT(*) AS count, degreeLevel FROM ${TABLE_NAMES.degreeTitle}
+            GROUP BY degreeLevel
+        `
+    );
+
+    return {
+        countByDegreeLevel: countByDegreeLevel ?? [],
+        data,
+    };
+};
+
 export default {
     createIfNotExists,
     getByName,
+    count,
 };

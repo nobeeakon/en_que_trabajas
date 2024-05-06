@@ -26,6 +26,7 @@ const DegreeLevelSchema = z.union([
     z.literal('lic'),
     z.literal('msc'),
     z.literal('phd'),
+    z.literal('postdoc'),
 ]);
 
 const LaboralSituationSchema = z.union([
@@ -75,7 +76,7 @@ const currentYear = new Date().getFullYear();
 const MAX_STRING_LENGTH = 150;
 
 const UserDegreeSchema = z.object({
-    degree: DegreeLevelSchema,
+    degreeLevel: DegreeLevelSchema,
     title: z.string().min(2).max(MAX_STRING_LENGTH),
     institution: z.string().min(2).max(MAX_STRING_LENGTH),
     startYear: z.number().min(1910).max(currentYear).int(),
@@ -103,9 +104,18 @@ const PostUserInfoSchema = z.object({
 
 router.post('/', async (req, res, next) => {
     try {
-        const cleanReq = await validateReq(PostUserInfoSchema, req);
+        const externalUserId: string | undefined =
+            req.signedCookies?.userId ?? `${Math.random()}`;
 
-        const externalUserId = 'oaisd'; // TODO update this to something better :/
+        const userExists = !externalUserId
+            ? false
+            : await UserModel.userExist({
+                  externalId: externalUserId,
+              });
+
+        if (!externalUserId || userExists) return res.json();
+
+        const cleanReq = await validateReq(PostUserInfoSchema, req);
 
         const { gender, degrees, job } = cleanReq.body;
 
@@ -145,15 +155,17 @@ router.post('/', async (req, res, next) => {
                 const createdDegreeTitle =
                     await DegreeTitleModel.createIfNotExists({
                         name: degreeItem.title,
+                        degreeLevel: degreeItem.degreeLevel,
                     });
 
                 const degreeData = {
                     userId: createdUser.id,
-                    degree: degreeItem.degree,
                     titleId: createdDegreeTitle.id,
                     institutionId: createdInstitution.id,
                     startYear: degreeItem.startYear,
-                    mainUserJobId: createdUserJob.id,
+                    mainUserJobId: degreeItem.isJobRelated
+                        ? createdUserJob.id
+                        : undefined,
                 };
 
                 await UserDegreeModel.create(degreeData);
@@ -161,11 +173,14 @@ router.post('/', async (req, res, next) => {
                 return degreeData;
             })
         );
+
+        return res.json(null);
     } catch (err) {
         next(err);
     }
 });
 
+// TODO
 router.get('/', (req, res, next) => {
     return res.json({ hola: 22 });
 });

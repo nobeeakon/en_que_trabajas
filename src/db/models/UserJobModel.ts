@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidV4 } from 'uuid';
 import type { UserJob } from '../types';
 import { openDb } from '../dbClient';
 import { getDateISOString } from '../utils';
@@ -25,7 +25,7 @@ const create = async ({
     | 'mexicanState'
 >) => {
     const db = await openDb();
-    const id = uuid();
+    const id = uuidV4();
     const createdAt = getDateISOString();
 
     await db.run(
@@ -50,6 +50,17 @@ const create = async ({
     return { id };
 };
 
+const count = async () => {
+    const db = await openDb();
+
+    const data = await db.get<{ count: number }>(
+        `SELECT COUNT(1) AS count FROM ${TABLE_NAMES.userJob}`
+    );
+
+    return data;
+};
+
 export default {
     create,
+    count,
 };

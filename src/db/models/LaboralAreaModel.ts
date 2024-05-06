@@ -1,34 +1,41 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidV4 } from 'uuid';
 import type { LaboralArea } from '../types';
 import { openDb } from '../dbClient';
-import { getDateISOString } from '../utils';
+import { getDateISOString, normalizeString, stringCleanSpaces } from '../utils';
 import { TABLE_NAMES } from '../constants';
 
-const createIfNotExists = async ({ name }: Pick<LaboralArea, 'name'>) => {
+const createIfNotExists = async ({
+    name: inputName,
+}: Pick<LaboralArea, 'name'>) => {
     const db = await openDb();
-    const id = uuid();
+    const id = uuidV4();
     const createdAt = getDateISOString();
+    const name = stringCleanSpaces(inputName);
+    const normalizedName = normalizeString(inputName);
 
-    const records = await db.get(
+    const records = await db.all<LaboralArea[]>(
         ` SELECT * FROM ${TABLE_NAMES.laboralArea}
-        WHERE name = :name 
+        WHERE normalizedName = :normalizedName 
         COLLATE NOCASE
         `,
-        { ':name': name }
+        { ':normalizedName': normalizedName }
     );
 
-    // TODO check that this one is ok
-    if (records.length === 1 && records?.[0]?.id) return { id: records[0].id };
+    if (records.length > 0) {
+        const itemWithId = records.find((recordItem) => recordItem.id);
+        if (itemWithId) return { id: itemWithId.id };
+    }
 
     await db.run(
         `
-        INSERT INTO ${TABLE_NAMES.laboralArea}(id, name, createdAt) 
-            VALUES(:id, :name, :createdAt)
+        INSERT INTO ${TABLE_NAMES.laboralArea}(id, name, createdAt, normalizedName) 
+            VALUES(:id, :name, :createdAt, :normalizedName)
     `,
         {
             ':id': id,
             ':name': name,
             ':createdAt': createdAt,
+            ':normalizedName': normalizedName,
         }
     );
 
@@ -38,8 +45,7 @@ const createIfNotExists = async ({ name }: Pick<LaboralArea, 'name'>) => {
 const getByName = async ({ name }: Pick<LaboralArea, 'name'>) => {
     const db = await openDb();
 
-    // TODO check that this one is ok
-    const records = await db.get(
+    const records = await db.all<LaboralArea[]>(
         ` SELECT * FROM ${TABLE_NAMES.laboralArea}
         WHERE name LIKE '%:name%' 
         COLLATE NOCASE
@@ -50,7 +56,18 @@ const getByName = async ({ name }: Pick<LaboralArea, 'name'>) => {
     return { records };
 };
 
+const count = async () => {
+    const db = await openDb();
+
+    const data = await db.get<{ count: number }>(
+        `SELECT COUNT(1) AS count FROM ${TABLE_NAMES.laboralArea}`
+    );
+
+    return data;
+};
+
 export default {
     createIfNotExists,
     getByName,
+    count,
 };

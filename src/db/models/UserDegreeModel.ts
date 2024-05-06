@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuidV4 } from 'uuid';
 import type { UserDegree } from '../types';
 import { openDb } from '../dbClient';
 import { getDateISOString } from '../utils';
@@ -6,34 +6,27 @@ import { TABLE_NAMES } from '../constants';
 
 const create = async ({
     userId,
-    degree,
     titleId,
     institutionId,
     startYear,
     mainUserJobId,
 }: Pick<
     UserDegree,
-    | 'userId'
-    | 'degree'
-    | 'titleId'
-    | 'institutionId'
-    | 'startYear'
-    | 'mainUserJobId'
+    'userId' | 'titleId' | 'institutionId' | 'startYear' | 'mainUserJobId'
 >) => {
     const db = await openDb();
-    const id = uuid();
+    const id = uuidV4();
     const createdAt = getDateISOString();
 
     await db.run(
         `
-        INSERT INTO ${TABLE_NAMES.userDegree}(id, createdAt, userId, degree, titleId, institutionId, startYear, mainUserJobId) 
-            VALUES(:id, :createdAt, :userId, :degree, :titleId, :institutionId, :startYear, :mainUserJobId)
+        INSERT INTO ${TABLE_NAMES.userDegree}(id, createdAt, userId,  titleId, institutionId, startYear, mainUserJobId) 
+            VALUES(:id, :createdAt, :userId, :titleId, :institutionId, :startYear, :mainUserJobId)
     `,
         {
             ':id': id,
             ':createdAt': createdAt,
             ':userId': userId,
-            ':degree': degree,
             ':titleId': titleId,
             ':institutionId': institutionId,
             ':startYear': startYear,
@@ -44,6 +37,17 @@ const create = async ({
     return { id };
 };
 
+const count = async () => {
+    const db = await openDb();
+
+    const data = await db.get<{ count: number }>(
+        `SELECT COUNT(1) AS count FROM ${TABLE_NAMES.userDegree}`
+    );
+
+    return data;
+};
+
 export default {
     create,
+    count,
 };
