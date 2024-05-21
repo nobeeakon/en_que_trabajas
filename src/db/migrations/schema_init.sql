@@ -58,7 +58,7 @@ CREATE TABLE UserDegree (
     "titleId" TEXT NOT NULL,
     "institutionId" TEXT NOT NULL,
     "startYear" INTEGER NOT NULL,
-    "mainUserJobId" TEXT ,
+    "mainUserJobId" TEXT , -- TODO rename as relatedWithDegreeMainJobId
     CONSTRAINT "Validation_user_id_fkey" FOREIGN KEY ("userId") REFERENCES User("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Validation_title_id_fkey" FOREIGN KEY ("titleId") REFERENCES DegreeTitle("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Validation_institution_id_fkey" FOREIGN KEY ("institutionId") REFERENCES Institution("id") ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -73,7 +73,7 @@ CREATE TABLE UserJob (
     "laboralSituation" TEXT NOT NULL,
     "salary" INTEGER NOT NULL,
     "employerId" TEXT NOT NULL,
-    "laboralAreaId" TEXT NOT NULL,
+    "laboralAreaId" TEXT NOT NULL, -- TODO remove , this is fragile as laboral area position is tied to laboral area
     "laboralAreaPositionId" TEXT NOT NULL,
     "yearsOfExperience" INTEGER NOT NULL,
     "mexicanState" TEXT,

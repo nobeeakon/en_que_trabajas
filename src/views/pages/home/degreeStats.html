@@ -1,0 +1,279 @@
+<h2 class="is-size-3 has-text-centered mb-5">Busca en nuestros datos</h2>
+<div class="field is-flex is-align-items-baseline mb-4">
+    <label class="mr-3" for="stats-degree-selector"
+        >Selecciona un grado de estudios</label
+    >
+    <div class="select">
+        <select id="stats-degree-selector">
+            <option value=""></option>
+
+            {% for degreeTitleItem in degreeTitles %}
+            <option value="{{degreeTitleItem['id']}}">
+                {{degreeTitleItem["name"]}} (
+                {{degreeTitleItem["degreeLevelName"]}} )
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div id="stats-default-info" class="content">
+    <p>Tenemos {{ stats.reviewsCount }} contribuciones</p>
+    <ul>
+        {% for item in stats.userByDegreeLevelCount %}
+        <li>{{item['degreeLevelName']}}: {{item['count']}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    <div id="degree-data-pannel" class="content">
+        <!-- TODO share button -->
+    </div>
+    <div></div>
+
+    <!-- TODO import from local 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+
+    <script type="module" nonce="{{nonce}}">
+        const degreeSelector = document.getElementById('stats-degree-selector');
+        const degreeDataPannel = document.getElementById('degree-data-pannel');
+        const statsDefaultInfo = document.getElementById('stats-default-info');
+
+        const buildTableRow = (...columns) =>
+            html`<tr>
+                ${columns.map((columnItem) => html`<td>${columnItem}</td>`)}
+            </tr>`;
+        const buildTable = (theaderTitles, trows) =>
+            html` <table>
+                <thead>
+                    <tr>
+                        ${theaderTitles.map(
+                            (theadItem) => html`<th>${theadItem}</th>`
+                        )}
+                    </tr>
+                </thead>
+                <tbody>
+                    ${trows}
+                </tbody>
+            </table>`;
+
+        /**
+         * @param data {avgSalary:number,count: number,displayName:string}[]
+         */
+        const buildGenderStatsTable = (data = []) =>
+            buildTable(
+                ['Género', 'Salario Promedio', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(
+                        genderItem.displayName,
+                        genderItem.avgSalary,
+                        genderItem.count
+                    )
+                )
+            );
+
+        /**
+         * @param data {avgSalary:number,count: number,laboralArea:string}[]
+         */
+        const buildLaboralAreaStatsTable = (data = []) =>
+            buildTable(
+                ['Área laboral', 'Salario Promedio', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(
+                        genderItem.laboralArea,
+                        genderItem.avgSalary,
+                        genderItem.count
+                    )
+                )
+            );
+
+        /**
+         * @param data {count:number,laboralAreaPosition: string,laboralArea:string}[]
+         */
+        const buildLaboralAreaPositionStatsTable = (data = []) =>
+            buildTable(
+                ['Área laboral', 'Posición', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(
+                        genderItem.laboralArea,
+                        genderItem.laboralAreaPosition,
+                        genderItem.count
+                    )
+                )
+            );
+
+        /**
+         * @param data {count: number,displayName:string, avgSalary: number}[]
+         */
+        const buildMexicanStatesStatsTable = (data = []) =>
+            buildTable(
+                ['Estado', 'Salario Promedio', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(
+                        genderItem.displayName,
+                        genderItem.avgSalary,
+                        genderItem.count
+                    )
+                )
+            );
+
+        /**
+         * @param data {count: number,name:string}[]
+         */
+        const buildEmployerStatsTable = (data = []) =>
+            buildTable(
+                ['Empleador', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(genderItem.name, genderItem.count)
+                )
+            );
+
+        /**
+         * @param data {count: number,name:string}[]
+         */
+        const buildInstitutionsStatsTable = (data = []) =>
+            buildTable(
+                ['Institución', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(genderItem.name, genderItem.count)
+                )
+            );
+
+        /**
+         * @param data {notRelated: number,isRelated:number}
+         */
+        const buildIsJobRelatedStatsTable = (data = {}) =>
+            buildTable(
+                ['Trabajo relacionado con estudios', 'n'],
+                [
+                    buildTableRow('Sí', data?.isRelated ?? 0),
+                    buildTableRow('No', data?.notRelated ?? 0),
+                ]
+            );
+
+        /**
+         * @param data {count: number,displayName:string, avgSalary: number}[]
+         */
+        const buildLaboralSituationStatsTable = (data = []) =>
+            buildTable(
+                ['Situación laboral', 'Salario Promedio', 'n'],
+                data.map((genderItem) =>
+                    buildTableRow(
+                        genderItem.displayName,
+                        genderItem.avgSalary,
+                        genderItem.count
+                    )
+                )
+            );
+
+        let degreeStatsAbortController = null;
+        degreeSelector.addEventListener('change', async (e) => {
+            if (degreeStatsAbortController) {
+                degreeStatsAbortController.abort();
+            }
+
+            degreeStatsAbortController = new AbortController();
+            const degreeTitleId = e.target.value;
+            if (!degreeTitleId) {
+                statsDefaultInfo.classList.remove('hide');
+                degreeDataPannel.classList.add('hide');
+                return;
+            }
+
+            fetch(`/api/stats/${degreeTitleId}`, {
+                signal: degreeStatsAbortController.signal,
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    throw new Error('degreeError');
+                })
+                .then((res) => {
+                    statsDefaultInfo.classList.add('hide');
+                    degreeDataPannel.classList.remove('hide');
+
+                    const genderTable = buildGenderStatsTable(res?.genderStats);
+                    const laboralAreaTable = buildLaboralAreaStatsTable(
+                        res?.laboralAreaStats
+                    );
+                    const laboralAreaPositionTable =
+                        buildLaboralAreaPositionStatsTable(
+                            res?.laboralAreaPositionStats
+                        );
+                    const mexicanStatesTable = buildMexicanStatesStatsTable(
+                        res?.mexicanStateStats
+                    );
+                    const employersTable = buildEmployerStatsTable(
+                        res?.employerStats
+                    );
+                    const isJobRelatedTable = buildIsJobRelatedStatsTable(
+                        res?.jobRelatedStats
+                    );
+                    const laboralSituationTable =
+                        buildLaboralSituationStatsTable(
+                            res?.laboralsSituationStats
+                        );
+
+                    const dataPanelHTML = html`
+                        <div class="columns">
+                            <div class="column is-half">${genderTable}</div>
+                            <div class="column is-half">
+                                ${isJobRelatedTable}
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-half">
+                                ${laboralSituationTable}
+                            </div>
+                            <div class="column is-half">
+                                ${mexicanStatesTable}
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-half">
+                                ${laboralAreaTable}
+                            </div>
+                            <div class="column is-half">
+                                ${laboralAreaPositionTable}
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-half">${employersTable}</div>
+                        </div>
+                    `;
+
+                    degreeDataPannel.innerHTML = dataPanelHTML.toString();
+                })
+                .catch((error) => console.error(error));
+        });
+
+        const X_AXIS = { a: 22 };
+
+        /**
+         * @param {gender: string, userDegreeStartYear: number, degreeName: string, laboralSituation: string, salary: number, yearsOfExperience: number, mexicanState: string, laboralAreaPositionName: string, laboralAreaName: string, institutionName: string, employerName: string }[] data
+         * @param {string} xAxis
+         * @param {string} yAxis
+         */
+        const buildUserDataGraphDataset = (data = [], xAxis, yAxis) => {
+            const currentYear = new Date().getFullYear();
+
+            const graphData = data.map((userItem) => ({
+                x: userItem[xAxis],
+                y: userItem[yAxis],
+                data: { ...userItem },
+            }));
+
+            return {
+                datasets: [
+                    {
+                        label: 'Hola',
+                        data: graphData,
+                        backgroundColor: 'rgb(255, 99, 132)',
+                    },
+                ],
+            };
+        };
+    </script>
+</div>

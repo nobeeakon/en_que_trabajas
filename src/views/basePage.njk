@@ -16,10 +16,9 @@
     <link rel="shortcut icon" href="favicon.ico" />
     {# SOME STYLESHEETS HERE #} 
     <link rel="stylesheet" href='/public/css/baseStyles.css' />
-    <link rel="stylesheet" href='/public/css/footer.css' />
-   
+    <link rel="stylesheet"  href="/public/css/bulma/css/bulma.min.css">
    <!-- Modules -->
-    <script src="public/js/escape-html/index.js" ></script>
+    <script type="module" src="/public/js/safeHTML.mjs" nonce="{{nonce}}" ></script>
     {% block head %}
      <!-- CSS Customization -->
     {% endblock %}
@@ -30,7 +29,7 @@
     <main class="main">
       {# HEADER #} 
       {% include "header.njk"%} 
-      <div class="mainContent">
+      <div class="mainContent container">
         {% block body %}{% endblock %} 
       </div>
       {# FOOTER #} 

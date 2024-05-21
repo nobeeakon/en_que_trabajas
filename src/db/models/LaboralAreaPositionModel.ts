@@ -1,7 +1,12 @@
 import { v4 as uuidV4 } from 'uuid';
 import type { LaboralAreaPosition } from '../types';
 import { openDb } from '../dbClient';
-import { getDateISOString, normalizeString, stringCleanSpaces } from '../utils';
+import {
+    getDateISOString,
+    normalizeString,
+    cleanString,
+    capitalizeFirstLetter,
+} from '../utils';
 import { TABLE_NAMES } from '../constants';
 
 const createIfNotExists = async ({
@@ -11,7 +16,7 @@ const createIfNotExists = async ({
     const db = await openDb();
     const id = uuidV4();
     const createdAt = getDateISOString();
-    const name = stringCleanSpaces(inputName);
+    const name = capitalizeFirstLetter(cleanString(inputName));
     const normalizedName = normalizeString(inputName);
 
     const records = await db.all<LaboralAreaPosition[]>(
@@ -54,7 +59,9 @@ const getByLaborAreaId = async ({
 
     const records = await db.all<LaboralAreaPosition[]>(
         ` SELECT * FROM ${TABLE_NAMES.laboralAreaPosition}
-        WHERE laboralAreaId = :laboralAreaId
+        WHERE  laboralAreaId = :laboralAreaId
+        COLLATE NOCASE
+        LIMIT 10
         `,
         { ':laboralAreaId': laboralAreaId }
     );
@@ -72,8 +79,36 @@ const count = async () => {
     return data;
 };
 
+const statsByDegreeTitle = async ({
+    degreeTitleId,
+}: {
+    degreeTitleId: string;
+}) => {
+    const db = await openDb();
+
+    return await db.all<{
+        laboralArea: string;
+        laboralAreaPosition: string;
+        count: number;
+    }>(
+        `SELECT la.name AS laboralArea, lap.name AS laboralAreaPosition, COUNT(1) as count 
+            FROM ${TABLE_NAMES.user} as u
+                LEFT JOIN ${TABLE_NAMES.userDegree} ud ON ud.userId = u.id
+                LEFT JOIN ${TABLE_NAMES.userJob} uj ON uj.userId = u.id
+                LEFT JOIN ${TABLE_NAMES.laboralArea} la ON la.id = uj.laboralAreaId
+                LEFT JOIN ${TABLE_NAMES.laboralAreaPosition} lap ON lap.id = uj.laboralAreaPositionId
+            WHERE ud.titleId = :degreeTitleId 
+            GROUP BY  la.name, lap.name
+        `,
+        {
+            ':degreeTitleId': degreeTitleId,
+        }
+    );
+};
+
 export default {
     createIfNotExists,
     getByLaborAreaId,
     count,
+    statsByDegreeTitle,
 };

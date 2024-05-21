@@ -1,10 +1,21 @@
-import { ESTADOS, STUDY_LEVEL_NAMES, LABORAL_SITUATION } from './constants';
+import {
+    MEXICAN_STATES,
+    STUDY_LEVEL_NAMES,
+    LABORAL_SITUATION,
+    USER_GENDER,
+} from './constants';
 // manually done :/
+
+const USER_GENDER_SET = new Set(Object.keys(USER_GENDER));
+export const isUserGenderTypeGuard = (
+    userGender: string
+): userGender is UserGender => USER_GENDER_SET.has(userGender);
+export type UserGender = keyof typeof USER_GENDER;
 
 export type User = {
     id: string;
     createdAt: string;
-    gender: string;
+    gender: UserGender;
     externalId: string;
 };
 
@@ -62,8 +73,18 @@ export type UserDegree = {
     mainUserJobId?: string;
 };
 
-export type MexicanStates = keyof typeof ESTADOS;
-export type LaboralSituation = (typeof LABORAL_SITUATION)[number]['id'];
+export type MexicanStates = keyof typeof MEXICAN_STATES;
+const MEXICAN_STATES_SET = new Set(Object.keys(MEXICAN_STATES));
+export const isMexicanStateTypeGuard = (
+    mexicanState: string
+): mexicanState is MexicanStates => MEXICAN_STATES_SET.has(mexicanState);
+
+export type LaboralSituation = keyof typeof LABORAL_SITUATION;
+const LABORAL_SITUATION_SET = new Set(Object.keys(LABORAL_SITUATION));
+export const isLaboralSituationTypeGuard = (
+    laboralSituation: string
+): laboralSituation is LaboralSituation =>
+    LABORAL_SITUATION_SET.has(laboralSituation);
 
 export type UserJob = {
     id: string;

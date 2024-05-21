@@ -47,7 +47,42 @@ const count = async () => {
     return data;
 };
 
+const countByDegreeLevel = async () => {
+    const db = await openDb();
+
+    return await db.all<{ count: number; degreeLevel: string }[]>(
+        `SELECT COUNT(1) AS count, dt.degreeLevel AS degreeLevel
+            FROM ${TABLE_NAMES.userDegree} AS ud
+            LEFT JOIN ${TABLE_NAMES.degreeTitle} AS dt ON dt.id = ud.titleId
+            GROUP BY dt.degreeLevel
+            ORDER BY count DESC
+        `
+    );
+};
+
+const isJobRelatedStatsByDegreeTitle = async ({
+    degreeTitleId,
+}: {
+    degreeTitleId: string;
+}) => {
+    const db = await openDb();
+
+    return await db.get<{ notRelated: number; isRelated: number }>(
+        `SELECT 
+            SUM(CASE WHEN mainUserJobId IS NULL THEN 1 ELSE 0 END) AS notRelated,
+            SUM(CASE WHEN mainUserJobId IS NOT NULL THEN 1 ELSE 0 END) AS isRelated 
+            FROM ${TABLE_NAMES.userDegree} ud 
+            WHERE ud.titleId = :degreeTitleId 
+        `,
+        {
+            ':degreeTitleId': degreeTitleId,
+        }
+    );
+};
+
 export default {
     create,
     count,
+    countByDegreeLevel,
+    isJobRelatedStatsByDegreeTitle,
 };

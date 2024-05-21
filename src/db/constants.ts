@@ -10,15 +10,15 @@ export const TABLE_NAMES = {
 };
 
 export const STUDY_LEVEL_NAMES = {
-    tsu: { id: 'tsu', name: 'Técnico Superior Universitario' },
-    lic: { id: 'lic', name: 'Licenciatura' },
-    esp: { id: 'esp', name: 'Especialidad' },
-    msc: { id: 'msc', name: 'Maestría' },
-    phd: { id: 'phd', name: 'Doctorado' },
-    postdoc: { id: 'postdoc', name: 'Posdoctorado' },
+    tsu: { id: 'tsu', displayName: 'Técnico Superior Universitario' },
+    lic: { id: 'lic', displayName: 'Licenciatura' },
+    esp: { id: 'esp', displayName: 'Especialidad' },
+    msc: { id: 'msc', displayName: 'Maestría' },
+    phd: { id: 'phd', displayName: 'Doctorado' },
+    postdoc: { id: 'postdoc', displayName: 'Posdoctorado' },
 } as const;
 
-export const ESTADOS = {
+export const MEXICAN_STATES = {
     ags: 'Aguascalientes',
     baja: 'Baja California',
     bajaSur: 'Baja California Sur',
@@ -53,9 +53,15 @@ export const ESTADOS = {
     zac: 'Zacatecas',
 } as const;
 
-export const LABORAL_SITUATION = [
-    { id: 'full', name: 'Tiempo completo' },
-    { id: 'mid', name: 'Medio tiempo' },
-    { id: 'independent', name: 'Empleado independiente' },
-    { id: 'autoemployment', name: 'Autoempleo' },
-] as const;
+export const LABORAL_SITUATION = {
+    full: 'Tiempo completo',
+    mid: 'Medio tiempo',
+    independent: 'Empleado independiente',
+    autoemployment: 'Autoempleo',
+} as const;
+
+export const USER_GENDER = {
+    male: 'Masculino',
+    female: 'Femenino',
+    other: 'Otro',
+} as const;

@@ -7,6 +7,7 @@ import {
 } from 'uuid';
 import UserModel from '../../db/models/UserModel';
 import DegreeTitleModel from '../../db/models/DegreeTitleModel';
+import UserDegreeModel from '../../db/models/UserDegreeModel';
 import { isDegreeLevelTypeGuard } from '../../db/types';
 import { STUDY_LEVEL_NAMES } from '../../db/constants';
 const router = Router();
@@ -36,19 +37,65 @@ router.use((req, res, next) => {
     next();
 });
 
+router.use((req, res, next) => {
+    const nonce = Math.floor(Math.random() * 10000).toString();
+
+    res.setHeader(
+        'Content-Security-Policy',
+        ` default-src 'self'; script-src 'nonce-${nonce}';style-src 'self'; font-src 'self; img-src 'self'; frame-src 'self';`
+    );
+
+    res.locals.nonce = nonce;
+
+    next();
+});
+
 router.get('/', async (req, res) => {
     const externalUserId: string | undefined = req.signedCookies?.userId;
     const userCount = await UserModel.count();
     const degreeTitleCount = await DegreeTitleModel.count();
+    const degreeTitleList = await DegreeTitleModel.getDegreeTitleList();
+    const userByDegreeLevelCount = await UserDegreeModel.countByDegreeLevel();
 
     const countByDegreeLevel = degreeTitleCount.countByDegreeLevel
         .map((degreeLevelItem) =>
-            isDegreeLevelTypeGuard(degreeLevelItem.degreeLevel) &&
-            STUDY_LEVEL_NAMES[degreeLevelItem.degreeLevel]
+            isDegreeLevelTypeGuard(degreeLevelItem.degreeLevel)
                 ? {
                       ...degreeLevelItem,
                       degreeLevelName:
-                          STUDY_LEVEL_NAMES[degreeLevelItem.degreeLevel].name,
+                          STUDY_LEVEL_NAMES[degreeLevelItem.degreeLevel]
+                              .displayName,
+                  }
+                : null
+        )
+        .filter(Boolean);
+
+    const degreeTitles = degreeTitleList
+        .map((degreeTitleItem) =>
+            isDegreeLevelTypeGuard(degreeTitleItem.degreeLevel)
+                ? {
+                      ...degreeTitleItem,
+                      degreeLevelName:
+                          STUDY_LEVEL_NAMES[degreeTitleItem.degreeLevel]
+                              .displayName,
+                  }
+                : null
+        )
+        .filter(Boolean)
+        .sort((a, b) =>
+            a.degreeLevelName.localeCompare(b.degreeLevelName, 'es', {
+                sensitivity: 'base',
+            })
+        );
+
+    const userByDegreeLevelCountWithDisplayName = userByDegreeLevelCount
+        .map((userCountItem) =>
+            isDegreeLevelTypeGuard(userCountItem.degreeLevel)
+                ? {
+                      ...userCountItem,
+                      degreeLevelName:
+                          STUDY_LEVEL_NAMES[userCountItem.degreeLevel]
+                              .displayName,
                   }
                 : null
         )
@@ -61,12 +108,16 @@ router.get('/', async (req, res) => {
           });
 
     res.render('pages/home/home.njk', {
-        name: 'aqui',
-        showSurvey: !userExists,
+        // showSurvey: !userExists, // FIXME: uncomment
+        showSurvey: true,
+        showStats: false,
         stats: {
-            reviewsCount: userCount?.count,
+            reviewsCount: userCount?.count ?? 0,
             countByDegreeLevel,
+            userByDegreeLevelCount: userByDegreeLevelCountWithDisplayName,
         },
+        degreeTitles,
+        nonce: res.locals.nonce ?? '',
     });
 });
 

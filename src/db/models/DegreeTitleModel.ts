@@ -1,7 +1,12 @@
 import { v4 as uuidV4 } from 'uuid';
 import type { DegreeTitle } from '../types';
 import { openDb } from '../dbClient';
-import { getDateISOString, normalizeString, stringCleanSpaces } from '../utils'; // 1
+import {
+    getDateISOString,
+    normalizeString,
+    cleanString,
+    capitalizeFirstLetter,
+} from '../utils'; // 1
 import { TABLE_NAMES } from '../constants';
 
 const createIfNotExists = async ({
@@ -11,7 +16,7 @@ const createIfNotExists = async ({
     const db = await openDb();
     const id = uuidV4();
     const createdAt = getDateISOString();
-    const name = stringCleanSpaces(inputName);
+    const name = capitalizeFirstLetter(cleanString(inputName));
     const normalizedName = normalizeString(inputName);
 
     const records = await db.all<DegreeTitle[]>(
@@ -44,20 +49,29 @@ const createIfNotExists = async ({
     return { id };
 };
 
-const getByName = async ({ name }: Pick<DegreeTitle, 'name'>) => {
+const getByDegreeLevelAndLikeName = async ({
+    name,
+    degreeLevel,
+}: Pick<DegreeTitle, 'name' | 'degreeLevel'>) => {
     const db = await openDb();
+    const normalizedName = normalizeString(name);
 
     const records = await db.all<DegreeTitle[]>(
         ` SELECT * FROM ${TABLE_NAMES.degreeTitle}
-        WHERE name LIKE '%:name%' 
+        WHERE normalizedName LIKE :normalizedName AND degreeLevel = :degreeLevel
         COLLATE NOCASE
+        LIMIT 5
         `,
-        { ':name': name }
+        {
+            ':normalizedName': `%${normalizedName}%`,
+            ':degreeLevel': degreeLevel,
+        }
     );
 
     return { records };
 };
 
+// TODO check this one, seems weird that is doing 2 things at the same time
 const count = async () => {
     const db = await openDb();
 
@@ -82,8 +96,23 @@ const count = async () => {
     };
 };
 
+const getDegreeTitleList = async () => {
+    const db = await openDb();
+
+    const data = await db.all<
+        { id: string; name: string; degreeLevel: string }[]
+    >(
+        `
+        SELECT id, name, degreeLevel FROM ${TABLE_NAMES.degreeTitle}
+        `
+    );
+
+    return data;
+};
+
 export default {
     createIfNotExists,
-    getByName,
+    getDegreeTitleList,
+    getByDegreeLevelAndLikeName,
     count,
 };

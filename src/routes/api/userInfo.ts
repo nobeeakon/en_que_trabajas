@@ -93,7 +93,6 @@ const UserJobSchema = z.object({
     mexicanState: MexicanStatesSchema,
 });
 
-// TODO need to add userId obtained from the Frontend somehow??
 const PostUserInfoSchema = z.object({
     body: z.object({
         gender: UserGenderSchema,
@@ -180,9 +179,16 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-// TODO
-router.get('/', (req, res, next) => {
-    return res.json({ hola: 22 });
+router.get('/', async (req, res, next) => {
+    const degreeTitleId = req.query?.degreeTitleId ?? '';
+
+    if (!degreeTitleId || typeof degreeTitleId !== 'string')
+        return res.json({});
+
+    const userData = await UserModel.allUserDataByDegreeTitle({
+        degreeTitleId,
+    });
+    return res.json(userData);
 });
 
 export default router;

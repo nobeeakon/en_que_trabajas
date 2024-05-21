@@ -1,4 +1,8 @@
+import escape from 'escape-html';
+
 export const getDateISOString = () => new Date().toISOString();
+
+const randomSignsRegexp = /\\|[\!\@\#\$\%\^\&\+\=\?\¿\¡\~\°\§\<\>\*\/\|]/g;
 
 /**
  * Adjusts case (lower), removes diacritics (normalize NFD), removes spaces, removes signs (comma, point, semicolon, colon, parenthesis, etc. ).
@@ -14,10 +18,22 @@ export const normalizeString = (text: string) =>
         .replace(/[\.\,\;\:]/g, '')
         .replace(/[\_\-]/g, '')
         .replace(/[\(\)\{\}\[\]]/g, '') // parenthesis and similars
-        .replace(/[\!\@\#\$\%\^\&\+\=\?\¿\¡\~\°\§\<\>\*]/g, ''); // random signs
+        .replace(randomSignsRegexp, ''); // random signs
 
 /**
- * removes additional spaces
+ * removes additional spaces and escapes html
  */
-export const stringCleanSpaces = (text: string) =>
-    text.trim().replace(/s+/g, ' ');
+export const cleanString = (text: string) =>
+    escape(text.trim().replace(/s+/g, ' '));
+
+/** Takes a string, splits by ' ' and capitalizes first letter  */
+export const capitalizeFirstLetter = (text: string) => {
+    return text
+        .split(' ')
+        .map((wordItem) =>
+            wordItem.length == 1
+                ? wordItem
+                : `${wordItem[0]}${wordItem.slice(1)}`
+        )
+        .join(' ');
+};

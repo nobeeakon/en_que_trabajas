@@ -1,63 +1,82 @@
-<form id="start-survey">
+<form id="start-survey" autocomplete="off">
+    <!-- TODO add form step -->
     <div>
-        <div>Selecciona tus estudios</div>
-        <div>
-            <label
-                ><input name="degree" type="checkbox" value="tsu" /> Técnico
-                Superior Universitario
-            </label>
-            <label
-                ><input name="degree" type="checkbox" value="lic" />
-                Licenciatura
-            </label>
-            <label
-                ><input name="degree" type="checkbox" value="esp" />
-                Especialidad
-            </label>
-            <label
-                ><input name="degree" type="checkbox" value="msc" /> Maestría
-            </label>
-            <label
-                ><input name="degree" type="checkbox" value="phd" /> Doctorado
-            </label>
-            <label
-                ><input name="degree" type="checkbox" value="postdoc" />
-                Posdoctorado
-            </label>
-        </div>
-        <div>
-            <div>Género</div>
-            <div>
-                <label
-                    ><input name="gender" type="radio" value="male" /> Masculino
+        <div class="field">
+            <div class="label">Selecciona tus estudios</div>
+            <div class="control">
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="tsu" /> Técnico
+                    Superior Universitario
                 </label>
-                <label
-                    ><input name="gender" type="radio" value="female" />
-                    Femenino
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="lic" />
+                    Licenciatura
                 </label>
-                <label
-                    ><input name="gender" type="radio" value="other" /> Otro
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="esp" />
+                    Especialidad
+                </label>
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="msc" />
+                    Maestría
+                </label>
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="phd" />
+                    Doctorado
+                </label>
+                <label class="checkbox"
+                    ><input name="degree" type="checkbox" value="postdoc" />
+                    Posdoctorado
                 </label>
             </div>
         </div>
-        <button type="submit">Siguiente</button>
+        <div class="field">
+            <div class="label">Género</div>
+            <div class="control">
+                <label class="radio" class="radio">
+                    <input required name="gender" type="radio" value="male" />
+                    Masculino
+                </label>
+                <label class="radio" class="radio">
+                    <input required name="gender" type="radio" value="female" />
+                    Femenino
+                </label>
+                <label class="radio">
+                    <input required name="gender" type="radio" value="other" />
+                    Otro
+                </label>
+            </div>
+        </div>
+        <div class="mt-2">
+            <button type="submit" class="button">Siguiente</button>
+        </div>
     </div>
 </form>
 
-<form id="studies-survey" class="hide">
+<form id="studies-survey" class="hide" autocomplete="off">
     <div id="studies-survey-content"></div>
-    <button type="submit">Siguiente</button>
+    <div class="mt-2">
+        <button type="submit" class="button">Siguiente</button>
+    </div>
 </form>
 
-<form id="job-survey" class="hide">
-    <div>De tu trabajo que representa tu fuente principal de ingresos</div>
-    <div id="job-survey-content"></div>
-    <button type="submit">Siguiente</button>
+<form id="job-survey" class="hide" autocomplete="off">
+    <div class="is-size-5 mb-2 title">
+        Del trabajo que representa tu fuente principal de ingresos
+    </div>
+    <div id="job-survey-content" class="pl-2"></div>
+    <div class="mt-2">
+        <button type="submit" class="button">Siguiente</button>
+    </div>
 </form>
+<!-- TODO add free text form, also add it to the db, with a validate space -->
+<!-- TODO share button https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share https://css-tricks.com/how-to-use-the-web-share-api/-->
+<div id="finish-form" class="title hide is-size-4 has-text-centered">
+    <p>🎉 Muchas Gracias 🎉</p>
+    <p>¡No dudes en compartir este sitio con tus colegas!</p>
+</div>
 
-<div id="finish-form" class="hide">Gracias :)</div>
-
-<script>
+<script type="module" nonce="{{ nonce }}">
     const startSurveyForm = document.getElementById('start-survey');
     const studiesSurvey = document.getElementById('studies-survey');
     const studiesSurveyContent = document.getElementById(
@@ -116,42 +135,193 @@
         zac: 'Zacatecas',
     };
 
-    const buildStudyItem = (studyDegree, index) => {
+    const OPTIONS_TO_FETCH = {
+        degreeTitle: 'degreeTitle',
+        institution: 'institution',
+        employer: 'employer',
+        laboralArea: 'laboralArea',
+        laboralAreaPosition: 'laboralAreaPosition',
+    };
+
+    const onClickOption = (value, targetInputId) => {
+        console.log(value, targetInputId);
+        const targetInputElement = document.getElementById(targetInputId);
+        targetInputElement.value = value;
+    };
+
+    let optionsTimeoutId = null;
+    let abortController = null;
+    const addShowOptionsListener = ({
+        inputEventType,
+        inputToListenId,
+        inputTargetId,
+        optionsTargetId,
+        optionsToFetchType,
+        degreeLevel = '',
+    }) => {
+        const inputToListenElement = document.getElementById(inputToListenId);
+
+        const optionsTargetElement = document.getElementById(optionsTargetId);
+
+        inputToListenElement.addEventListener(inputEventType, (event) => {
+            const value = event.target.value;
+            if (!(optionsToFetchType in OPTIONS_TO_FETCH)) return;
+
+            if (optionsTimeoutId) {
+                clearTimeout(optionsTimeoutId);
+            }
+            if (abortController) {
+                abortController.abort();
+            }
+
+            abortController = new AbortController();
+
+            optionsTimeoutId = setTimeout(() => {
+                const value = event.target.value;
+                fetch(
+                    encodeURI(
+                        `/api/options?type=${optionsToFetchType}&value=${value}&degreeLevel=${degreeLevel}`
+                    ),
+                    {
+                        signal: abortController.signal,
+                    }
+                )
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error(response);
+                        }
+                        return response.json();
+                    })
+                    .then((responseJson) => {
+                        optionsTargetElement.innerHTML = '';
+                        const listItems = (responseJson.records ?? []).forEach(
+                            (recordItem) => {
+                                const listItem = document.createElement('li');
+                                const buttonItem =
+                                    document.createElement('button');
+                                buttonItem.textContent = recordItem.name;
+                                buttonItem.addEventListener('click', () => {
+                                    onClickOption(
+                                        recordItem.name,
+                                        inputTargetId ?? inputToListenId
+                                    );
+                                });
+
+                                listItem.appendChild(buttonItem);
+                                optionsTargetElement.appendChild(listItem);
+                            }
+                        );
+                    })
+                    .catch((err) => console.error(err));
+            }, 200);
+        });
+    };
+
+    const buildStudyItem = (degreeLevel, index) => {
         const container = document.createElement('div');
 
         const currentYear = new Date().getFullYear();
 
-        const [inputTitleId, institutionId, startYearId, stateId] =
-            buildRandomIds(10);
+        const [
+            inputTitleId,
+            institutionId,
+            startYearId,
+            stateId,
+            degreeTitleIdOptions,
+            institutionIdOptions,
+        ] = buildRandomIds(20);
 
-        const studyItemHtmlString = `
-          <div>${STUDY_LEVEL_NAMES[studyDegree].name}</div>
-          <input name="${`${index}-degree`}" type="hidden" value="${studyDegree}">
-          <div>
-            <label for="${inputTitleId}">Título</label>
-            <input  name="${`${index}-title`}"  type="text" name="" id="${inputTitleId}" placeholder="Ej: Biólogo">
-          </div>
-          <div>
-            <label for="${institutionId}">Institución</label>
-            <input  name="${`${index}-institution`}"  type="text" name="" id="${institutionId}" placeholder="Ej: Universidad Nacional Autónoma de México">
-          </div>
+        const studyItemHtmlString = html`
+            <div class="field">
+                <div class="is-size-5 title">
+                    ${STUDY_LEVEL_NAMES[degreeLevel].name}
+                </div>
+                <input
+                    class="input"
+                    name="${`${index}-degree`}"
+                    type="hidden"
+                    value="${degreeLevel}"
+                />
+            </div>
+            <div class="pl-2">
+                <div class="field">
+                    <label class="label" for="${inputTitleId}">Grado en</label>
+                    <input
+                        class="input"
+                        required
+                        name="${`${index}-title`}"
+                        type="text"
+                        name=""
+                        id="${inputTitleId}"
+                        placeholder="Ej: Biología"
+                    />
+                </div>
+                <div class="content has-text-grey">
+                    <ul id="${degreeTitleIdOptions}"></ul>
+                </div>
 
-          <div>
-            <label for="${startYearId}">Año en que entraste</label>
-            <select  name="${`${index}-startYear`}"  id="${startYearId}">
-              <option></option>
-              ${Array(60)
-                  .fill(null)
-                  .map((_, i) => {
-                      const targetYear = currentYear - i;
-                      return `<option value="${targetYear}">${targetYear}</option>`;
-                  })
-                  .join('')}
-            </select>
-          </div>
-      `;
+                <div class="field">
+                    <label class="label" for="${institutionId}"
+                        >Institución (sin abreviación)</label
+                    >
+                    <input
+                        class="input"
+                        required
+                        name="${`${index}-institution`}"
+                        type="text"
+                        name=""
+                        id="${institutionId}"
+                        placeholder="Ej: Universidad Nacional Autónoma de México"
+                    />
+                </div>
+                <div class="content has-text-grey">
+                    <ul id="${institutionIdOptions}"></ul>
+                </div>
 
-        container.innerHTML = studyItemHtmlString;
+                <div class="field is-flex is-align-items-baseline">
+                    <label class="label mr-3" for="${startYearId}"
+                        >Año en que entraste</label
+                    >
+                    <div class="select">
+                        <select
+                            required
+                            name="${`${index}-startYear`}"
+                            id="${startYearId}"
+                        >
+                            <option></option>
+                            ${Array(60)
+                                .fill(null)
+                                .map((_, i) => {
+                                    const targetYear = currentYear - i;
+                                    return html`<option value="${targetYear}">
+                                        ${targetYear}
+                                    </option>`;
+                                })}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.innerHTML = studyItemHtmlString.toString();
+        // wait for these elements to be mounted
+        setTimeout(() => {
+            addShowOptionsListener({
+                inputEventType: 'keyup',
+                inputToListenId: inputTitleId,
+                optionsTargetId: degreeTitleIdOptions,
+                optionsToFetchType: OPTIONS_TO_FETCH.degreeTitle,
+                degreeLevel,
+            });
+            addShowOptionsListener({
+                inputEventType: 'keyup',
+                inputToListenId: institutionId,
+                optionsTargetId: institutionIdOptions,
+                optionsToFetchType: OPTIONS_TO_FETCH.institution,
+                degreeLevel,
+            });
+        }, 10);
+
         return container;
     };
 
@@ -181,94 +351,190 @@
         const [
             laboralSituationInputId,
             salaryInputId,
-            institutionId,
+            employerInputId,
             yearsOfExperienceInputId,
             jobAreaInputId,
             positionInputId,
             stateInputId,
             degreeJobRelatedInputId,
-        ] = buildRandomIds(10);
+            employerIdOptions,
+            laboralAreaIdOptions,
+            laboralAreaPositionIdOptions,
+        ] = buildRandomIds(20);
 
-        const studyItemHtmlString = `
-          <div>
-            <label for="${laboralSituationInputId}">Situación laboral</label>
-            <select  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.jobSituation
-            }"  id="${laboralSituationInputId}">
-              <option></option>
-              ${LABORAL_SITUATION.map(
-                  (laborSituationItem) =>
-                      `<option value="${laborSituationItem.id}">${laborSituationItem.name}</option>`
-              ).join('')}
-            </select>
-          </div>
+        const studyItemHtmlString = html`
+            <div class="field is-flex is-align-items-baseline">
+                <label class="label mr-3" for="${laboralSituationInputId}"
+                    >Situación laboral</label
+                >
+                <div class="select">
+                    <select
+                        required
+                        name="${JOB_FORM_CONTENT_INPUT_NAMES.jobSituation}"
+                        id="${laboralSituationInputId}"
+                    >
+                        <option></option>
+                        ${LABORAL_SITUATION.map(
+                            (laborSituationItem) =>
+                                html`<option value="${laborSituationItem.id}">
+                                    ${laborSituationItem.name}
+                                </option>`
+                        )}
+                    </select>
+                </div>
+            </div>
 
-          <div>
-            <label for="${salaryInputId}">Salario mensual (pesos mexicanos)</label>
-            <input  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.salary
-            }" type="number" min="0" id="${salaryInputId}">
-          </div>
+            <div class="field">
+                <label class="label" for="${salaryInputId}"
+                    >Salario mensual neto (antes de impuestos, $
+                    mexicanos)</label
+                >
+                <input
+                    required
+                    class="input"
+                    name="${JOB_FORM_CONTENT_INPUT_NAMES.salary}"
+                    type="number"
+                    min="0"
+                    id="${salaryInputId}"
+                />
+            </div>
 
-          <div>
-            <label for="${institutionId}">Empresa o institución</label>
-            <input  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.employer
-            }"  type="text" id="${institutionId}" placeholder="Ej: Universidad Nacional Autónoma de México">
-          </div>
+            <div class="field">
+                <label class="label" for="${employerInputId}"
+                    >Empresa o institución</label
+                >
+                <input
+                    required
+                    class="input"
+                    name="${JOB_FORM_CONTENT_INPUT_NAMES.employer}"
+                    type="text"
+                    id="${employerInputId}"
+                />
+            </div>
+            <div class="content has-text-grey">
+                <ul id="${employerIdOptions}"></ul>
+            </div>
 
-          <div>
-            <label for="${jobAreaInputId}">Área laboral</label>
-            <input  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.laboralArea
-            }" type="text"  id="${jobAreaInputId}">
-          </div>
+            <div class="field">
+                <label class="label" for="${jobAreaInputId}"
+                    >Área laboral</label
+                >
+                <input
+                    required
+                    class="input"
+                    name="${JOB_FORM_CONTENT_INPUT_NAMES.laboralArea}"
+                    type="text"
+                    id="${jobAreaInputId}"
+                    placeholder="Desarrollo de software"
+                />
+            </div>
+            <div class="content has-text-grey">
+                <ul id="${laboralAreaIdOptions}"></ul>
+            </div>
 
-          <div>
-            <label for="${positionInputId}">Cargo</label>
-            <input  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.position
-            }" type="text"  id="${positionInputId}">
-          </div>
+            <div class="field">
+                <label class="label" for="${positionInputId}">Cargo</label>
+                <input
+                    required
+                    class="input"
+                    name="${JOB_FORM_CONTENT_INPUT_NAMES.position}"
+                    type="text"
+                    id="${positionInputId}"
+                    placeholder="Frontend"
+                />
+            </div>
+            <div class="content has-text-grey">
+                <ul id="${laboralAreaPositionIdOptions}"></ul>
+            </div>
 
-          <div>
-            <label for="${yearsOfExperienceInputId}">Cuántos años llevas en esa área</label>
-            <input  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.yearsOfExperience
-            }" type="number" min="0" max="40" name="" id="${yearsOfExperienceInputId}">
-          </div>
+            <div class="field">
+                <label class="label" for="${yearsOfExperienceInputId}"
+                    >Cuántos años llevas en esa área</label
+                >
+                <input
+                    required
+                    class="input"
+                    name="${JOB_FORM_CONTENT_INPUT_NAMES.yearsOfExperience}"
+                    type="number"
+                    min="0"
+                    max="40"
+                    name=""
+                    id="${yearsOfExperienceInputId}"
+                />
+            </div>
 
-          <div>
-            <label for=${stateInputId}> Estado</label>
-            <select  name="${
-                JOB_FORM_CONTENT_INPUT_NAMES.mexicanState
-            }"  id=${stateInputId}>
-              <option></option>
-              ${Object.entries(ESTADOS)
-                  .map(
-                      ([stateId, stateName]) =>
-                          `<option value="${stateId}">${stateName}</option>`
-                  )
-                  .join('')}
-            </select>
-          </div>
+            <div class="field is-flex is-align-items-baseline">
+                <label class="label" class="mr-3" for=${stateInputId}>
+                    Estado</label
+                >
+                <div class="select">
+                    <select
+                        required
+                        name="${JOB_FORM_CONTENT_INPUT_NAMES.mexicanState}"
+                        id=${stateInputId}
+                    >
+                        <option></option>
+                        ${Object.entries(ESTADOS).map(
+                            ([stateId, stateName]) =>
+                                html`<option value="${stateId}">
+                                    ${stateName}
+                                </option>`
+                        )}
+                    </select>
+                </div>
+            </div>
 
-          <div>
-            <label for=${degreeJobRelatedInputId}> ¿Cuál de tus grados está relacionado con este trabajo?</label>
-            ${studyDegrees
-                .map(
-                    (degreeItem, degreeIndex) =>
-                        `<div><label> <input type="checkbox" name="${
-                            JOB_FORM_CONTENT_INPUT_NAMES.degreeJobRelated
-                        }" value="${degreeIndex}"> ${
-                            STUDY_LEVEL_NAMES[degreeItem.degreeLevel].name
-                        } - ${degreeItem.title} </label></div>`
-                )
-                .join('')}
-          </div>
-      `;
+            <div class="field">
+                <label class="label" for=${degreeJobRelatedInputId}>
+                    ¿Cuál de tus grados está relacionado con este
+                    trabajo?</label
+                >
+                <div>
+                    ${studyDegrees.map(
+                        (degreeItem, degreeIndex) =>
+                            html`<div>
+                                <label class="label">
+                                    <input
+                                        class="checkbox"
+                                        type="checkbox"
+                                        name="${JOB_FORM_CONTENT_INPUT_NAMES.degreeJobRelated}"
+                                        value="${degreeIndex}"
+                                    />
+                                    ${STUDY_LEVEL_NAMES[degreeItem.degreeLevel]
+                                        .name}
+                                    - ${degreeItem.title}
+                                </label>
+                            </div>`
+                    )}
+                </div>
+            </div>
+        `;
 
-        container.innerHTML = studyItemHtmlString;
+        container.innerHTML = studyItemHtmlString.toString();
+
+        // wait for these elements to be mounted
+        setTimeout(() => {
+            addShowOptionsListener({
+                inputEventType: 'keyup',
+                inputToListenId: employerInputId,
+                optionsTargetId: employerIdOptions,
+                optionsToFetchType: OPTIONS_TO_FETCH.employer,
+            });
+            addShowOptionsListener({
+                inputEventType: 'keyup',
+                inputToListenId: jobAreaInputId,
+                optionsTargetId: laboralAreaIdOptions,
+                optionsToFetchType: OPTIONS_TO_FETCH.laboralArea,
+            });
+
+            addShowOptionsListener({
+                inputEventType: 'change',
+                inputToListenId: jobAreaInputId,
+                inputTargetId: positionInputId,
+                optionsTargetId: laboralAreaPositionIdOptions,
+                optionsToFetchType: OPTIONS_TO_FETCH.laboralAreaPosition,
+            });
+        }, 10);
         return container;
     };
 
@@ -390,6 +656,10 @@
                 if (response.ok) {
                     jobSurveyForm.classList.toggle('hide');
                     finishFormThanks.classList.toggle('hide');
+                    finishFormThanks.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                    });
                 } else {
                     // TODO
                 }
