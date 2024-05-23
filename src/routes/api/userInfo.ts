@@ -103,8 +103,7 @@ const PostUserInfoSchema = z.object({
 
 router.post('/', async (req, res, next) => {
     try {
-        const externalUserId: string | undefined =
-            req.signedCookies?.userId ?? `${Math.random()}`;
+        const externalUserId: string | undefined = req.signedCookies?.userId;
 
         const userExists = !externalUserId
             ? false
@@ -112,7 +111,8 @@ router.post('/', async (req, res, next) => {
                   externalId: externalUserId,
               });
 
-        if (!externalUserId || userExists) return res.json();
+        // if (!externalUserId || userExists) return res.json(); // FIXME uncomment
+        if (!externalUserId) return res.json();
 
         const cleanReq = await validateReq(PostUserInfoSchema, req);
 

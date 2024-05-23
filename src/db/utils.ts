@@ -24,7 +24,7 @@ export const normalizeString = (text: string) =>
  * removes additional spaces and escapes html
  */
 export const cleanString = (text: string) =>
-    escape(text.trim().replace(/s+/g, ' '));
+    escape(text.trim().replace(/\s+/g, ' '));
 
 /** Takes a string, splits by ' ' and capitalizes first letter  */
 export const capitalizeFirstLetter = (text: string) => {
