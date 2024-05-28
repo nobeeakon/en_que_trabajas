@@ -12,6 +12,7 @@ import LaboralAreaPositionModel from '../../db/models/LaboralAreaPositionModel';
 import UserDegreeModel from '../../db/models/UserDegreeModel';
 import UserJobModel from '../../db/models/UserJobModel';
 import UserModel from '../../db/models/UserModel';
+import MonitoringRequestModel from '../../db/models/MonitoringRequestModel';
 
 const router = Router();
 
@@ -111,8 +112,18 @@ router.post('/', async (req, res, next) => {
                   externalId: externalUserId,
               });
 
-        // if (!externalUserId || userExists) return res.json(); // FIXME uncomment
-        if (!externalUserId) return res.json();
+        if (!externalUserId || userExists) {
+            await MonitoringRequestModel.create({
+                counterName: 'user_api',
+                requestMethod: 'post',
+                requestStatus: 'ok',
+                data: externalUserId
+                    ? 'Missing external id'
+                    : 'User already exists',
+            });
+
+            return res.json();
+        }
 
         const cleanReq = await validateReq(PostUserInfoSchema, req);
 
@@ -173,22 +184,56 @@ router.post('/', async (req, res, next) => {
             })
         );
 
+        await MonitoringRequestModel.create({
+            counterName: 'user_api',
+            requestMethod: 'post',
+            requestStatus: 'ok',
+        });
         return res.json(null);
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'user_api',
+            requestMethod: 'post',
+            requestStatus: 'error',
+            data: String(error),
+        });
+        next(error);
     }
 });
 
 router.get('/', async (req, res, next) => {
-    const degreeTitleId = req.query?.degreeTitleId ?? '';
+    try {
+        const degreeTitleId = req.query?.degreeTitleId ?? '';
 
-    if (!degreeTitleId || typeof degreeTitleId !== 'string')
-        return res.json({});
+        if (!degreeTitleId || typeof degreeTitleId !== 'string') {
+            await MonitoringRequestModel.create({
+                counterName: 'user_api',
+                requestMethod: 'get',
+                requestStatus: 'ok',
+            });
 
-    const userData = await UserModel.allUserDataByDegreeTitle({
-        degreeTitleId,
-    });
-    return res.json(userData);
+            return res.json({});
+        }
+
+        const userData = await UserModel.allUserDataByDegreeTitle({
+            degreeTitleId,
+        });
+
+        await MonitoringRequestModel.create({
+            counterName: 'user_api',
+            requestMethod: 'get',
+            requestStatus: 'ok',
+        });
+        return res.json(userData);
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'user_api',
+            requestMethod: 'get',
+            requestStatus: 'error',
+            data: String(error),
+        });
+        next(error);
+    }
 });
 
 export default router;

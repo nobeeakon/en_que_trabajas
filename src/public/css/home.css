@@ -30,3 +30,17 @@
 .tabs *[active] {
     border: red 2px solid;
 }
+
+.workerImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.workerImage.big {
+    width: 250px;
+    height: 250px;
+}
+.workerImage.left{
+    object-position: left;
+}

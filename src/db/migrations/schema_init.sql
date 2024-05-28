@@ -82,3 +82,14 @@ CREATE TABLE UserJob (
     CONSTRAINT "Validation_laboral_area_id_fkey" FOREIGN KEY ("laboralAreaId") REFERENCES LaboralArea("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Validation_laboral_area_position_id_fkey" FOREIGN KEY ("laboralAreaPositionId") REFERENCES LaboralAreaPosition("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
+-- create table
+CREATE TABLE MonitoringRequest (
+   "id" TEXT NOT NULL PRIMARY KEY,
+   "createdAt" TEXT NOT NULL,
+   "counterName" TEXT NOT NULL,
+   "requestStatus" TEXT NOT NULL,
+   "requestMethod" TEXT NOT NULL,
+   "data" TEXT
+);

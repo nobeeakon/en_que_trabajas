@@ -6,34 +6,33 @@
   <div class="columns">
     <div class="column is-8 is-offset-2">
       <div class="content is-medium">
-  <!-- TODO update this color to something nicer, maybe a gradient -->
-        <h1 class="title is-size-1 has-text-centered has-text-warning">¿En qué trabajas?</h1>
-        <p>
-          Las eternas preguntas: ¿en qué trabajas?, ¿dónde?, ¿cuánto ganas? 
-        </p>
-        <p>
-          En
-          esta página tratamos de reunir esa información y ayudar a:
-        </p>
+        <!-- TODO update this color to something nicer, maybe a gradient -->
+        <h1 class="title is-size-1 has-text-centered has-text-warning">
+          ¿En qué trabajas?
+        </h1>
+        <p>Las eternas preguntas: ¿en qué trabajas?, ¿dónde?, ¿cuánto ganas?</p>
+        <p>En esta página tratamos de reunir esa información y ayudar a:</p>
         <ul>
           <li>estudiantes y recién egresados a conocer el campo laboral</li>
           <li>colegas que estén buscando nuevas áreas laborales</li>
           <li>otras personas que necesiten conocer esa información</li>
         </ul>
       </div>
+
+      <figure class="has-text-centered mt-6">
+        <img class="workerImage big left" src="/public/img/ingeniero.jpg" />
+      </figure>
     </div>
   </div>
-  <!-- TODO update this image 
-  <figure class="image is-128x128">
-  <img src="/public/img/working3.png" >
-</figure>-->
 </section>
 
 {% if showSurvey %}
 <section class="section">
   <div class="p-3 mb-5">
     <div class="box">
-      <div class="title is-size-3 has-text-centered mb-2">Contribuye con nosotros</div>
+      <div class="title is-size-3 has-text-centered mb-2">
+        Contribuye con nosotros
+      </div>
       <div class="is-size-6 has-text-centered mb-3">
         (100% anónimo, te toma 1 minuto)
       </div>
@@ -41,29 +40,25 @@
     </div>
   </div>
 </section>
-{% endif %}
-
-{% if showStats %}
+{% endif %} {% if showStats %}
 <section class="section">
-    <div class="columns">
+  <div class="columns">
     <div class="column is-8 is-offset-2">
-      <div class="content is-medium">
-  {% include "./degreeStats.html" %}
+      <div class="content is-medium">{% include "./degreeStats.html" %}</div>
+    </div>
   </div>
-  </div>
-  </div>
-  </section>
+</section>
 {% else %}
 <section class="section">
   <div class="columns">
     <div class="column is-8 is-offset-2">
       <div class="content is-medium">
-        <h2 class="title is-size-2 has-text-centered">Busca en nuestros datos</h2>
+        <h2 class="title is-size-2 has-text-centered">
+          Busca en nuestros datos
+        </h2>
+        <p class="has-text-centered">Apenas estamos comenzando 🚀</p>
         <p class="has-text-centered">
-         Apenas estamos comenzando 🚀
-        </p>
-        <p class="has-text-centered">
-         Vuelve pronto para poder conocer lo que otras personas han aportado
+          Vuelve pronto para poder conocer lo que otras personas han aportado
         </p>
       </div>
     </div>
@@ -77,14 +72,17 @@
       <div class="content is-medium">
         <h2 class="title is-size-2 has-text-centered">Sobre nuestros datos</h2>
         <ul>
-          <li> 
-            La información de este sitio se puede reutilizar de la manera que consideres
+          <li>
+            La información de este sitio se puede reutilizar de la manera que
+            consideres
           </li>
-          <li> 
-            La información proviene de lo que los usuarios provean, por lo que pueden llegar a ser inexacta
+          <li>
+            La información proviene de lo que los usuarios provean, por lo que
+            pueden llegar a ser inexacta
           </li>
-          <li> 
-            La información proviene de los usuarios, no de una encuesta con un diseño estadístico
+          <li>
+            La información proviene de los usuarios, no de una encuesta con un
+            diseño estadístico
           </li>
         </ul>
       </div>
@@ -96,18 +94,49 @@
   <div class="columns">
     <div class="column is-8 is-offset-2">
       <div class="content is-medium">
+        <figure class="has-text-centered">
+          <img class="workerImage" src="/public/img/medicos.jpg" />
+        </figure>
         <h2 class="title is-size-2 has-text-centered">Otras fuentes</h2>
-        <p>Si quisieras complementar la información, te recomiendo visitar los siguientes sitios: </p>
+        <p>
+          Si quisieras complementar la información, te recomiendo visitar los
+          siguientes sitios:
+        </p>
         <ul>
-          <li> <a 
-            target="_blank" rel="noreferrer noopener"
-          href="https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ocupacion_sectores.html">Observatorio laboral</a>: basado en una encuesta nacional oficial.
-            </li>
-            <li> <a target="_blank" rel="noreferrer noopener" href="https://www.economia.gob.mx/datamexico/es/profile/occupation/">Data México</a>: basado en una encuesta nacional oficial.
-            </li><li> <a target="_blank" rel="noreferrer noopener" href="https://www.glassdoor.com.mx/Sueldos/index.html"> Glassdoor</a>: basado en opiniones de los usuarios.
-            </li>
-                  </li><li> <a target="_blank" rel="noreferrer noopener" href="https://mx.indeed.com/orientacion-profesional/como-encontrar-empleo"> Indeed</a>: artículos sobre la perspectiva laboral de diferentes profesiones.
-            </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.observatoriolaboral.gob.mx/static/estudios-publicaciones/Ocupacion_sectores.html"
+              >Observatorio laboral</a
+            >: basado en una encuesta nacional oficial.
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.economia.gob.mx/datamexico/es/profile/occupation/"
+              >Data México</a
+            >: basado en una encuesta nacional oficial.
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.glassdoor.com.mx/Sueldos/index.html"
+            >
+              Glassdoor</a
+            >: basado en opiniones de los usuarios.
+          </li>
+          <li>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://mx.indeed.com/orientacion-profesional/como-encontrar-empleo"
+            >
+              Indeed</a
+            >: artículos sobre la perspectiva laboral de diferentes profesiones.
+          </li>
         </ul>
       </div>
     </div>

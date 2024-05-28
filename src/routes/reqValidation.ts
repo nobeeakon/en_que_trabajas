@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { z, AnyZodObject, ZodError } from 'zod';
-import { BadRequestError } from '../errors';
+import { BadRequestError, BadRequestValidationError } from '../errors';
 
 // TODO sanitize/escape? sql injection
 export const validateReq = async <ZodSchema extends AnyZodObject>(
@@ -12,7 +12,7 @@ export const validateReq = async <ZodSchema extends AnyZodObject>(
         return validated;
     } catch (error) {
         if (error instanceof ZodError) {
-            return Promise.reject(new BadRequestError(error.message));
+            return Promise.reject(new BadRequestValidationError(error.message));
         }
 
         return Promise.reject(new BadRequestError(String(error)));

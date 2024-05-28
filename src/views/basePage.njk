@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     {% block meta %} {% endblock %}
     <!-- Title -->
-    <title>{{ title }}</title>
+    <title>¿En qué trabajas?</title>
+    <meta
+      property="og:title"
+      content="¿En qué trabajas? | Conoce el panorama laboral por carrera"
+    />
+    <meta
+      name="description"
+      content="Busca en qué y cuánto ganan otras trabajan personas que estudiaron lo mismo que tú. Conoce el panorama laboral y descubre áreas de oportunidad."
+    />
+    <meta
+      name="og:description"
+      content="Busca en qué y cuánto ganan otras trabajan personas que estudiaron lo mismo que tú. Conoce el panorama laboral y descubre áreas de oportunidad."
+    />
 
     <meta charset="utf-8" />
     <meta
@@ -11,34 +23,33 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta property="og:image" content="/public/img/cat_working_200.png" />
+
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" />
-    {# SOME STYLESHEETS HERE #} 
-    <link rel="stylesheet" href='/public/css/baseStyles.css' />
-    <link rel="stylesheet"  href="/public/css/bulma/css/bulma.min.css">
-   <!-- Modules -->
-    <script type="module" src="/public/js/safeHTML.mjs" nonce="{{nonce}}" ></script>
+    <link rel="shortcut icon" href="/public/favicon.ico" />
+    {# SOME STYLESHEETS HERE #}
+    <link rel="stylesheet" href="/public/css/baseStyles.css" />
+    <link rel="stylesheet" href="/public/css/bulma/css/bulma.min.css" />
+    <!-- Modules -->
+    <script
+      type="module"
+      src="/public/js/safeHTML.mjs"
+      nonce="{{nonce}}"
+    ></script>
     {% block head %}
-     <!-- CSS Customization -->
+    <!-- CSS Customization -->
     {% endblock %}
   </head>
 
   <body>
     {# margin to accommodate header bar #}
     <main class="main">
-      {# HEADER #} 
-      {% include "header.njk"%} 
-      <div class="mainContent container">
-        {% block body %}{% endblock %} 
-      </div>
-      {# FOOTER #} 
-       {% include "footer.njk"%}
+      {# HEADER #} {% include "header.njk"%}
+      <div class="mainContent container">{% block body %}{% endblock %}</div>
+      {# FOOTER #} {% include "footer.njk"%}
     </main>
 
-    {# SOME SCRIPTS HERE #}
-    {%block script%} {%endblock%}
-   
-
+    {# SOME SCRIPTS HERE #} {%block script%} {%endblock%}
   </body>
 </html>

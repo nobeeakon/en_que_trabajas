@@ -18,97 +18,133 @@ import {
     isMexicanStateTypeGuard,
     isLaboralSituationTypeGuard,
 } from '../../../db/types';
+import MonitoringRequestModel from '../../../db/models/MonitoringRequestModel';
 
 const router = Router();
 
 router.get('/', async (req, res, next) => {
-    const userCount = await UserModel.count();
-    const degreeTitleCount = await DegreeTitleModel.count();
+    try {
+        const userCount = await UserModel.count();
+        const degreeTitleCount = await DegreeTitleModel.count();
 
-    return res.json({
-        reviewsCount: userCount?.count,
-        degreeTitleCount,
-    });
+        await MonitoringRequestModel.create({
+            counterName: 'stats_api',
+            requestMethod: 'get',
+            requestStatus: 'ok',
+        });
+        return res.json({
+            reviewsCount: userCount?.count,
+            degreeTitleCount,
+        });
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'stats_api',
+            requestMethod: 'get',
+            requestStatus: 'error',
+            data: String(error),
+        });
+        next(error);
+    }
 });
 
 router.get('/:degreeTitleId', async (req, res, next) => {
-    const degreeTitleId = req.params.degreeTitleId;
+    try {
+        const degreeTitleId = req.params.degreeTitleId;
 
-    const genderStats = await UserModel.genderStatsByDegreeTitle({
-        degreeTitleId,
-    });
-    const genderStatsWithDisplayName = genderStats
-        .map((genderItem) =>
-            !isUserGenderTypeGuard(genderItem.gender)
-                ? null
-                : {
-                      ...genderItem,
-                      displayName: USER_GENDER[genderItem.gender],
-                  }
-        )
-        .filter(Boolean);
-
-    const laboralAreaStats = await LaboralAreaModel.statsByDegreeTitle({
-        degreeTitleId,
-    });
-    const laboralAreaPositionStats =
-        await LaboralAreaPositionModel.statsByDegreeTitle({ degreeTitleId });
-
-    const mexicanStateStats = await UserJobModel.mexicanStateStatsByDegreeTitle(
-        { degreeTitleId }
-    );
-    const mexicanStateWithDisplayNameStats = mexicanStateStats
-        .map((stateItem) =>
-            !isMexicanStateTypeGuard(stateItem.mexicanState)
-                ? null
-                : {
-                      ...stateItem,
-                      displayName: MEXICAN_STATES[stateItem.mexicanState],
-                  }
-        )
-        .filter(Boolean);
-
-    const employerStats = await EmployerModel.statsByDegreeTitle({
-        degreeTitleId,
-    });
-    const institutionStats = await InstitutionModel.statsByDegreeTitle({
-        degreeTitleId,
-    });
-    const laboralsSituationStats =
-        await UserJobModel.laboralSituationStatsByDegreeTitle({
+        const genderStats = await UserModel.genderStatsByDegreeTitle({
             degreeTitleId,
         });
-    const laboralsSituationWithDisplayNameStats = laboralsSituationStats
-        .map((laboralSituationItem) =>
-            !isLaboralSituationTypeGuard(laboralSituationItem.laboralSituation)
-                ? null
-                : {
-                      ...laboralSituationItem,
-                      displayName:
-                          LABORAL_SITUATION[
-                              laboralSituationItem.laboralSituation
-                          ],
-                  }
-        )
-        .filter(Boolean);
+        const genderStatsWithDisplayName = genderStats
+            .map((genderItem) =>
+                !isUserGenderTypeGuard(genderItem.gender)
+                    ? null
+                    : {
+                          ...genderItem,
+                          displayName: USER_GENDER[genderItem.gender],
+                      }
+            )
+            .filter(Boolean);
 
-    const jobRelatedStats =
-        await UserDegreeModel.isJobRelatedStatsByDegreeTitle({
+        const laboralAreaStats = await LaboralAreaModel.statsByDegreeTitle({
             degreeTitleId,
         });
+        const laboralAreaPositionStats =
+            await LaboralAreaPositionModel.statsByDegreeTitle({
+                degreeTitleId,
+            });
 
-    const data = {
-        genderStats: genderStatsWithDisplayName,
-        laboralAreaStats,
-        laboralAreaPositionStats,
-        mexicanStateStats: mexicanStateWithDisplayNameStats,
-        employerStats,
-        institutionStats,
-        laboralsSituationStats: laboralsSituationWithDisplayNameStats,
-        jobRelatedStats,
-    };
+        const mexicanStateStats =
+            await UserJobModel.mexicanStateStatsByDegreeTitle({
+                degreeTitleId,
+            });
+        const mexicanStateWithDisplayNameStats = mexicanStateStats
+            .map((stateItem) =>
+                !isMexicanStateTypeGuard(stateItem.mexicanState)
+                    ? null
+                    : {
+                          ...stateItem,
+                          displayName: MEXICAN_STATES[stateItem.mexicanState],
+                      }
+            )
+            .filter(Boolean);
 
-    return res.json(data);
+        const employerStats = await EmployerModel.statsByDegreeTitle({
+            degreeTitleId,
+        });
+        const institutionStats = await InstitutionModel.statsByDegreeTitle({
+            degreeTitleId,
+        });
+        const laboralsSituationStats =
+            await UserJobModel.laboralSituationStatsByDegreeTitle({
+                degreeTitleId,
+            });
+        const laboralsSituationWithDisplayNameStats = laboralsSituationStats
+            .map((laboralSituationItem) =>
+                !isLaboralSituationTypeGuard(
+                    laboralSituationItem.laboralSituation
+                )
+                    ? null
+                    : {
+                          ...laboralSituationItem,
+                          displayName:
+                              LABORAL_SITUATION[
+                                  laboralSituationItem.laboralSituation
+                              ],
+                      }
+            )
+            .filter(Boolean);
+
+        const jobRelatedStats =
+            await UserDegreeModel.isJobRelatedStatsByDegreeTitle({
+                degreeTitleId,
+            });
+
+        const data = {
+            genderStats: genderStatsWithDisplayName,
+            laboralAreaStats,
+            laboralAreaPositionStats,
+            mexicanStateStats: mexicanStateWithDisplayNameStats,
+            employerStats,
+            institutionStats,
+            laboralsSituationStats: laboralsSituationWithDisplayNameStats,
+            jobRelatedStats,
+        };
+
+        await MonitoringRequestModel.create({
+            counterName: 'stats_api',
+            requestMethod: 'get',
+            requestStatus: 'ok',
+        });
+        return res.json(data);
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'stats_api',
+            requestMethod: 'get',
+            requestStatus: 'error',
+            data: String(error),
+        });
+        next(error);
+    }
 });
 
 export default router;

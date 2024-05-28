@@ -1,21 +1,17 @@
 import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import cookieParser from 'cookie-parser';
+import 'dotenv/config';
 
 import nunjucks from 'nunjucks';
 import '@total-typescript/ts-reset';
 
-import { ExpressError } from './errors';
+import { BadRequestValidationError } from './errors';
 import { HTTP_CODES } from './utils';
 
 // routes
 import apiRoutes from './routes/api';
 import frontEnd from './routes/frontend';
-
-apiRoutes.get('/', (req, res) => {
-    console.log('hola api route');
-    res.json({ hola: 'api route' }).status(200);
-});
 
 const app = express();
 nunjucks.configure(path.join(__dirname, 'views'), {
@@ -23,28 +19,33 @@ nunjucks.configure(path.join(__dirname, 'views'), {
     express: app,
 });
 
-const PORT = 3000;
+const PORT = process.env?.PORT ?? 3000;
 
-app.use(cookieParser('hola')); // TODO update this
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use('/api', apiRoutes);
-app.get('/', frontEnd);
+app.use('/', frontEnd);
 
 // serve static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
-// TODO improve error handling, currently logging all to the client :(
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
+// error handling
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error(err?.stack);
 
-    const errMessage = err.message ?? 'Something went wrong';
-    if (err instanceof ExpressError) {
-        return res.status(err.status).send({ error: errMessage });
+    if (err instanceof BadRequestValidationError) {
+        return res
+            .status(err.status)
+            .send({ error: err?.message ?? 'Something went wrong' });
     }
 
     return res
         .status(HTTP_CODES[500].internalServerError)
-        .send({ error: errMessage });
+        .send({ error: 'Something went wrong' });
+});
+
+app.all('*', (_req, res) => {
+    res.status(404).render('pages/error/error.njk');
 });
 
 app.listen(PORT, () => {
