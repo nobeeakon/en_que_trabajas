@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// import { v4 as uuidV4 } from 'uuid';
 import {
     v4 as uuidV4,
     validate as uuidValidate,
@@ -8,8 +7,10 @@ import {
 import UserModel from '../../db/models/UserModel';
 import DegreeTitleModel from '../../db/models/DegreeTitleModel';
 import UserDegreeModel from '../../db/models/UserDegreeModel';
+import MonitoringRequestModel from '../../db/models/MonitoringRequestModel';
 import { isDegreeLevelTypeGuard } from '../../db/types';
 import { STUDY_LEVEL_NAMES } from '../../db/constants';
+
 const router = Router();
 
 router.use((req, res, next) => {
@@ -37,7 +38,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use((req, res, next) => {
+router.use((_req, res, next) => {
     const nonce = Math.floor(Math.random() * 10000).toString();
 
     res.setHeader(
@@ -50,75 +51,96 @@ router.use((req, res, next) => {
     next();
 });
 
-router.get('/', async (req, res) => {
-    const externalUserId: string | undefined = req.signedCookies?.userId;
-    const userCount = await UserModel.count();
-    const degreeTitleCount = await DegreeTitleModel.count();
-    const degreeTitleList = await DegreeTitleModel.getDegreeTitleList();
-    const userByDegreeLevelCount = await UserDegreeModel.countByDegreeLevel();
+router.get('/', async (req, res, next) => {
+    try {
+        const externalUserId: string | undefined = req.signedCookies?.userId;
+        const userCount = await UserModel.count();
+        const degreeTitleCount = await DegreeTitleModel.count();
+        const degreeTitleList = await DegreeTitleModel.getDegreeTitleList();
+        const userByDegreeLevelCount =
+            await UserDegreeModel.countByDegreeLevel();
 
-    const countByDegreeLevel = degreeTitleCount.countByDegreeLevel
-        .map((degreeLevelItem) =>
-            isDegreeLevelTypeGuard(degreeLevelItem.degreeLevel)
-                ? {
-                      ...degreeLevelItem,
-                      degreeLevelName:
-                          STUDY_LEVEL_NAMES[degreeLevelItem.degreeLevel]
-                              .displayName,
-                  }
-                : null
-        )
-        .filter(Boolean);
+        const countByDegreeLevel = degreeTitleCount.countByDegreeLevel
+            .map((degreeLevelItem) =>
+                isDegreeLevelTypeGuard(degreeLevelItem.degreeLevel)
+                    ? {
+                          ...degreeLevelItem,
+                          degreeLevelName:
+                              STUDY_LEVEL_NAMES[degreeLevelItem.degreeLevel]
+                                  .displayName,
+                      }
+                    : null
+            )
+            .filter(Boolean);
 
-    const degreeTitles = degreeTitleList
-        .map((degreeTitleItem) =>
-            isDegreeLevelTypeGuard(degreeTitleItem.degreeLevel)
-                ? {
-                      ...degreeTitleItem,
-                      degreeLevelName:
-                          STUDY_LEVEL_NAMES[degreeTitleItem.degreeLevel]
-                              .displayName,
-                  }
-                : null
-        )
-        .filter(Boolean)
-        .sort((a, b) =>
-            a.degreeLevelName.localeCompare(b.degreeLevelName, 'es', {
-                sensitivity: 'base',
-            })
-        );
+        const degreeTitles = degreeTitleList
+            .map((degreeTitleItem) =>
+                isDegreeLevelTypeGuard(degreeTitleItem.degreeLevel)
+                    ? {
+                          ...degreeTitleItem,
+                          degreeLevelName:
+                              STUDY_LEVEL_NAMES[degreeTitleItem.degreeLevel]
+                                  .displayName,
+                      }
+                    : null
+            )
+            .filter(Boolean)
+            .sort((a, b) =>
+                a.degreeLevelName.localeCompare(b.degreeLevelName, 'es', {
+                    sensitivity: 'base',
+                })
+            );
 
-    const userByDegreeLevelCountWithDisplayName = userByDegreeLevelCount
-        .map((userCountItem) =>
-            isDegreeLevelTypeGuard(userCountItem.degreeLevel)
-                ? {
-                      ...userCountItem,
-                      degreeLevelName:
-                          STUDY_LEVEL_NAMES[userCountItem.degreeLevel]
-                              .displayName,
-                  }
-                : null
-        )
-        .filter(Boolean);
+        const userByDegreeLevelCountWithDisplayName = userByDegreeLevelCount
+            .map((userCountItem) =>
+                isDegreeLevelTypeGuard(userCountItem.degreeLevel)
+                    ? {
+                          ...userCountItem,
+                          degreeLevelName:
+                              STUDY_LEVEL_NAMES[userCountItem.degreeLevel]
+                                  .displayName,
+                      }
+                    : null
+            )
+            .filter(Boolean);
 
-    const userExists = !externalUserId
-        ? false
-        : await UserModel.userExist({
-              externalId: externalUserId,
-          });
+        const userExists = !externalUserId
+            ? false
+            : await UserModel.userExist({
+                  externalId: externalUserId,
+              });
 
-    res.render('pages/home/home.njk', {
-        // showSurvey: !userExists, // FIXME: uncomment
-        showSurvey: true,
-        showStats: false,
-        stats: {
-            reviewsCount: userCount?.count ?? 0,
-            countByDegreeLevel,
-            userByDegreeLevelCount: userByDegreeLevelCountWithDisplayName,
-        },
-        degreeTitles,
-        nonce: res.locals.nonce ?? '',
-    });
+        await MonitoringRequestModel.create({
+            counterName: 'home_page',
+            requestMethod: 'get',
+            requestStatus: 'ok',
+        });
+
+        res.render('pages/home/home.njk', {
+            showSurvey: !userExists,
+            showStats: false,
+            stats: {
+                reviewsCount: userCount?.count ?? 0,
+                countByDegreeLevel,
+                userByDegreeLevelCount: userByDegreeLevelCountWithDisplayName,
+            },
+            degreeTitles,
+            nonce: res.locals.nonce ?? '',
+        });
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'home_page',
+            requestMethod: 'get',
+            requestStatus: 'error',
+            data: String(error),
+        });
+
+        return res.redirect('/error');
+    }
+});
+
+router.get('/error', (_req, res) => {
+    res.render('pages/error/error.njk');
 });
 
 export default router;

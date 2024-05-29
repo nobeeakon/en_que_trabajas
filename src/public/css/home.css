@@ -30,3 +30,26 @@
 .tabs *[active] {
     border: red 2px solid;
 }
+
+.workerImage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.workerImage.big {
+    width: 250px;
+    height: 250px;
+}
+.workerImage.left{
+    object-position: left;
+}
+
+
+.mainTitle {
+    background: rgb(8,149,246);
+    background: linear-gradient(117deg, rgba(8,149,246,1) 0%, rgba(244,241,48,1) 100%); 
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

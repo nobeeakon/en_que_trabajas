@@ -98,3 +98,22 @@ export type UserJob = {
     yearsOfExperience: number;
     mexicanState?: MexicanStates;
 };
+
+export type MonitoringRequestName =
+    | 'home_page'
+    | 'user_api'
+    | 'stats_api'
+    | 'options_api';
+export type MonitoringRequestMethod = 'get' | 'post';
+export type MonitoringRequestStatus = 'error' | 'ok';
+// TODOn fisnish this
+// TODO how errors are susually handled in express? via a common middleware?
+// how are those usually logged? in the point?
+export type MonitoringRequest = {
+    id: string;
+    createdAt: string;
+    counterName: MonitoringRequestName;
+    requestStatus: MonitoringRequestStatus;
+    requestMethod: MonitoringRequestMethod;
+    data?: string;
+};

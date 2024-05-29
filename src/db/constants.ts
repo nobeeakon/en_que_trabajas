@@ -7,6 +7,7 @@ export const TABLE_NAMES = {
     laboralAreaPosition: 'LaboralAreaPosition',
     userDegree: 'UserDegree',
     userJob: 'UserJob',
+    monitoringRequest: 'MonitoringRequest',
 };
 
 export const STUDY_LEVEL_NAMES = {
