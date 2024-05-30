@@ -7,10 +7,11 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "npm run format && ts-node src/index.ts",
         "browserify": "browserify src/views/js/map -o src/public/map  ",
-        "build": "npm run format && tsc",
+        "build": "npm run format && tsc && npm run copy-files",
         "serve": "node dist/index.js",
         "prepare": "husky install",
-        "format": "pretty-quick . "
+        "format": "pretty-quick . ",
+        "copy-files": "cp -r ./src/views/ ./dist/views && cp -r ./src/public/ ./dist/public"
     },
     "author": "",
     "license": "ISC",
