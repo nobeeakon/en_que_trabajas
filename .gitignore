@@ -1,3 +1,5 @@
 node_modules
 src/db/data/
+dist/
+db/data/*.db
 .env
