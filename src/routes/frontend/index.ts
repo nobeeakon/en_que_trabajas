@@ -139,6 +139,23 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/sitemap', (_req, res) => {
+    res.header('Content-type', 'text/xml');
+
+    const BASE_URL = 'https://www.enquetrabajas.com';
+
+    const urls: Array<{ loc: string; lastmodYMD: string }> = [
+        {
+            loc: BASE_URL,
+            lastmodYMD: '2024-05-29',
+        },
+    ];
+
+    res.render('sitemap.xml', {
+        urls,
+    });
+});
+
 router.get('/error', (_req, res) => {
     res.render('pages/error/error.njk');
 });
