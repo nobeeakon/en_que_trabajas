@@ -19,6 +19,7 @@ import {
     isLaboralSituationTypeGuard,
 } from '../../../db/types';
 import MonitoringRequestModel from '../../../db/models/MonitoringRequestModel';
+import monitoring from './monitoring';
 
 const router = Router();
 
@@ -46,6 +47,9 @@ router.get('/', async (req, res, next) => {
         next(error);
     }
 });
+
+// TODO: make something better
+router.use(monitoring);
 
 router.get('/:degreeTitleId', async (req, res, next) => {
     try {

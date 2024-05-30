@@ -1,17 +1,7 @@
 import { v4 as uuidV4 } from 'uuid';
-import type {
-    MonitoringRequest,
-    MonitoringRequestName,
-    MonitoringRequestMethod,
-    MonitoringRequestStatus,
-} from '../types';
+import type { MonitoringRequest } from '../types';
 import { openDb } from '../dbClient';
-import {
-    getDateISOString,
-    normalizeString,
-    cleanString,
-    capitalizeFirstLetter,
-} from '../utils';
+import { getDateISOString } from '../utils';
 import { TABLE_NAMES } from '../constants';
 
 const create = async ({
