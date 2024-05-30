@@ -1,0 +1,8 @@
+<urlset>
+{%- for url in urls -%}
+<url>
+<loc>{{ url.loc }}</loc>
+<lastmod>{{ url.lastmodYMD }}</lastmod>
+</url>
+{% endfor -%}
+</urlset>
