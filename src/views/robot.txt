@@ -1,0 +1,5 @@
+User-agent: AdsBot-Google
+User-agent: *
+Disallow: /api
+
+Sitemap: https://www.enquetrabajas.com/sitemap
