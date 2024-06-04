@@ -11,6 +11,8 @@ import MonitoringRequestModel from '../../db/models/MonitoringRequestModel';
 import { isDegreeLevelTypeGuard } from '../../db/types';
 import { STUDY_LEVEL_NAMES } from '../../db/constants';
 
+import { CANONICAL_URL, getCanonicalHeader, getCspHeader } from './headerUtil';
+
 const router = Router();
 
 router.use((req, res, next) => {
@@ -38,20 +40,13 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use((_req, res, next) => {
-    const nonce = Math.floor(Math.random() * 10000).toString();
-
-    res.setHeader(
-        'Content-Security-Policy',
-        ` default-src 'self'; script-src 'nonce-${nonce}';style-src 'self'; font-src 'self; img-src 'self'; frame-src 'self';`
-    );
-
-    res.locals.nonce = nonce;
-
-    next();
-});
-
 router.get('/', async (req, res, next) => {
+    const cspHeader = getCspHeader();
+    res.setHeader(cspHeader.csp[0], cspHeader.csp[1]);
+
+    const canonicalHeader = getCanonicalHeader(req.path);
+    res.setHeader(canonicalHeader[0], canonicalHeader[1]);
+
     try {
         const externalUserId: string | undefined = req.signedCookies?.userId;
         const userCount = await UserModel.count();
@@ -125,7 +120,7 @@ router.get('/', async (req, res, next) => {
                 userByDegreeLevelCount: userByDegreeLevelCountWithDisplayName,
             },
             degreeTitles,
-            nonce: res.locals.nonce ?? '',
+            nonce: cspHeader.nonce,
         });
     } catch (error) {
         await MonitoringRequestModel.create({
@@ -142,11 +137,9 @@ router.get('/', async (req, res, next) => {
 router.get('/sitemap', (_req, res) => {
     res.header('Content-type', 'text/xml');
 
-    const BASE_URL = 'https://www.enquetrabajas.com';
-
     const urls: Array<{ loc: string; lastmodYMD: string }> = [
         {
-            loc: BASE_URL,
+            loc: CANONICAL_URL,
             lastmodYMD: '2024-05-29',
         },
     ];
@@ -154,6 +147,12 @@ router.get('/sitemap', (_req, res) => {
     res.render('sitemap.xml', {
         urls,
     });
+});
+
+router.get('/robot.txt', (_req, res) => {
+    res.header('Content-type', 'text/plain');
+
+    res.render('robot.txt');
 });
 
 router.get('/error', (_req, res) => {
