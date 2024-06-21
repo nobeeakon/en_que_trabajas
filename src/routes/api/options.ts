@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
             return res.json(defaultResponse);
         }
 
-        let cleanData: { name: string }[] = [];
+        let cleanData: { name: string; normalizedName?: string }[] = [];
         switch (queryType) {
             case 'degreeTitle': {
                 if (
@@ -72,6 +72,7 @@ router.get('/', async (req, res, next) => {
 
                 cleanData = data.records.map((degreeItem) => ({
                     name: degreeItem.name,
+                    normalizedName: degreeItem.normalizedName,
                 }));
                 break;
             }

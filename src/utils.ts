@@ -1,6 +1,7 @@
 export const HTTP_CODES = {
     200: {
         ok: 200,
+        noContent: 204,
         multiStatus: 207,
     },
     400: {

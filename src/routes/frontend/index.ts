@@ -10,8 +10,11 @@ import UserDegreeModel from '../../db/models/UserDegreeModel';
 import MonitoringRequestModel from '../../db/models/MonitoringRequestModel';
 import { isDegreeLevelTypeGuard } from '../../db/types';
 import { STUDY_LEVEL_NAMES } from '../../db/constants';
+import { getDegreeStats } from '../api/stats/index';
 
 import { CANONICAL_URL, getCanonicalHeader, getCspHeader } from './headerUtil';
+// import { getDegreeDescription } from './pageUtils/degreeDescriptions'; // TODO
+import { getSimilarDegrees } from './pageUtils/similarDegrees';
 
 const router = Router();
 
@@ -32,7 +35,7 @@ router.use((req, res, next) => {
     if (isValidUserId) {
         res.cookie('userId', userId, {
             ...cookieOptions,
-            maxAge: 10 * 24 * 60 * 60 * 1000, // increase life time
+            maxAge: 15 * 24 * 60 * 60 * 1000, // increase life time
         });
     } else {
         res.cookie('userId', uuidV4(), cookieOptions);
@@ -157,6 +160,96 @@ router.get('/robot.txt', (_req, res) => {
 
 router.get('/error', (_req, res) => {
     res.render('pages/error/error.njk');
+});
+
+router.get('/:degreeLevel/:normalizedName', async (req, res) => {
+    const cspHeader = getCspHeader();
+    res.setHeader(cspHeader.csp[0], cspHeader.csp[1]);
+
+    const canonicalHeader = getCanonicalHeader(req.path);
+    res.setHeader(canonicalHeader[0], canonicalHeader[1]);
+
+    try {
+        const degreeNormalizedName = req.params.normalizedName;
+        const degreeLevel = req.params.degreeLevel;
+        const externalUserId: string | undefined = req.signedCookies?.userId;
+        const userExists = !externalUserId
+            ? false
+            : await UserModel.userExist({
+                  externalId: externalUserId,
+              });
+
+        if (!isDegreeLevelTypeGuard(degreeLevel)) {
+            await MonitoringRequestModel.create({
+                counterName: 'degree_page',
+                requestMethod: 'get',
+                requestStatus: 'ok',
+                data: `Unknown degreeLevel: ${degreeLevel}`,
+            });
+
+            return res.redirect('/');
+        }
+
+        const degreeInfo = await DegreeTitleModel.getDegree({
+            name: degreeNormalizedName,
+            degreeLevel,
+        });
+
+        if (!degreeInfo) {
+            await MonitoringRequestModel.create({
+                counterName: 'degree_page',
+                requestMethod: 'get',
+                requestStatus: 'ok',
+                data: `Unknown degreeTitle: ${degreeNormalizedName}. DegreeLevel: ${degreeLevel}`,
+            });
+
+            return res.redirect('/');
+        }
+
+        const data = await getDegreeStats(degreeInfo.id);
+
+        await MonitoringRequestModel.create({
+            counterName: 'degree_page',
+            requestMethod: 'get',
+            requestStatus: 'ok',
+            data: degreeNormalizedName,
+        });
+
+        const similarDegrees = getSimilarDegrees({
+            degreeLevel,
+            normalizedDegreeName: degreeNormalizedName,
+        })?.map((degreeInfoItem) => ({
+            url: `/${degreeInfoItem.degreeLevel}/${degreeInfoItem.normalizedDegreeName}`,
+            name: degreeInfoItem.name,
+            degreeLevelDisplayName:
+                STUDY_LEVEL_NAMES[degreeInfoItem.degreeLevel].displayName,
+        }));
+
+        const pageDescription = `Conoce en qué trabajan quienes estudian ${degreeInfo.name} en México. Conoce en qué áreas se emplean y cuál es su salario.`;
+        return res.render('pages/degree/degree.njk', {
+            description: pageDescription,
+            showSurvey: !userExists,
+            showStats: !!data.genderStats.length,
+            degreeName: degreeInfo.name,
+            degreeTitle: STUDY_LEVEL_NAMES[degreeLevel].displayName,
+            // degreeDescription: getDegreeDescription({ // TODO
+            //     degreeLevel,
+            //     normalizedDegreeName: degreeNormalizedName,
+            // }),
+            similarDegrees,
+            data,
+            nonce: cspHeader.nonce,
+        });
+    } catch (error) {
+        await MonitoringRequestModel.create({
+            counterName: 'degree_page',
+            requestMethod: 'get',
+            requestStatus: 'error',
+            data: String(error),
+        });
+
+        return res.redirect('/error');
+    }
 });
 
 export default router;

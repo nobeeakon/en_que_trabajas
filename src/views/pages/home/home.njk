@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="/public/css/home.css" />
 {% endblock %} {% block body %}
 
+{% include '../../navbar/navbar.njk'%}
+
 <section class="section">
   <div class="columns">
     <div class="column is-8 is-offset-2">
@@ -37,7 +39,7 @@
       <div class="is-size-6 has-text-centered mb-3">
         (100% anónimo, te toma 1 minuto)
       </div>
-      <div>{% include "./addForm.html" %}</div>
+      <div>{% include "../../addForm/addForm.html" %}</div>
     </div>
   </div>
 </section>
