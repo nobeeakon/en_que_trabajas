@@ -1,4 +1,5 @@
 import type { DegreeLevel } from '../../../db/types';
+import { CANONICAL_URL } from '../headerUtil';
 
 type DegreeInfo = {
     degreeLevel: DegreeLevel;
@@ -21,6 +22,22 @@ export const getSimilarDegrees = ({
     }
 
     return degreeRelations[degreeLevel][normalizedDegreeName];
+};
+
+// this is just a temporary helper method
+export const getPagesWithSimilarDegreesInfo = () => {
+    const pages: string[] = [];
+
+    Object.entries(degreeRelations).forEach(
+        ([degreeLevelItem, degreeInfoItem]) => {
+            Object.keys(degreeInfoItem).forEach((normalizedDegreeNameItem) => {
+                const page = `${CANONICAL_URL}/${degreeLevelItem}/${normalizedDegreeNameItem}`;
+                pages.push(page);
+            });
+        }
+    );
+
+    return pages;
 };
 
 const degreeRelations: Record<DegreeLevel, Record<string, DegreeInfo[]>> = {

@@ -14,7 +14,10 @@ import { getDegreeStats } from '../api/stats/index';
 
 import { CANONICAL_URL, getCanonicalHeader, getCspHeader } from './headerUtil';
 // import { getDegreeDescription } from './pageUtils/degreeDescriptions'; // TODO
-import { getSimilarDegrees } from './pageUtils/similarDegrees';
+import {
+    getSimilarDegrees,
+    getPagesWithSimilarDegreesInfo,
+} from './pageUtils/similarDegrees';
 
 const router = Router();
 
@@ -147,6 +150,14 @@ router.get('/sitemap', (_req, res) => {
         },
     ];
 
+    const pagesWithSimilarDegrees = getPagesWithSimilarDegreesInfo();
+    pagesWithSimilarDegrees.forEach((pageItem) => {
+        urls.push({
+            loc: pageItem,
+            lastmodYMD: '2024-06-21',
+        });
+    });
+
     res.render('sitemap.xml', {
         urls,
     });
@@ -225,7 +236,7 @@ router.get('/:degreeLevel/:normalizedName', async (req, res) => {
                 STUDY_LEVEL_NAMES[degreeInfoItem.degreeLevel].displayName,
         }));
 
-        const pageDescription = `Conoce en qué trabajan quienes estudian ${degreeInfo.name} en México. Conoce en qué áreas se emplean y cuál es su salario.`;
+        const pageDescription = `Descubre en qué trabajan quienes estudian ${degreeInfo.name} en México. Conoce en qué áreas se emplean y cuál es su salario.`;
         return res.render('pages/degree/degree.njk', {
             description: pageDescription,
             showSurvey: !userExists,
