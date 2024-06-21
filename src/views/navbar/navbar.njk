@@ -1,0 +1,202 @@
+<nav class="navbar" role="navigation" aria-label="navegación principal">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <img src="/public/img/cat_working_200.png" width="27" height="27" />
+      <span class="ml-2">Inicio</span>
+    </a>
+
+    <button
+      id="navbar-search-mobile"
+      type="button"
+      class="navbar-burger"
+      aria-label="Buscar"
+      aria-expanded="false"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        data-icon="SvgSearch"
+        aria-hidden="true"
+      >
+        <path
+          d="M10.1 3a7.1 7.1 0 11-5.02 2.08A7.074 7.074 0 0110.1 3zM21 21l-2.9-2.9-2.9-2.9"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <button id="navbar-search-desktop" class="button is-info">
+            <span class="mr-2"> Buscar </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              data-icon="SvgSearch"
+              aria-hidden="true"
+            >
+              <path
+                d="M10.1 3a7.1 7.1 0 11-5.02 2.08A7.074 7.074 0 0110.1 3zM21 21l-2.9-2.9-2.9-2.9"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="navbar-search-dialog" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Buscar</p>
+      <button
+        id="navbar-search-dialog-close"
+        class="delete"
+        aria-label="Cerrar"
+      ></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="label" for="navbar-search-degree-level">Grado de estudios</div>
+      <div class="select">
+        <select id="navbar-search-degree-level">
+          <option value="tsu">Técnico Superior Universitario</option>
+          <option value="lic" selected>Licenciatura</option>
+          <option value="esp">Especialidad</option>
+          <option value="msc">Maestría</option>
+          <option value="phd">Doctorado</option>
+          <option value="postdoc">Posdoctorado</option>
+        </select>
+      </div>
+      <div class="field mt-2">
+        <label class="label" for="navbar-search-degree-name">
+          Nombre del grado
+        </label>
+        <input
+          class="input"
+          required
+          type="text"
+          id="navbar-search-degree-name"
+          placeholder="Ej: Biología"
+        />
+      </div>
+
+      <div>
+        <ul id="navbar-search-degree-options-ul"></ul>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <div class="buttons">
+        <button
+          id="navbar-search-dialog-close-bottom"
+          class="button"
+          type="button"
+        >
+          Cerrar
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script nonce="{{nonce}}" type="module">
+  const mobileSearchButton = document.getElementById("navbar-search-mobile")
+  const desktopSearchButton = document.getElementById("navbar-search-desktop")
+  const searchDialog = document.getElementById("navbar-search-dialog")
+  const searchDialogCloseButton = document.getElementById(
+    "navbar-search-dialog-close"
+  )
+  const searchDialogCloseButtonBottom = document.getElementById(
+    "navbar-search-dialog-close-bottom"
+  )
+
+  const degreeLevelSelect = document.getElementById("navbar-search-degree-level")
+  const degreeNameInput = document.getElementById("navbar-search-degree-name")
+  const degreeOptionsUl = document.getElementById(
+    "navbar-search-degree-options-ul"
+  )
+
+  // open close dialog
+  mobileSearchButton.addEventListener("click", () =>
+    searchDialog.classList.add("is-active")
+  )
+  desktopSearchButton.addEventListener("click", () =>
+    searchDialog.classList.add("is-active")
+  )
+  searchDialogCloseButton.addEventListener("click", () =>
+    searchDialog.classList.remove("is-active")
+  )
+  searchDialogCloseButtonBottom.addEventListener("click", () =>
+    searchDialog.classList.remove("is-active")
+  )
+
+  // search query
+  let optionsTimeoutId = null
+  let abortController = null
+  const addSearchOptions = () => {
+    const degreeLevelToSearch = degreeLevelSelect.value
+    const degreeNameToSearch = degreeNameInput.value
+    if (optionsTimeoutId) {
+      clearTimeout(optionsTimeoutId)
+    }
+    if (abortController) {
+      abortController.abort()
+    }
+    abortController = new AbortController()
+
+    optionsTimeoutId = setTimeout(() => {
+      fetch(
+        encodeURI(
+          `/api/options?type=degreeTitle&value=${degreeNameToSearch}&degreeLevel=${degreeLevelToSearch}`
+        ),
+        {
+          signal: abortController.signal,
+        }
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response)
+          }
+          return response.json()
+        })
+        .then((responseJson) => {
+          degreeOptionsUl.innerHTML = "";
+          const listItems = (responseJson.records ?? []).forEach(
+            (recordItem) => {
+            if(recordItem.name && recordItem.normalizedName) {
+
+                const listItem = document.createElement("li")
+                const linkItem = document.createElement("a")
+                linkItem.textContent = recordItem.name
+                linkItem.href= `/${degreeLevelToSearch}/${recordItem.normalizedName}`
+
+                listItem.appendChild(linkItem);
+                degreeOptionsUl.appendChild(listItem);
+            }
+            }
+          )
+        })
+        .catch((err) => console.error(err))
+    }, 300)
+  }
+
+  // search actions
+  degreeLevelSelect.addEventListener("change", addSearchOptions)
+  degreeNameInput.addEventListener("keyup", addSearchOptions)
+</script>

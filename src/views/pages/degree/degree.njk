@@ -1,0 +1,129 @@
+{% extends 'basePage.njk' %} {% block head %}
+<link rel="stylesheet" href="/public/css/home.css" />
+{% endblock %} {% block body %} 
+
+{% include "../../navbar/navbar.njk" %}
+
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <div class="content is-medium">
+        <h1
+          class="mainTitle title is-size-1 has-text-centered has-text-warning mb-4"
+        >
+          {{ degreeName }}
+        </h1>
+        <h2
+          class="mainTitle title is-size-3 has-text-centered has-text-warning mt-0"
+        >
+          {{ degreeTitle }}
+        </h2>
+
+        {% if degreeDescription%}
+        {% for degreeDescriptionItem in degreeDescription%}
+        <p>{{ degreeDescriptionItem }}</p>
+        {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <p class="p-3 title is-size-4 has-text-centered mb-0">
+    ¿Conoces a alguien que lo haya estudiado?
+  </p>
+  <p class="p-3 title is-size-5 has-text-centered">
+    No dudes en compartirle este sitio
+  </p>
+</section>
+{# TODO share button #}
+{% if showSurvey %}
+<section class="section">
+  <div class="p-3 mb-5">
+    <div class="box">
+      <div class="title is-size-3 has-text-centered mb-2">
+        Contribuye con nosotros
+      </div>
+      <div class="is-size-6 has-text-centered mb-3">
+        (100% anónimo, te toma 1 minuto)
+      </div>
+      <div>{% include "../../addForm/addForm.html" %}</div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <div class="content is-medium">
+        <h2 class="title is-size-2 has-text-centered">
+          Conoce el panorama laboral en México
+        </h2>
+{% if showStats %}
+
+        {% include "./degreeStats.njk" %}
+{% else %}
+        <p class="has-text-centered">Aún no tenemos información</p>
+        <p class="has-text-centered">
+          Vuelve pronto para conocer lo que otras personas han aportado
+        </p>
+{% endif %} 
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{# TODO abstract the disclaimer, or link in the footer or something
+to not have to repeat every time #}
+<section class="section">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <div class="content is-medium">
+        <h3 class="title is-size-4 has-text-centered">Sobre los datos</h3>
+        <ul>
+          <li>
+            La información de este sitio se puede reutilizar de la manera que
+            consideres
+          </li>
+          <li>
+            La información proviene de lo que los usuarios provean, por lo que
+            pueden llegar a ser inexacta
+          </li>
+          <li>
+            La información proviene de los usuarios, no de una encuesta con un
+            diseño estadístico
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if similarDegrees %}
+<section class="section">
+  <div class="columns">
+    <div class="column is-8 is-offset-2">
+      <div class="content is-medium">
+        <h3 class="title is-size-4 has-text-centered">Otros grados relacionados</h3>
+        <ul>
+          {% for degreeItem in similarDegrees %}
+          <li>
+            <a href="{{ degreeItem['url'] }}"> {{ degreeItem['name'] }}, {{ degreeItem ['degreeLevelDisplayName']}}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+{% endblock %} {% block script %}
+<script></script>
+{% endblock %}

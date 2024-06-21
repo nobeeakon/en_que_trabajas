@@ -101,6 +101,7 @@ export type UserJob = {
 
 export type MonitoringRequestName =
     | 'home_page'
+    | 'degree_page'
     | 'user_api'
     | 'stats_api'
     | 'options_api';

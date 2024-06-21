@@ -1,0 +1,174 @@
+<div class="columns">
+  <div class="column is-half">
+    <table>
+      <thead>
+        <tr>
+          <th>Género</th>
+          <th>Salario Promedio</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['genderStats']%}
+        <tr>
+          <td>{{ row['displayName'] }}</td>
+          <td>{{ row['count'] }}</td>
+          <td>{{ row['avgSalary'] }}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-half">
+    <table >
+      <thead>
+        <tr>
+          <th>Área laboral</th>
+          <th>Salario Promedio</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['laboralAreaStats']%}
+        <tr>
+          <td>{{ row['laboralArea'] }}</td>
+          <td>{{ row['count'] }}</td>
+          <td>{{ row['avgSalary'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-half">
+    <table>
+      <thead>
+        <tr>
+          <th>Área laboral</th>
+          <th>Posición</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['laboralAreaPositdonStats']%}
+        <tr>
+          <td>{{ row['laboralArea'] }}</td>
+          <td>{{ row['laboralAreaPositdon'] }}</td>
+          <td>{{ row['count'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-half">
+    <table >
+      <thead>
+        <tr>
+          <th>Estado</th>
+          <th>Salario Promedio</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['mexicanStateStats']%}
+        <tr>
+          <td>{{ row['displayName'] }}</td>
+          <td>{{ row['count'] }}</td>
+          <td>{{ row['avgSalary'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-half">
+    <table >
+      <thead>
+        <tr>
+          <th>Empleador</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['employerStats']%}
+        <tr>
+          <td>{{ row['name'] }}</td>
+          <td>{{ row['count'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-half">
+    <table >
+      <thead>
+        <tr>
+          <th>Institución</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['institutionStats']%}
+        <tr>
+          <td>{{ row['name'] }}</td>
+          <td>{{ row['count'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column is-half">
+    <table >
+      <thead>
+        <tr>
+          <th>Situación Laboral</th>
+          <th>Salario Promedio</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data['laboralsSituationStats']%}
+        <tr>
+          <td>{{ row['displayName'] }}</td>
+          <td>{{ row['avgSalary'] }}</td>
+          <td>{{ row['count'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="column is-half">
+    {% if data['jobRelatedStats'] %}
+    <table>
+      <thead>
+        <tr>
+          <th>Trabajo relacionado con estudios</th>
+          <th>n</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Sí</td>
+          <td>{{ data['jobRelatedStats']['isRelated'] }}</td>
+        </tr>
+        <tr>
+          <td>No</td>
+          <td>{{ data['jobRelatedStats']['notRelated'] }}</td>
+        </tr>
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+</div>

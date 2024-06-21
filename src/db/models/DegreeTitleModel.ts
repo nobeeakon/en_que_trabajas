@@ -110,7 +110,48 @@ const getDegreeTitleList = async () => {
     return data;
 };
 
+const degreeExists = async ({ id }: { id: string }) => {
+    const db = await openDb();
+
+    const degreeExists = await db.get<{ isPresent?: 1 }>(
+        `SELECT 1 AS isPresent FROM ${TABLE_NAMES.degreeTitle} WHERE id = :id`,
+        {
+            ':id': id,
+        }
+    );
+
+    return !!degreeExists?.isPresent;
+};
+
+const getDegree = async ({
+    name,
+    degreeLevel,
+}: Pick<DegreeTitle, 'name' | 'degreeLevel'>) => {
+    const db = await openDb();
+    const normalizedName = normalizeString(name);
+
+    const data = await db.get<{
+        id: string;
+        name: string;
+        degreeLevel: string;
+    }>(
+        `
+            SELECT id, name, degreeLevel FROM ${TABLE_NAMES.degreeTitle}
+            WHERE normalizedName = :normalizedName AND 
+              degreeLevel = :degreeLevel
+            `,
+        {
+            ':normalizedName': normalizedName,
+            ':degreeLevel': degreeLevel,
+        }
+    );
+
+    return data;
+};
+
 export default {
+    getDegree,
+    degreeExists,
     createIfNotExists,
     getDegreeTitleList,
     getByDegreeLevelAndLikeName,
