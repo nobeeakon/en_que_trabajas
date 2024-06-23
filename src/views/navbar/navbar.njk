@@ -133,12 +133,12 @@
   )
 
   // open close dialog
-  mobileSearchButton.addEventListener("click", () =>
+  const handleOpen = () => {
     searchDialog.classList.add("is-active")
-  )
-  desktopSearchButton.addEventListener("click", () =>
-    searchDialog.classList.add("is-active")
-  )
+    degreeNameInput.focus();
+  }
+  mobileSearchButton.addEventListener("click", handleOpen )
+  desktopSearchButton.addEventListener("click", handleOpen )
   searchDialogCloseButton.addEventListener("click", () =>
     searchDialog.classList.remove("is-active")
   )

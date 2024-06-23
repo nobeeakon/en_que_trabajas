@@ -13,7 +13,7 @@ import { STUDY_LEVEL_NAMES } from '../../db/constants';
 import { getDegreeStats } from '../api/stats/index';
 
 import { CANONICAL_URL, getCanonicalHeader, getCspHeader } from './headerUtil';
-// import { getDegreeDescription } from './pageUtils/degreeDescriptions'; // TODO
+import { getDegreeDescription } from './pageUtils/degreeDescriptions'; // TODO
 import {
     getSimilarDegrees,
     getPagesWithSimilarDegreesInfo,
@@ -236,6 +236,27 @@ router.get('/:degreeLevel/:normalizedName', async (req, res) => {
                 STUDY_LEVEL_NAMES[degreeInfoItem.degreeLevel].displayName,
         }));
 
+        const degreeDescription = getDegreeDescription({
+            degreeLevel,
+            normalizedDegreeName: degreeNormalizedName,
+        });
+        const degreeDescriptionSourceHostname = degreeDescription?.sourceUrl
+            ? new URL(degreeDescription.sourceUrl).hostname
+            : null;
+        const descriptionSource =
+            !degreeDescriptionSourceHostname || !degreeDescription?.sourceUrl
+                ? undefined
+                : {
+                      href: degreeDescription.sourceUrl,
+                      displayName: degreeDescriptionSourceHostname,
+                  };
+        const degreeDescriptionToDisplay = !degreeDescription?.text.length
+            ? undefined
+            : {
+                  text: degreeDescription.text,
+                  source: descriptionSource,
+              };
+
         const pageDescription = `Descubre en qué trabajan quienes estudian ${degreeInfo.name} en México. Conoce en qué áreas se emplean y cuál es su salario.`;
         return res.render('pages/degree/degree.njk', {
             description: pageDescription,
@@ -243,10 +264,7 @@ router.get('/:degreeLevel/:normalizedName', async (req, res) => {
             showStats: !!data.genderStats.length,
             degreeName: degreeInfo.name,
             degreeTitle: STUDY_LEVEL_NAMES[degreeLevel].displayName,
-            // degreeDescription: getDegreeDescription({ // TODO
-            //     degreeLevel,
-            //     normalizedDegreeName: degreeNormalizedName,
-            // }),
+            degreeDescription: degreeDescriptionToDisplay,
             similarDegrees,
             data,
             nonce: cspHeader.nonce,
