@@ -13,7 +13,7 @@ import { STUDY_LEVEL_NAMES } from '../../db/constants';
 import { getDegreeStats } from '../api/stats/index';
 
 import { CANONICAL_URL, getCanonicalHeader, getCspHeader } from './headerUtil';
-import { getDegreeDescription } from './pageUtils/degreeDescriptions'; // TODO
+import { getDegreeDescription } from './pageUtils/degreeDescriptions'; 
 import {
     getSimilarDegrees,
     getPagesWithSimilarDegreesInfo,
