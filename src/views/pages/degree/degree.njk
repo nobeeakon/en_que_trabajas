@@ -1,9 +1,6 @@
 {% extends 'basePage.njk' %} {% block head %}
 <link rel="stylesheet" href="/public/css/home.css" />
-{% endblock %} {% block body %} 
-
-{% include "../../navbar/navbar.njk" %}
-
+{% endblock %} {% block body %} {% include "../../navbar/navbar.njk" %}
 
 <section class="section">
   <div class="columns">
@@ -20,16 +17,32 @@
           {{ degreeTitle }}
         </h2>
 
-        {% if degreeDescription%}
-        {% for degreeDescriptionItem in degreeDescription%}
+        {% if degreeDescription%} {% for degreeDescriptionItem in
+        degreeDescription%}
         <p>{{ degreeDescriptionItem }}</p>
-        {% endfor %}
-        {% endif %}
-
+        {% endfor %} {% endif %}
       </div>
     </div>
   </div>
 </section>
+
+{% if degreeDescription %}
+<section class="section pt-0 content">
+  {% for descriptionItem in degreeDescription.text %}
+  <p>{{ descriptionItem }}</p>
+  {% endfor %} {% if degreeDescription.source%}
+  <p class="has-text-right">
+    <i>
+      - Tomado de
+      <a href="{{degreeDescription.source.href}}" rel="noreferrer noopener"
+        >{{degreeDescription.source.displayName}}</a
+      >
+    </i>
+  </p>
+  {% endif %}
+</section>
+{% endif %}
+
 <section class="section">
   <p class="p-3 title is-size-4 has-text-centered mb-0">
     ¿Conoces a alguien que lo haya estudiado?
@@ -38,8 +51,7 @@
     No dudes en compartirle este sitio
   </p>
 </section>
-{# TODO share button #}
-{% if showSurvey %}
+{# TODO share button #} {% if showSurvey %}
 <section class="section">
   <div class="p-3 mb-5">
     <div class="box">
@@ -62,24 +74,19 @@
         <h2 class="title is-size-2 has-text-centered">
           Conoce el panorama laboral en México
         </h2>
-{% if showStats %}
-
-        {% include "./degreeStats.njk" %}
-{% else %}
+        {% if showStats %} {% include "./degreeStats.njk" %} {% else %}
         <p class="has-text-centered">Aún no tenemos información</p>
         <p class="has-text-centered">
           Vuelve pronto para conocer lo que otras personas han aportado
         </p>
-{% endif %} 
-
+        {% endif %}
       </div>
     </div>
   </div>
 </section>
 
-
-{# TODO abstract the disclaimer, or link in the footer or something
-to not have to repeat every time #}
+{# TODO abstract the disclaimer, or link in the footer or something to not have
+to repeat every time #}
 <section class="section">
   <div class="columns">
     <div class="column is-8 is-offset-2">
@@ -109,11 +116,16 @@ to not have to repeat every time #}
   <div class="columns">
     <div class="column is-8 is-offset-2">
       <div class="content is-medium">
-        <h3 class="title is-size-4 has-text-centered">Otros grados relacionados</h3>
+        <h3 class="title is-size-4 has-text-centered">
+          Otros grados relacionados
+        </h3>
         <ul>
           {% for degreeItem in similarDegrees %}
           <li>
-            <a href="{{ degreeItem['url'] }}"> {{ degreeItem['name'] }}, {{ degreeItem ['degreeLevelDisplayName']}}</a>
+            <a href="{{ degreeItem['url'] }}">
+              {{ degreeItem['name'] }}, {{ degreeItem
+              ['degreeLevelDisplayName']}}</a
+            >
           </li>
           {% endfor %}
         </ul>
@@ -121,9 +133,6 @@ to not have to repeat every time #}
     </div>
   </div>
 </section>
-{% endif %}
-
-
-{% endblock %} {% block script %}
+{% endif %} {% endblock %} {% block script %}
 <script></script>
 {% endblock %}
