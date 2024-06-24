@@ -8,7 +8,7 @@ router.get('/monitoring', async (_req, res) => {
     try {
         const monitoringData = await MonitoringRequestModel.get();
 
-        return res.json(monitoringData);
+        return res.json(monitoringData.reverse());
     } catch (error) {
         return res.json({});
     }
