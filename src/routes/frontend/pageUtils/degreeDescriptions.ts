@@ -25,7 +25,7 @@ const descriptionsByNormalizedName: Record<
         actuaria: {
             text: [
                 'Los actuarios son profesionistas que estudian, plantean, formulan y aplican modelos de contenido matemático con el fin de proveer información para la planeación, previsión y toma de decisiones, y para resolver problemas económicos y sociales que involucran riesgos. Intervienen en prácticamente todos los campos del quehacer humano interactuando con los profesionales que ahí se desempeñen.',
-'Llevan a cabo una labor sumamente diversa y relacionada principalmente con: seguros y planes de beneficio, demografía, finanzas, computación, administración, estadística, investigación de operaciones, economía, docencia e investigación.'
+                'Llevan a cabo una labor sumamente diversa y relacionada principalmente con: seguros y planes de beneficio, demografía, finanzas, computación, administración, estadística, investigación de operaciones, economía, docencia e investigación.',
             ],
             sourceUrl: 'https://oferta.unam.mx/actuaria.html',
         },
@@ -82,8 +82,10 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         cienciadelanutricionhumana: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Esta carrera tiene como objetivo formar licenciados en Ciencia de la Nutrición Humana competentes, capaces de integrar y aplicar el conocimiento científico, clínico y social, con base en los diagnósticos clínico-nutricional y nutricional-comunitario respectivamente, mediante la evaluación del estado de nutrición, vigilancia alimentaria-nutricional, orientación y educación alimentaria, así como la investigación, desde un enfoque interdisciplinario, a fin de atender los problemas de salud relacionados con la alimentación en los niveles individual y colectivo, con valores y principios éticos, que les permitan ser agentes de cambio y contribuir al mejoramiento de la salud local, nacional e internacional.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ciencia-nutricion-humana.html',
         },
         cienciadematerialessustentables: {
             text: [],
@@ -268,53 +270,86 @@ const descriptionsByNormalizedName: Record<
         informatica: {
             text: [
                 'La licenciatura en Informática forma expertos que aplican y desarrollan tecnologías de información apropiadas para la administración eficiente de las organizaciones, integrando las Tecnologías de Información y Comunicación en sus procesos operativos, valorando nuevos modelos de negocio basados en la innovación tecnológica, con un compromiso social y una visión global.',
-'Asimismo es el profesionista responsable de la creación de las estrategias para la implementación y la administración de Tecnologías de Información en la empresa, así como del mantenimiento de servicios tecnológicos y sistemas de tratamiento de la información de manera integral y eficiente.'
+                'Asimismo es el profesionista responsable de la creación de las estrategias para la implementación y la administración de Tecnologías de Información en la empresa, así como del mantenimiento de servicios tecnológicos y sistemas de tratamiento de la información de manera integral y eficiente.',
             ],
             sourceUrl: 'https://oferta.unam.mx/informatica.html',
         },
         ingenieriaaeroespacial: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El ingeniero aeroespacial es el profesional que integra los conocimientos de la física y las matemáticas con las ciencias de ingeniería en las áreas aeronáutica y espacial, a fin de dar solución a los problemas que le plantea el ejercicio profesional para el diseño, desarrollo, construcción, prueba y operación de vehículos que operan en la atmósfera terrestre o en el espacio exterior. En el sector aeronáutico, puede desempeñar actividades relacionadas con el diseño y manufactura de aeronaves, aviónica, pruebas de certificación, sistemas de navegación, uso de materiales y naves no tripuladas. En el sector espacial su campo de acción abarca el diseño de misiones espaciales, pruebas de certificación, desarrollo de subsistemas satelitales, sistemas de lanzamiento y comunicaciones espaciales.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-aeroespacial.html',
         },
         ingenieriaagricola: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Ingeniería Agrícola es una profesión con un alto nivel académico y práctico encaminado a solucionar problemas en la producción, manejo y comercialización de cultivos agrícolas, cuya orientación integral en las ciencias básicas, agrícolas, socioeconómicas y en la investigación permite a sus egresados desempeñarse con iniciativa y actitud de servicio.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-agricola.html',
         },
         ingenieriaambiental: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El ingeniero ambiental participa en la planeación, diseño, ejecución de programas y de instalaciones para el control de la contaminación del agua, el aire y el suelo; así como en el manejo y tratamiento de residuos de todo tipo. Asimismo opera y administra obras de protección al ambiente, buscando el uso óptimo de los recursos naturales y energéticos, y la seguridad de operadores y pobladores.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-ambiental.html',
         },
         ingenieriacivil: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El ingeniero civil obtiene conocimientos generales de matemáticas, física y química, computación, informática, administración y evaluación de proyectos que lo capacitan para participar en la planeación, organización, construcción, operación y conservación de obras civiles de infraestructura y desarrollo urbano que el país requiere en las áreas de construcción, estructuras, ingeniería sanitaria y ambiental, e ingeniería de sistemas, planeación y transporte.',
+                'Es el profesional que gracias a su formación multidisciplinaria entiende el comportamiento de estructuras y obras en construcción; prevé los impactos sociales, ecológicos y económicos que pueden ocasionar; y planea un uso más conveniente de recursos naturales y humanos de grandes áreas, por lo que su tarea es de gran importancia y responsabilidad para las poblaciones urbanas y rurales que conforman nuestro país.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-civil.html',
         },
         ingenieriademinasymetalurgia: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Esta carrera forma profesionales capaces de proyectar, dirigir y administrar la explotación racional, el beneficio y la comercialización de los minerales económicos existentes en la naturaleza y aprovecharlos de manera óptima en beneficio de la sociedad mexicana.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-de-minas.html',
         },
         ingenieriaelectricayelectronica: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El ingeniero eléctrico electrónico es el profesional capaz de crear, diseñar y generar tecnología; así como de, innovar, planear y poner en operación sistemas eléctricos y electrónicos.',
+                'Diseña y programa instalaciones y máquinas eléctricas e interviene en el estudio y la puesta en operación de sistemas de comunicación telefónica, televisiva y satelital. Asimismo, traza y construye dispositivos de control de procesos industriales y de servicio, con base en microcomputadoras.',
+                'Aplica sus conocimientos en los sectores: eléctrico, de comunicaciones, salud, transporte, industrial y de servicios para elevar la productividad y la competitividad de las empresas y el bienestar de la sociedad; además podrá comunicarse con otros profesionistas de áreas afines, lo que beneficiará su incorporación al mercado de trabajo.',
+            ],
+            sourceUrl:
+                'https://oferta.unam.mx/ingenieria-electrica-electronica.html',
         },
         ingenieriaenalimentos: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'En esta carrera son evaluados los recursos susceptibles de transformarse en alimentos y se establecen los procesos tecnológicos para utilizarlos en beneficio de la comunidad, como parte de las evoluciones económicas y sociales del país.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-en-alimentos.html',
         },
         ingenieriaencomputacion: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Este profesional adquiere los conocimientos que le permiten ser capaz de identificar, diseñar, planear, producir, operar y dar soporte a sistemas: electrónicos, inteligentes, de programación, de bases de datos, de cómputo gráfico, para el procesamiento digital de datos y el control de procesos automáticos. Su campo de acción se vincula con todas las áreas del conocimiento.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-en-computacion.html',
         },
         ingenieriaenenergiasrenovables: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El profesional de Ingeniería en Energías Renovables planea, proyecta, diseña, construye, opera, innova e implementa tecnologías relacionadas con el aprovechamiento de los recursos energéticos renovables, aplicando los conocimientos científicos y tecnológicos multidisciplinarios más avanzados.',
+                'Además, es capaz de gestionar, administrar y planear estrategias para la promoción de las energías renovables, siempre preservando y mejorando los aspectos del medio ambiente en su quehacer cotidiano.',
+            ],
+            sourceUrl:
+                'https://oferta.unam.mx/ingenieria-en-energias-renovables.html',
         },
         ingenieriaensistemasbiomedicos: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Nuestro país enfrenta una serie de retos en materia de salud, los cuales requieren de la labor de los ingenieros en sistemas biomédicos, quienes por su preparación participarán activamente en la solución de importantes necesidades en este terreno.',
+                'La carrera forma profesionales con conocimientos sólidos y habilidades en los principios de la ingeniería para integrarlos y aplicarlos en el área biomédica.',
+            ],
+            sourceUrl:
+                'https://oferta.unam.mx/ingenieria-en-sistemas-biom%C3%A9dicos.html',
         },
         ingenieriaentelecomunicaciones: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'El ingeniero en Telecomunicaciones conjuga conocimientos de las ciencias físicas y matemáticas, y de las técnicas de ingeniería para aplicarlos en las comunicaciones ópticas, satelitales y por microondas, las redes de comunicaciones alámbricas e inalámbricas y los sistemas de radiodifusión y radionavegación.',
+                'También lleva a cabo la administración, diseño, construcción, operación y mantenimiento de productos y equipos para telecomunicaciones.',
+                'Para dar solución a los problemas que le plantea la profesión, hace uso del análisis matemático y físico, además de dominar los conceptos fundamentales de las comunicaciones, la computación, la electrónica y las áreas específicas del campo de las telecomunicaciones.',
+            ],
+            sourceUrl:
+                'https://oferta.unam.mx/ingenieria-en-telecomunicaciones.html',
         },
         ingenieriaentelecomunicacionessistemasyelectronica: {
             text: [],
@@ -333,20 +368,29 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         ingenieriaindustrial: {
-            text: [],
+            text: [
+                'Esta carrera forma al profesional altamente capacitado en el uso e identificación de tecnologías óptimas que permitan diseñar y desarrollar procesos y sistemas de toda naturaleza: operativos, productivos, financieros y administrativos, haciéndolo apto para incrementar la productividad mediante la integración de recursos humanos, materiales, técnicos y financieros, a fin de impulsar y apoyar la industria para hacerla más competitiva tanto en el mercado interno como en el externo.',
+                'El ingeniero industrial emplea métodos y modelos matemáticos, físicos, químicos y computacionales, además de técnicas y tecnologías de Ingeniería, fundamentos sólidos de administración, finanzas y dirección de empresas que le permiten optimizar los procesos industriales, comerciales y de servicios.',
+            ],
             sourceUrl: '',
         },
         ingenieriamecanica: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'En esta carrera se forma el profesional capaz de plantear y realizar proyectos de innovación tecnológica que generen productos y servicios sustentables y que contribuyan a solucionar los problemas nacionales, mediante la aplicación de conocimientos científicos y tecnológicos.',
+                'El ingeniero mecánico, gracias al diseño, construcción, selección, instalación, operación y mantenimiento de equipos y sistemas mecánicos incrementa la productividad usando como herramienta la integración de tecnología.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-mecanica.html',
         },
         ingenieriamecanicaelectrica: {
             text: [],
             sourceUrl: '',
         },
         ingenieriamecatronica: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'En esta carrera se forman profesionales capaces de proporcionar a la sociedad bienes y herramientas mecatrónicas, mediante la aplicación de conocimientos físico matemáticos y técnicas avanzadas de ingeniería, para contribuir al desarrollo tecnológico, tema prioritario para el futuro de México.',
+                'Entre las principales actividades que realiza el ingeniero mecatrónico se encuentran: diseño, fabricación, implantación y control de equipos y sistemas de producción en micro, pequeña y gran industria, planeación de equipos médicos y productos de bioingeniería.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-mecatronica.html',
         },
         ingenieriapetrolera: {
             text: [],
@@ -429,12 +473,17 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         medicinaveterinariayzootecnia: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Profesión responsable de, entre otras actividades, promover y mantener la producción y la salud animal, evitar la transmisión de enfermedades de los animales al hombre, garantizar la producción de alimentos de dicho origen, sanos y de calidad; asegurar la sustentabilidad de los sistemas de producción animal, sin el deterioro de los recursos naturales renovables y no renovables, participar en la generación de investigación biomédica y en lo relativo a la producción animal.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/medicina-veterinaria.html',
         },
         medicocirujano: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'La Medicina es el conjunto de disciplinas científicas cuyo propósito primordial es promover, conservar y restaurar la salud de las personas, actuando siempre bajo un marco de referencia humanista. Su misión está enfocada a formar a los líderes de las próximas generaciones de médicos mexicanos y contribuir a establecer un sistema de salud capaz de desarrollar las capacidades físicas y mentales de nuestra población y colaborar en la preparación de investigadores en el campo de las Ciencias Médicas.',
+                ' El médico es un profesionista comprometido a preservar, mejorar y restablecer la salud del ser humano. Sus acciones se fundamentan en el conocimiento científico de los fenómenos biológicos, psicológicos y sociales. Su ejercicio profesional se orienta primordialmente a la práctica clínica, la cual debe ejercer con conocimiento, pericia, humanismo, arte, prudencia y juicio crítico, guiándose por un código ético que considera a la vida humana como valor supremo.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/medico-cirujano.html',
         },
         musicaytecnologiaartistica: {
             text: [],
@@ -445,16 +494,22 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         negociosinternacionales: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'La licenciatura en Negocios Internacionales forma profesionistas con una visión interdisciplinaria y global, capaces de diseñar modelos de negocios, generar soluciones creativas a las necesidades de las empresas que participan en el mercado mundial y promover el logro de objetivos en organizaciones públicas, privadas y sociales vinculadas con los negocios internacionales.',
+                'Negocios Internacionales atiende las necesidades y los requerimientos de las organizaciones públicas y privadas que participan en el mercado global en materia de negocios y administración y contribuye a la creación de nuevas fuentes de empleo que produzcan bienes y servicios competitivos internacionalmente.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/negocios-internacionales.html',
         },
         neurociencias: {
             text: [],
             sourceUrl: '',
         },
         nutriologia: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Los egresados de esta carrera cuentan con conocimientos en nutrición y actividad física, capaces de ejercer funciones profesionales de diagnóstico, prevención, promoción e intervención en estos ámbitos, con el propósito de favorecer la salud integral de las personas, basados en un enfoque interdisciplinario, de perspectiva de género e interculturalidad.',
+                'Se desempeñan profesionalmente como: nutriólogos, investigadores, coordinadores de programas de salud alimenticia y consultores para el desarrollo de nuevos productos y alimentos.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/nutriologia.html',
         },
         odontologia: {
             text: [],
@@ -481,16 +536,21 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         psicologia: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'Psicología es la profesión en la que se identifican, valoran y proponen alternativas de prevención y solución a situaciones derivadas de la interacción entre individuos, grupos, instituciones y comunidades para el desarrollo del ser humano y la sociedad.',
+                'Con una visión sólida, actualizada, plural y crítica acerca de los campos de conocimiento y de la intervención profesional de la disciplina, el egresado de Psicología posee una concepción integral sobre los problemas y fenómenos psicológicos; además revisa críticamente las diferentes aproximaciones teóricas de la Psicología, con la finalidad de seleccionar la metodología de trabajo adecuada para analizar e intervenir en diversos problemas.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/psicologia.html',
         },
         quimica: {
             text: [],
             sourceUrl: '',
         },
         quimicadealimentos: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'En Química de Alimentos se aplican conocimientos de química y biología al desarrollo, optimización y control de productos alimenticios, desde la materia prima hasta el producto almacenado, incluyendo su comercialización.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/quimica-alimentos.html',
         },
         quimicaeingenieriaenmateriales: {
             text: [],
@@ -505,8 +565,11 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         relacionesinternacionales: {
-            text: [],
-            sourceUrl: '',
+            text: [
+                'En su expresión más sintética, el objeto de estudio de las Relaciones Internacionales es la realidad internacional y su análisis en los ámbitos político, económico, jurídico, social y cultural. Asimismo contempla aspectos técnico-prácticos requeridos en el proceso de toma de decisiones, vinculando los hechos y los problemas internacionales, por lo que considera el estudio de los procesos históricos y sus consecuencias.',
+                'El profesional de las Relaciones Internacionales conducirá su ejercicio profesional con ética, honestidad, responsabilidad, compromiso social y lealtad a los más altos valores humanos de respeto, tolerancia, asimismo identificará variables nacionales e internacionales con una perspectiva interdisciplinaria para generar propuestas de solución a problemas nacionales e internacionales en los ámbitos político, jurídico, económico y social. El internacionalista se desempeñará en la diplomacia, la administración pública federal y local, además de la iniciativa privada.',
+            ],
+            sourceUrl: 'https://oferta.unam.mx/relaciones-internacionales.html',
         },
         sociologia: {
             text: [],
