@@ -30,8 +30,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: 'https://oferta.unam.mx/actuaria.html',
         },
         administracion: {
-            text: [],
-            sourceUrl: '',
+            text: ["En Administración se forman profesionistas con visión estratégica, ética y de compromiso social expertos en promover el logro eficiente de objetivos de organizaciones públicas, privadas y sociales en sus diferentes niveles jerárquicos, a través del análisis y la comprensión de sus funciones sustantivas desde una perspectiva integral."],
+            sourceUrl: 'https://oferta.unam.mx/administracion.html',
         },
         administracionagropecuaria: {
             text: [],
@@ -58,8 +58,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         artesvisuales: {
-            text: [],
-            sourceUrl: '',
+            text: ["En esta carrera se forman los profesionales comprometidos, con una visión humanística-social de las artes visuales, que adquieren una formación teórico-conceptual y la incorporan para llevar a cabo un profundo ejercicio de búsqueda de los distintos procesos y recursos involucrados en la disciplina, para aplicarlos directamente en su obra personal y en proyectos colectivos que transformen y beneficien la vida pública de su entorno y de la sociedad."],
+            sourceUrl: 'https://oferta.unam.mx/artes-visuales.html',
         },
         bibliotecologiayestudiosdelainformacion: {
             text: [],
@@ -112,12 +112,12 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         cienciasdelacomputacion: {
-            text: [],
-            sourceUrl: '',
+            text: ["sta carrera forma al profesional con conocimientos teóricos sólidos en la disciplina y con habilidades de programación; capaz de desarrollar soluciones computacionales de frontera.", ],
+            sourceUrl: 'https://oferta.unam.mx/ciencias-de-la-computacion.html',
         },
         cienciasdelacomunicacion: {
-            text: [],
-            sourceUrl: '',
+            text: ["Con un enfoque creativo, responsable y crítico, en Ciencias de la Comunicación se analiza y difunde la problemática social mediante mensajes y contenidos informativos, escritos y audiovisuales y se estudian los orígenes, la estructura, el desarrollo y los cambios en los procesos de la comunicación humana, tanto interpersonales como grupales, organizacionales, colectivos o masivos."],
+            sourceUrl: 'https://oferta.unam.mx/ciencias-de-la-comunicacion.html',
         },
         cienciasdelatierra: {
             text: [],
@@ -132,8 +132,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         cirujanodentista: {
-            text: [],
-            sourceUrl: '',
+            text: [ "La licenciatura de Cirujano Dentista forma profesionistas capaces de resolver las necesidades de salud bucodental de la población, mediante un criterio clínico integral."],
+            sourceUrl: 'https://oferta.unam.mx/cirujano-dentista.html',
         },
         composicion: {
             text: [],
@@ -148,8 +148,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         contaduria: {
-            text: [],
-            sourceUrl: '',
+            text: ["El licenciado en Contaduría satisface las necesidades de las organizaciones y los individuos relacionadas con la toma de decisiones sobre su patrimonio, expresado en valores financieros, en la que se determinan medidas sobre el dinero en sus distintas formas de expresión, a fin de incrementar el patrimonio, pagar contribuciones, y llevar un registro de dichas operaciones financieras. Posee además una perspectiva del contexto de las organizaciones con fines económicos o sociales."],
+            sourceUrl: 'https://oferta.unam.mx/contaduria.html',
         },
         derecho: {
             text: [],
@@ -240,8 +240,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         fisioterapia: {
-            text: [],
-            sourceUrl: '',
+            text: ["El profesional de la fisioterapia actúa en todos los niveles de atención a la salud, respeta los principios éticos, morales y culturales del individuo y de la comunidad con el objetivo de preservar, desarrollar y restaurar la integridad del movimiento corporal y adaptar al paciente su condición física y al entorno."],
+            sourceUrl: 'https://oferta.unam.mx/fisioterapia.html',
         },
         geociencias: {
             text: [],
@@ -352,27 +352,28 @@ const descriptionsByNormalizedName: Record<
                 'https://oferta.unam.mx/ingenieria-en-telecomunicaciones.html',
         },
         ingenieriaentelecomunicacionessistemasyelectronica: {
-            text: [],
-            sourceUrl: '',
+            text: ["El ingeniero en telecomunicaciones, sistemas y electrónica es el profesional capaz de integrar, diseñar, innovar y desarrollar sistemas de telecomunicaciones para la transmisión y recepción de voz, datos, audio y video.", "Su formación le permite hacer más eficaces los procesos productivos y de servicio, y participar en las áreas relacionadas con la generación e implementación de tecnología en electrónica analógica y digital; y con la administración de software, bases de datos y sistemas operativos para la automatización y el control de sistemas de telecomunicaciones.",],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-en-telecomunicaciones-sistemas.html',
         },
         ingenieriageofisica: {
-            text: [],
-            sourceUrl: '',
+            text: ["El ingeniero geofísico participa en la exploración de los recursos energéticos: hidrocarburos, minerales e hidrológicos.", "Realiza estudios del subsuelo para la construcción de presas, plantas, puentes, túneles y carreteras.", "Dada su formación académica puede realizar la investigación de otros fenómenos naturales: sismología, vulcanología, ciencias atmosféricas, impacto ambiental y riesgos geológicos."],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-geofisica.html',
         },
         ingenieriageologica: {
-            text: [],
-            sourceUrl: '',
+            text: ["El ingeniero geólogo es el profesional con los conocimientos y capacidad para participar en las actividades de exploración, evaluación, explotación y aprovechamiento de recursos energéticos, minerales e hidrológicos, lo que lo convierte en un importante actor en la solución de problemas de riesgos naturales: sismos, inundaciones, riesgos volcánicos y deslaves, los cuales evidentemente tienen una amplia incidencia social.",],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-geologica.html',
         },
         ingenieriageomatica: {
-            text: [],
-            sourceUrl: '',
+            text: ["En la carrera de Ingeniería Geomática se llevan a cabo actividades relacionadas con la adquisición, proceso y almacenamiento de elementos topográficos y geográficos que son la base para la producción de mapas, planos, cartas e imágenes que se utilizan en forma digital para realizar estudios y análisis, con fines multidisciplinarios.",
+             "Esta profesión sirve de apoyo a otras geociencias como: geografía, geofísica, oceanografía, ecología, que dependen de dichos estudios.", "Los ingenieros geomáticos aplican sus conocimientos de cartografía, fotogrametría, sistemas de información, geodesia, topografía, percepción remota, informática y computación, con lo que resuelven problemas y abren nuevas oportunidades en áreas como: desarrollo, operación y mantenimiento de sistemas de información geográfica y construcción de obras civiles."],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-geomatica.html',
         },
         ingenieriaindustrial: {
             text: [
                 'Esta carrera forma al profesional altamente capacitado en el uso e identificación de tecnologías óptimas que permitan diseñar y desarrollar procesos y sistemas de toda naturaleza: operativos, productivos, financieros y administrativos, haciéndolo apto para incrementar la productividad mediante la integración de recursos humanos, materiales, técnicos y financieros, a fin de impulsar y apoyar la industria para hacerla más competitiva tanto en el mercado interno como en el externo.',
                 'El ingeniero industrial emplea métodos y modelos matemáticos, físicos, químicos y computacionales, además de técnicas y tecnologías de Ingeniería, fundamentos sólidos de administración, finanzas y dirección de empresas que le permiten optimizar los procesos industriales, comerciales y de servicios.',
             ],
-            sourceUrl: '',
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-industrial.html',
         },
         ingenieriamecanica: {
             text: [
@@ -393,24 +394,24 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: 'https://oferta.unam.mx/ingenieria-mecatronica.html',
         },
         ingenieriapetrolera: {
-            text: [],
-            sourceUrl: '',
+            text: ["El ingeniero petrolero desarrolla métodos y aplica técnicas para explotar racionalmente los yacimientos de hidrocarburos, buscando siempre el beneficio social, ambiental y económico del país.",],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-petrolera.html',
         },
         ingenieriaquimica: {
-            text: [],
-            sourceUrl: '',
+            text: ["En esta carrera se forman profesionales encargados del diseño, manejo, optimización, control y administración de procesos y proyectos para la transformación física y/o química de materias primas, a fin de obtener productos y servicios útiles al hombre que sean, técnica, ambiental y económicamente factibles.",],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-quimica.html',
         },
         ingenieriaquimicametalurgica: {
-            text: [],
-            sourceUrl: '',
+            text: ["En la carrera de Ingeniería Química Metalúrgica se forman profesionales con una visión integral en el análisis, operación y desarrollo de la industria metalúrgica, cuyas funciones son: la extracción de metales, la fabricación de aleaciones, la protección y prevención de fallas de componentes metálicos, la manufactura de piezas de cerámicos, polímeros y materiales compuestos.", "Realizan actividades de evaluación, control, modificación y diseño de componentes metálicos y sus procesos de producción aplicando las bases científicas de la química, la física y las matemáticas."],
+            sourceUrl: 'https://oferta.unam.mx/ingenieria-quim-meta.html',
         },
         instrumentista: {
             text: [],
             sourceUrl: '',
         },
         investigacionbiomedicabasica: {
-            text: [],
-            sourceUrl: '',
+            text: ["En Investigación Biomédica Básica se forman científicos en biomedicina y biología, a través de la enseñanza tutoral impartida por investigadores de alto nivel.", "Algunas de las áreas de investigación de esta carrera son: Biología Celular, Bioquímica, Genética, Genómica, Inmunología, Neurociencias, Parasitología, Virología, Biotecnología, Biología del Desarrollo, y Regulación Metabólica."],
+            sourceUrl: 'https://oferta.unam.mx/investigacion-biomedica.html',
         },
         lenguayliteraturashispanicas: {
             text: [],
@@ -457,8 +458,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         matematicas: {
-            text: [],
-            sourceUrl: '',
+            text: ["El matemático es el profesionista capaz de encontrar analogías y de modelar situaciones reales, aprende las matemáticas y sus relaciones con otras disciplinas tanto científicas como sociales, en las cuales motiva y resuelve problemas.", "Lleva a cabo investigación pura en alguna rama de las matemáticas, o bien, investigación aplicada a otras ciencias: economía, medicina, sociología, ingeniería, física y biología."],
+            sourceUrl: 'https://oferta.unam.mx/matematicas.html',
         },
         matematicasaplicadas: {
             text: [],
@@ -481,7 +482,7 @@ const descriptionsByNormalizedName: Record<
         medicocirujano: {
             text: [
                 'La Medicina es el conjunto de disciplinas científicas cuyo propósito primordial es promover, conservar y restaurar la salud de las personas, actuando siempre bajo un marco de referencia humanista. Su misión está enfocada a formar a los líderes de las próximas generaciones de médicos mexicanos y contribuir a establecer un sistema de salud capaz de desarrollar las capacidades físicas y mentales de nuestra población y colaborar en la preparación de investigadores en el campo de las Ciencias Médicas.',
-                ' El médico es un profesionista comprometido a preservar, mejorar y restablecer la salud del ser humano. Sus acciones se fundamentan en el conocimiento científico de los fenómenos biológicos, psicológicos y sociales. Su ejercicio profesional se orienta primordialmente a la práctica clínica, la cual debe ejercer con conocimiento, pericia, humanismo, arte, prudencia y juicio crítico, guiándose por un código ético que considera a la vida humana como valor supremo.',
+                'El médico es un profesionista comprometido a preservar, mejorar y restablecer la salud del ser humano. Sus acciones se fundamentan en el conocimiento científico de los fenómenos biológicos, psicológicos y sociales. Su ejercicio profesional se orienta primordialmente a la práctica clínica, la cual debe ejercer con conocimiento, pericia, humanismo, arte, prudencia y juicio crítico, guiándose por un código ético que considera a la vida humana como valor supremo.',
             ],
             sourceUrl: 'https://oferta.unam.mx/medico-cirujano.html',
         },
@@ -524,8 +525,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         pedagogia: {
-            text: [],
-            sourceUrl: '',
+            text: [ "El pedagogo estudia integralmente la educación para describir, comprender, explicar, evaluar e intervenir en el fortalecimiento y mejora de los procesos educativos, analiza y propone alternativas de solución en problemas relacionados con el campo educativo, además de atender a diversos sectores de la población que requieren ayuda pedagógica.", "Desarrolla actividades de docencia, orientación educativa, educación permanente y capacitación, administración y gestión educativas, desarrollo curricular, comunicación e investigación en este campo, en instituciones públicas y privadas o en el ejercicio libre de la profesión, atendiendo las distintas orientaciones de la práctica profesional." ],
+            sourceUrl: 'https://oferta.unam.mx/pedagogia.html',
         },
         piano: {
             text: [],
@@ -592,8 +593,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         trabajosocial: {
-            text: [],
-            sourceUrl: '',
+            text: [ "El licenciado en Trabajo Social es un profesional que interviene en los contextos sociales a través de generar estrategias y alternativas de solución a las necesidades y problemas de alcance nacional e internacional, tomando en cuenta los escenarios sociales, políticos, jurídicos, administrativos, organizativos, económicos y educativos con miras a transformar las realidades sociales.", "Está preparado para atender problemáticas multidimensionales que requieren un abordaje desde diversas miradas disciplinarias, ya que busca contribuir en la mejora de las condiciones de vida de la población y el fortalecimiento del tejido social."],
+            sourceUrl: 'https://oferta.unam.mx/trabajo-social.html',
         },
         traduccion: {
             text: [],
@@ -1104,8 +1105,8 @@ const descriptionsByNormalizedName: Record<
             sourceUrl: '',
         },
         cienciadedatos: {
-            text: [],
-            sourceUrl: '',
+            text: [ "Ciencia de Datos es una carrera indispensable para resolver necesidades en el manejo actual y futuro de la información.", "Sus labores fundamentales son: seleccionar, limpiar, consolidar y preparar los datos para posteriormente: analizar, predecir, describir comportamientos o conocimientos nuevos para la toma de decisiones. Los dominios de aplicación de esas habilidades pueden ser empresariales, gubernamentales o científicos."],
+            sourceUrl: 'https://oferta.unam.mx/ciencia-de-datos.html',
         },
         cienciasdelainformatica: {
             text: [],
