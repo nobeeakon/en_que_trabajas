@@ -41,7 +41,6 @@ export const getPagesWithSimilarDegreesInfo = () => {
 };
 
 const degreeRelations: Record<DegreeLevel, Record<string, DegreeInfo[]>> = {
-    postdoc: {},
     lic: {
         administracion: [
             {
@@ -9806,8 +9805,2287 @@ const degreeRelations: Record<DegreeLevel, Record<string, DegreeInfo[]>> = {
                 name: 'Ingeniería Física',
             },
         ],
+        maestriaencienciasinstrumentacionycontrolautomatico: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaencontrolyautomatizacion',
+                name: 'Ingeniería en Control y Automatización',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenautomatizacion',
+                name: 'Ingeniería en Automatización',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadeningenieriamecanicaautomatizaciondeprocesosindustriales',
+                name: 'Especialidad en Ingeniería Mecánica (Automatización de Procesos Industriales)',
+            },
+        ],
+        maestriaencienciasmecatronica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriamecatronica',
+                name: 'Ingeniería Mecatrónica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'ingenieriaensistemasmecatronicosindustriales',
+                name: 'Ingeniería en Sistemas Mecatrónicos Industriales',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoeningenieriadesistemasroboticosymecatronicos',
+                name: 'Doctorado en Ingeniería de Sistemas Robóticos y Mecatrónicos',
+            },
+        ],
+        maestriaencienciasnanotecnologia: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nanotecnologia',
+                name: 'Nanotecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaennanotecnologia',
+                name: 'Ingeniería en Nanotecnología',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoennanocienciasymicronanotecnologia',
+                name: 'Doctorado en Nanociencias y Micro-Nanotecnología',
+            },
+        ],
+        maestriaencienciasdeenfermeria: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'enfermeria',
+                name: 'Enfermería',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenenfermeria',
+                name: 'Maestría en Enfermería',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'enfermeriayobstetricia',
+                name: 'Enfermería y Obstetricia',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenenfermeriadepracticaavanzada',
+                name: 'Maestría en Enfermería de Práctica Avanzada',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenmanejoagroecologicodeplagasyenfermedades',
+                name: 'Maestría en Ciencias en Manejo Agroecológico de Plagas y Enfermedades',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenenfermeria',
+                name: 'Doctorado en Enfermería',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidaddeenfermeriaengerontogeriatria',
+                name: 'Especialidad de Enfermería en Gerontogeriatría',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidaddeenfermeriaperinatal',
+                name: 'Especialidad de Enfermería Perinatal',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidaddeenfermeriaencuidadosintensivos',
+                name: 'Especialidad de Enfermería en Cuidados Intensivos',
+            },
+        ],
+        maestriaencienciasdelaeducacion: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencreacioneducativa',
+                name: 'Maestría en Creación Educativa',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenarteparalaeducacion',
+                name: 'Maestría en Arte para la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendesarrolloyplaneaciondelaeducacion',
+                name: 'Maestría en Desarrollo y Planeación de la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendocenciaparalaeducacionmediasuperior',
+                name: 'Maestría en Docencia para la Educación Media Superior',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'pedagogia',
+                name: 'Pedagogía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpedagogia',
+                name: 'Maestría en Pedagogía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpedagogia',
+                name: 'Doctorado en Pedagogía',
+            },
+        ],
+        maestriaencienciasdelaenergia: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenenergia',
+                name: 'Ingeniería en Energía',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenenergiasrenovables',
+                name: 'Ingeniería en Energías Renovables',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'ingenieriaensistemasenergeticosyredesinteligentes',
+                name: 'Ingeniería en Sistemas Energéticos y Redes Inteligentes',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenenergiaymedioambiente',
+                name: 'Maestría en Energía y Medio Ambiente',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasdeingenieriaensistemasenergeticos',
+                name: 'Maestría en Ciencias de Ingeniería en Sistemas Energéticos',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaeningenieriadehidrocarburosysusenergeticosasociados',
+                name: 'Maestría en Ingeniería de Hidrocarburos y sus Energéticos Asociados',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenenergiaymedioambiente',
+                name: 'Doctorado en Energía y Medio Ambiente',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenenergia',
+                name: 'Doctorado en Energía',
+            },
+        ],
+        maestriaencienciasdelanutricionhumana: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutriologia',
+                name: 'Nutriología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricionhumana',
+                name: 'Nutrición Humana',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricion',
+                name: 'Nutrición',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciadelanutricionhumana',
+                name: 'Ciencia de la Nutrición Humana',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaennutricionclinicaintegral',
+                name: 'Maestría en Nutrición Clínica Integral',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadennutricionyalimentosfuncionales',
+                name: 'Especialidad en Nutrición y Alimentos Funcionales',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadenmanejonutriciodelaobesidadyelsindromemetabolico',
+                name: 'Especialidad en Manejo Nutricio de la Obesidad y el Síndrome Metabólico',
+            },
+        ],
+        maestriaencienciasdelarehabilitacionenelmovimientohumano: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenrehabilitacionneurologica',
+                name: 'Maestría en Rehabilitación Neurológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'fisioterapia',
+                name: 'Fisioterapia',
+            },
+        ],
+        maestriaencienciaseconomicoadministrativas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'economia',
+                name: 'Economía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaeneconomia',
+                name: 'Maestría en Economía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoeneconomia',
+                name: 'Doctorado en Economía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciaseconomicas',
+                name: 'Maestría en Ciencias Económicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'administracion',
+                name: 'Administración',
+            },
+        ],
+        maestriaencienciasenbiomedicina: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiomedicinamolecular',
+                name: 'Maestría en Ciencias en Biomedicina Molecular',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiomedicinaybiotecnologiamolecular',
+                name: 'Maestría en Ciencias en Biomedicina y Biotecnología Molecular',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiabiomedica',
+                name: 'Psicología Biomédica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriabiomedica',
+                name: 'Ingeniería Biomédica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasingenieriabiomedica',
+                name: 'Maestría en Ciencias (Ingeniería Biomédica)',
+            },
+        ],
+        maestriaencienciaseninteligenciaartificial: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaeninteligenciaartificial',
+                name: 'Ingeniería en Inteligencia Artificial',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciasdedatos',
+                name: 'Ciencias de Datos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciadedatos',
+                name: 'Ciencia de Datos',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciadedatos',
+                name: 'Maestría en Ciencia de Datos',
+            },
+        ],
+        maestriaencienciasenneurometabolismo: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutriologia',
+                name: 'Nutriología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricionhumana',
+                name: 'Nutrición Humana',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricion',
+                name: 'Nutrición',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciadelanutricionhumana',
+                name: 'Ciencia de la Nutrición Humana',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelanutricionhumana',
+                name: 'Maestría en Ciencias de la Nutrición Humana',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaennutricionclinicaintegral',
+                name: 'Maestría en Nutrición Clínica Integral',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadennutricionyalimentosfuncionales',
+                name: 'Especialidad en Nutrición y Alimentos Funcionales',
+            },
+        ],
+        maestriaencienciasentecnologiassustentables: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'ingenieriaennegociosenergeticossustentables',
+                name: 'Ingeniería en Negocios Energéticos Sustentables',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciadematerialessustentables',
+                name: 'Ciencia de Materiales Sustentables',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaensostenibilidadeinnovacionentecnologiaambiental',
+                name: 'Maestría en Sostenibilidad e Innovación en Tecnología Ambiental',
+            },
+        ],
+        maestriaencienciasjuridicas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'derecho',
+                name: 'Derecho',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenderecho',
+                name: 'Maestría en Derecho',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenderechoshumanos',
+                name: 'Maestría en Derechos Humanos',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenconservacionyaprovechamientoderecursosnaturales',
+                name: 'Maestría en Ciencias en Conservación y Aprovechamiento de Recursos Naturales',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenderecho',
+                name: 'Doctorado en Derecho',
+            },
+        ],
+        maestriaencienciasquimicobiologicas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicafarmaceuticabiologica',
+                name: 'Química Farmacéutica Biológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicofarmaceuticobiologo',
+                name: 'Químico Farmacéutico Biólogo',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'microbiologia',
+                name: 'Microbiología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasbiologicas',
+                name: 'Maestría en Ciencias Biológicas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiologia',
+                name: 'Maestría en Biología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiologiaexperimental',
+                name: 'Maestría en Biología Experimental',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasbiologicas',
+                name: 'Doctorado en Ciencias Biológicas',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasquimicobiologicas',
+                name: 'Doctorado en Ciencias Quimicobiológicas',
+            },
+        ],
+        maestriaencomunicacionyculturadigital: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'comunicacion',
+                name: 'Comunicación',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'disenoycomunicacionvisual',
+                name: 'Diseño y Comunicación Visual',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'arteycomunicaciondigitales',
+                name: 'Arte y Comunicación Digitales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencomunicacion',
+                name: 'Maestría en Comunicación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaendisenoycomunicacionvisual',
+                name: 'Maestría en Diseño y Comunicación Visual',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendisenoinformacionycomunicacion',
+                name: 'Maestría en Diseño, Información y Comunicación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendisenoycomunicacionhipermedial',
+                name: 'Maestría en Diseño y Comunicación Hipermedial',
+            },
+        ],
+        maestriaencreacioneducativa: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'innovacionygestioneducativa',
+                name: 'Innovación y Gestión Educativa',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendocenciaparalaeducacionmediasuperior',
+                name: 'Maestría en Docencia para la Educación Media Superior',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendesarrolloyplaneaciondelaeducacion',
+                name: 'Maestría en Desarrollo y Planeación de la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelaeducacion',
+                name: 'Maestría en Ciencias de la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministracionengestionydesarrollodelaeducacion',
+                name: 'Maestría en Administración en Gestión y Desarrollo de la Educación',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadensociologiadeeducacionsuperior',
+                name: 'Especialidad en Sociología de Educación Superior',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadengestiondeinstitucioneseducativas',
+                name: 'Especialidad en Gestión de Instituciones Educativas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpedagogia',
+                name: 'Maestría en Pedagogía',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'pedagogia',
+                name: 'Pedagogía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpedagogia',
+                name: 'Doctorado en Pedagogía',
+            },
+        ],
+        maestriaenderechoshumanos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'derecho',
+                name: 'Derecho',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenderecho',
+                name: 'Maestría en Derecho',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenderecho',
+                name: 'Doctorado en Derecho',
+            },
+        ],
+        maestriaendidacticadelascienciasmodalidadvirtual: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendidacticadelasmatematicasydelasciencias',
+                name: 'Maestría en Didáctica de las Matemáticas y de las Ciencias',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'pedagogia',
+                name: 'Pedagogía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpedagogia',
+                name: 'Maestría en Pedagogía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpedagogia',
+                name: 'Doctorado en Pedagogía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendocenciaparalaeducacionmediasuperior',
+                name: 'Maestría en Docencia para la Educación Media Superior',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelaeducacion',
+                name: 'Maestría en Ciencias de la Educación',
+            },
+        ],
+        maestriaendidacticadelasmatematicasydelasciencias: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenaprendizajedelalenguaylasmatematicas',
+                name: 'Maestría en Aprendizaje de la Lengua y las Matemáticas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'pedagogia',
+                name: 'Pedagogía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpedagogia',
+                name: 'Maestría en Pedagogía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpedagogia',
+                name: 'Doctorado en Pedagogía',
+            },
+        ],
+        maestriaendireccionygestiondeproyectosartisticosyculturales: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'artesvisuales',
+                name: 'Artes Visuales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'arteydiseno',
+                name: 'Arte y Diseño',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenartesvisuales',
+                name: 'Maestría en Artes Visuales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenestudiosinterdisciplinariosenarteyhumanidadesmeiah',
+                name: 'Maestría en Estudios Interdisciplinarios en Arte y Humanidades (MEIAH)',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenartesydiseno',
+                name: 'Doctorado en Artes y Diseño',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoenprocesosculturalesparaeldisenoyelarte',
+                name: 'Doctorado en Procesos Culturales para el Diseño y el Arte',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasyartesparaeldiseno',
+                name: 'Doctorado en Ciencias y Artes para el Diseño',
+            },
+        ],
+        maestriaendisenoeinnovacion: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaengestiondelainnovacion',
+                name: 'Maestría en Gestión de la Innovación',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoengestionypoliticadeinnovacion',
+                name: 'Doctorado en Gestión y Política de Innovación',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadengestionestrategicadelainnovacionydelapropiedadindustrial',
+                name: 'Especialidad en Gestión Estratégica de la Innovación y de la Propiedad Industrial',
+            },
+        ],
+        maestriaendisenoycomunicacionhipermedial: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'comunicacion',
+                name: 'Comunicación',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciasdelacomunicacion',
+                name: 'Ciencias de la Comunicación',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'comunicacionyperiodismo',
+                name: 'Comunicación y Periodismo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencomunicacion',
+                name: 'Maestría en Comunicación',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'disenodelacomunicaciongrafica',
+                name: 'Diseño de la Comunicación Gráfica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaendisenoycomunicacionvisual',
+                name: 'Maestría en Diseño y Comunicación Visual',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendisenoinformacionycomunicacion',
+                name: 'Maestría en Diseño, Información y Comunicación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencomunicacionyculturadigital',
+                name: 'Maestría en Comunicación y Cultura Digital',
+            },
+        ],
+        maestriaeneducacionparalaciudadania: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiaeducativa',
+                name: 'Psicología Educativa',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencreacioneducativa',
+                name: 'Maestría en Creación Educativa',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelaeducacion',
+                name: 'Maestría en Ciencias de la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministracionengestionydesarrollodelaeducacion',
+                name: 'Maestría en Administración en Gestión y Desarrollo de la Educación',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadensociologiadeeducacionsuperior',
+                name: 'Especialidad en Sociología de Educación Superior',
+            },
+        ],
+        maestriaenelmanejoclinicoavanzadodeheridasestomasyquemaduras: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicina',
+                name: 'Medicina',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicinageneral',
+                name: 'Medicina General',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'enfermeria',
+                name: 'Enfermería',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdeenfermeria',
+                name: 'Maestría en Ciencias de Enfermería',
+            },
+        ],
+        maestriaenensenanzadelenguasycultura: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'ensenanzadealemanespanolfrancesinglesoitalianocomolenguaextranjera',
+                name: 'Enseñanza de (Alemán; Español; Francés; Inglés o Italiano) como Lengua Extranjera',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturashispanicas',
+                name: 'Lengua y Literaturas Hispánicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasalemanas',
+                name: 'Lengua y Literaturas Modernas Alemanas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasfrancesas',
+                name: 'Lengua y Literaturas Modernas Francesas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasinglesas',
+                name: 'Lengua y Literaturas Modernas Inglesas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasitalianas',
+                name: 'Lengua y Literaturas Modernas Italianas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasportuguesas',
+                name: 'Lengua y Literaturas Modernas Portuguesas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguasmodernasdelfrances',
+                name: 'Lenguas Modernas del Francés',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguasmodernasenespanol',
+                name: 'Lenguas Modernas en Español',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguasmodernasingles',
+                name: 'Lenguas Modernas Inglés',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'profesorasociadoenlaensenanzadelenguas',
+                name: 'Profesor Asociado en la Enseñanza de Lenguas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenaprendizajedelalenguaylasmatematicas',
+                name: 'Maestría en Aprendizaje de la Lengua y las Matemáticas',
+            },
+        ],
+        maestriaenensenanzaenestudiosliterarios: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'estudiosliterarios',
+                name: 'Estudios Literarios',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenliteraturamexicanacontemporanea',
+                name: 'Maestría en Literatura Mexicana Contemporánea',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadenliteraturamexicanadelsigloxx',
+                name: 'Especialidad en Literatura Mexicana del Siglo XX',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturashispanicas',
+                name: 'Lengua y Literaturas Hispánicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasalemanas',
+                name: 'Lengua y Literaturas Modernas Alemanas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasfrancesas',
+                name: 'Lengua y Literaturas Modernas Francesas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasinglesas',
+                name: 'Lengua y Literaturas Modernas Inglesas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasitalianas',
+                name: 'Lengua y Literaturas Modernas Italianas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'lenguayliteraturasmodernasportuguesas',
+                name: 'Lengua y Literaturas Modernas Portuguesas',
+            },
+        ],
+        maestriaenestrategiadenegociosinternacionales: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'negociosinternacionales',
+                name: 'Negocios Internacionales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'relacionesinternacionales',
+                name: 'Relaciones Internacionales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'negociosycomerciointernacional',
+                name: 'Negocios y Comercio Internacional',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'comerciointernacional',
+                name: 'Comercio Internacional',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenestudiosinterdisciplinariosparapequenasymedianasempresas',
+                name: 'Maestría en Ciencias en Estudios Interdisciplinarios para Pequeñas y Medianas Empresas',
+            },
+        ],
+        maestriaenestudiosamerindiosyeducacionbilingue: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'pedagogia',
+                name: 'Pedagogía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpedagogia',
+                name: 'Maestría en Pedagogía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpedagogia',
+                name: 'Doctorado en Pedagogía',
+            },
+        ],
+        maestriaenestudioshistoricos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'historia',
+                name: 'Historia',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenhistoria',
+                name: 'Maestría en Historia',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenhistoriografia',
+                name: 'Maestría en Historiografía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenhistoria',
+                name: 'Doctorado en Historia',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenhistoriografia',
+                name: 'Doctorado en Historiografía',
+            },
+        ],
+        maestriaenestudiosinterdisciplinariosenarteyhumanidadesmeiah: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'humanidades',
+                name: 'Humanídades',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenhumanidades',
+                name: 'Maestría en Humanidades',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenhumanidades',
+                name: 'Doctorado en Humanidades',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'arteydiseno',
+                name: 'Arte y Diseño',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'artesvisuales',
+                name: 'Artes Visuales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenartes',
+                name: 'Maestría en Artes',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenartesydiseno',
+                name: 'Doctorado en Artes y Diseño',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoenprocesosculturalesparaeldisenoyelarte',
+                name: 'Doctorado en Procesos Culturales para el Diseño y el Arte',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasyartesparaeldiseno',
+                name: 'Doctorado en Ciencias y Artes para el Diseño',
+            },
+        ],
+        maestriaenestudiosmultidisciplinariossobreeltrabajo: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'trabajosocial',
+                name: 'Trabajo Social',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaentrabajosocial',
+                name: 'Maestría en Trabajo Social',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasensaluddelostrabajadores',
+                name: 'Maestría en Ciencias en Salud de los Trabajadores',
+            },
+        ],
+        maestriaeneticaaplicadaybioetica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'filosofia',
+                name: 'Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofia',
+                name: 'Maestría en Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofiadelaciencia',
+                name: 'Maestría en Filosofía de la Ciencia',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofia',
+                name: 'Doctorado en Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenfilosofiacontemporaneaaplicada',
+                name: 'Maestría en Filosofía Contemporánea Aplicada',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofiadelaciencia',
+                name: 'Doctorado en Filosofía de la Ciencia',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbioetica',
+                name: 'Maestría en Bioética',
+            },
+        ],
+        maestriaenfilosofiacontemporaneaaplicada: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbioetica',
+                name: 'Maestría en Bioética',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaeneticaaplicadaybioetica',
+                name: 'Maestría en Ética Aplicada y Bioética',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'filosofia',
+                name: 'Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofia',
+                name: 'Maestría en Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofiadelaciencia',
+                name: 'Maestría en Filosofía de la Ciencia',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofia',
+                name: 'Doctorado en Filosofía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofiadelaciencia',
+                name: 'Doctorado en Filosofía de la Ciencia',
+            },
+        ],
+        maestriaengestiondelatecnologia: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'administracionentecnologiasdeinformacion',
+                name: 'Administración en Tecnologías de Información',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'gestionydesarrollodeempresassociales',
+                name: 'Gestión y Desarrollo de Empresas Sociales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaengestiondelainnovacion',
+                name: 'Maestría en Gestión de la Innovación',
+            },
+        ],
+        maestriaengestioneinnovacionpublica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciaspoliticasyadministracionpublica',
+                name: 'Ciencias Políticas y Administración Pública',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'gestionpublicaygobierno',
+                name: 'Gestión Pública y Gobierno',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpoliticaspublicas',
+                name: 'Maestría en Políticas Públicas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministracionpublicaestatalymunicipal',
+                name: 'Maestría en Administración Pública Estatal y Municipal',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministracionypoliticaspublicas',
+                name: 'Maestría en Administración y Políticas Públicas',
+            },
+        ],
+        maestriaengestionintegradadecuencas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'estudiossocioterritoriales',
+                name: 'Estudios Socioterritoriales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'planeacionterritorial',
+                name: 'Planeación Territorial',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenrecursoshidricos',
+                name: 'Ingeniería en Recursos Hídricos',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciashidrologiaambiental',
+                name: 'Maestría en Ciencias (Hidrología Ambiental)',
+            },
+        ],
+        maestriaenimpuestos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'contaduria',
+                name: 'Contaduría',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'contadorpublico',
+                name: 'Contador Público',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'contaduriayfinanzaspublicas',
+                name: 'Contaduría y Finanzas Públicas',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidadenimpuestos',
+                name: 'Especialidad en Impuestos',
+            },
+        ],
+        maestriaeningenieriadecalidadyproductividad: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciaseningenieriaenproduccionmaslimpia',
+                name: 'Maestría en Ciencias en Ingeniería en Producción más Limpia',
+            },
+        ],
+        maestriaeningenieriadeviasterrestres: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriacivil',
+                name: 'Ingeniería Civil',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaeningenieriacivil',
+                name: 'Maestría en Ingeniería Civil',
+            },
+        ],
+        maestriaeningenieriaenbiosistemas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriabiotecnologica',
+                name: 'Ingeniería Biotecnológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenbiotecnologia',
+                name: 'Ingeniería en Biotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologia',
+                name: 'Maestría en Biotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologiaaplicada',
+                name: 'Maestría en Biotecnología Aplicada',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologiaproductiva',
+                name: 'Maestría en Biotecnología Productiva',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenbiotecnologia',
+                name: 'Doctorado en Biotecnología',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidadenbiotecnologia',
+                name: 'Especialidad en Biotecnología',
+            },
+        ],
+        maestriaeninnovacionenentornosvirtualesdeensenanzaaprendizaje: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'innovacionygestioneducativa',
+                name: 'Innovación y Gestión Educativa',
+            },
+        ],
+        maestriaeninvestigacionmedica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'fisicabiomedica',
+                name: 'Física Biomédica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaensistemasbiomedicos',
+                name: 'Ingeniería en Sistemas Biomédicos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'investigacionbiomedicabasica',
+                name: 'Investigación Biomédica Básica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriabiomedica',
+                name: 'Ingeniería Biomédica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasenbiomedicina',
+                name: 'Maestría en Ciencias en Biomedicina',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiomedicinaybiotecnologiamolecular',
+                name: 'Maestría en Ciencias en Biomedicina y Biotecnología Molecular',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasbiomedicas',
+                name: 'Doctorado en Ciencias Biomédicas',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasingenieriabiomedica',
+                name: 'Doctorado en Ciencias (Ingeniería Biomédica)',
+            },
+        ],
+        maestriaenlinguistica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'linguistica',
+                name: 'Lingüística',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'linguisticaaplicada',
+                name: 'Lingüística Aplicada',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenlinguisticaaplicada',
+                name: 'Maestría en Lingüística Aplicada',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenlinguisticahispanica',
+                name: 'Maestría en Lingüística Hispánica',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenlinguistica',
+                name: 'Doctorado en Lingüística',
+            },
+        ],
+        maestriaennutricionclinicaintegral: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciadelanutricionhumana',
+                name: 'Ciencia de la Nutrición Humana',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutriologia',
+                name: 'Nutriología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricionhumana',
+                name: 'Nutrición Humana',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'nutricion',
+                name: 'Nutrición',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelanutricionhumana',
+                name: 'Maestría en Ciencias de la Nutrición Humana',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadenmanejonutriciodelaobesidadyelsindromemetabolico',
+                name: 'Especialidad en Manejo Nutricio de la Obesidad y el Síndrome Metabólico',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadennutricionyalimentosfuncionales',
+                name: 'Especialidad en Nutrición y Alimentos Funcionales',
+            },
+        ],
+        maestriaenpsicologiaclinica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologia',
+                name: 'Psicología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiadeltrabajo',
+                name: 'Psicología del Trabajo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpsicologia',
+                name: 'Maestría en Psicología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenintervencionpsicologica',
+                name: 'Maestría en Intervención Psicológica',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpsicologia',
+                name: 'Doctorado en Psicología',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenpsicologiasocial',
+                name: 'Doctorado en Psicología Social',
+            },
+        ],
+        maestriaenpsicologiadeltrabajo: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiadeltrabajo',
+                name: 'Psicología del Trabajo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaentrabajosocial',
+                name: 'Maestría en Trabajo Social',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasensaluddelostrabajadores',
+                name: 'Maestría en Ciencias en Salud de los Trabajadores',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenestudiosmultidisciplinariossobreeltrabajo',
+                name: 'Maestría en Estudios Multidisciplinarios Sobre el Trabajo',
+            },
+        ],
+        maestriaenquimicaclinicadiagnostica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimica',
+                name: 'Química',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicafarmaceuticobiologica',
+                name: 'Química Farmacéutico Biológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicafarmaceuticabiologica',
+                name: 'Química Farmacéutica Biológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicofarmaceuticobiologo',
+                name: 'Químico Farmacéutico Biólogo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasenfarmacologia',
+                name: 'Maestría en Ciencias en Farmacología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasfarmaceuticas',
+                name: 'Maestría en Ciencias Farmacéuticas',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasfarmaceuticas',
+                name: 'Doctorado en Ciencias Farmacéuticas',
+            },
+        ],
+        maestriaensaludmentaldelainfanciaylaadolescencia: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologia',
+                name: 'Psicología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiaeducativa',
+                name: 'Psicología Educativa',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpsicologiaclinica',
+                name: 'Maestría en Psicología Clínica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenpsicologiasocialdegruposeinstituciones',
+                name: 'Maestría en Psicología Social de Grupos e Instituciones',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenintervencionpsicologica',
+                name: 'Maestría en Intervención Psicológica',
+            },
+        ],
+        maestriaensaludyproduccionanimalsustentable: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'produccionanimal',
+                name: 'Producción Animal',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasdelaproduccionydelasaludanimal',
+                name: 'Maestría en Ciencias de la Producción y de la Salud Animal',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenbiologiadelareproduccionanimal',
+                name: 'Maestría en Biología de la Reproducción Animal',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoencienciasdelaproduccionydelasaludanimal',
+                name: 'Doctorado en Ciencias de la Producción y de la Salud Animal',
+            },
+        ],
+        maestriaensistemascomputacionales: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaencomputacion',
+                name: 'Ingeniería en Computación',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciasdelacomputacion',
+                name: 'Ciencias de la Computación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciaeingenieriadelacomputacion',
+                name: 'Maestría en Ciencia e Ingeniería de la Computación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelacomputacion',
+                name: 'Maestría en Ciencias de la Computación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciaseningenieriadecomputo',
+                name: 'Maestría en Ciencias en Ingeniería de Cómputo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaentecnologiadecomputo',
+                name: 'Maestría en Tecnología de Cómputo',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasensistemascomputacionalesmoviles',
+                name: 'Maestría en Ciencias en Sistemas Computacionales Móviles',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidadencomputodealtorendimiento',
+                name: 'Especialidad en Cómputo de Alto Rendimiento',
+            },
+        ],
+        maestriaensistemasdeinformaciongestionytecnologia: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'tecnologia',
+                name: 'Tecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'tecnologiasparalainformacionenciencias',
+                name: 'Tecnologías para la Información en Ciencias',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaengestiondelatecnologia',
+                name: 'Maestría en Gestión de la Tecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaentecnologiaavanzada',
+                name: 'Maestría en Tecnología Avanzada',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadenseguridadinformaticaytecnologiasdelainformacion',
+                name: 'Especialidad en Seguridad Informática y Tecnologías de la Información',
+            },
+        ],
+        maestriaensoftwareembebido: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriadesoftware',
+                name: 'Ingeniería de Software',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'tecnologiasysistemasdeinformacion',
+                name: 'Tecnologías y Sistemas de Información',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaensistemascomputacionales',
+                name: 'Ingeniería en Sistemas Computacionales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasensistemasdigitales',
+                name: 'Maestría en Ciencias en Sistemas Digitales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciaseningenieriadesistemas',
+                name: 'Maestría en Ciencias en Ingeniería de Sistemas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasensistemascomputacionalesmoviles',
+                name: 'Maestría en Ciencias en Sistemas Computacionales Móviles',
+            },
+        ],
+        maestriaestudiosantropologicosensociedadescontemporaneas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'sociologia',
+                name: 'Sociología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaensociologia',
+                name: 'Maestría en Sociología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'sociologiaaplicada',
+                name: 'Sociologia Aplicada',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoensociologia',
+                name: 'Doctorado en Sociología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'antropologia',
+                name: 'Antropología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'antropologiasocial',
+                name: 'Antropología Social',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenantropologia',
+                name: 'Maestría en Antropología',
+            },
+        ],
+        maestriaenartes: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'artesvisuales',
+                name: 'Artes Visuales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenartesvisuales',
+                name: 'Maestría en Artes Visuales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaendocenciaenartesydiseno',
+                name: 'Maestría en Docencia en Artes y Diseño',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasyartesparaeldiseno',
+                name: 'Maestría en Ciencias y Artes para el Diseño',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenartesydiseno',
+                name: 'Doctorado en Artes y Diseño',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'artesvisualesconespecialidadenartesplasticas',
+                name: 'Artes Visuales con Especialidad en Artes Plásticas',
+            },
+        ],
+        maestriaenadministraciondeempresasparalasustentabilidad: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'administracionydesarrolloempresarial',
+                name: 'Administración y Desarrollo Empresarial',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'gestionydesarrollodeempresassociales',
+                name: 'Gestión y Desarrollo de Empresas Sociales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'economiaempresarial',
+                name: 'Economía Empresarial',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenestudiosinterdisciplinariosparapequenasymedianasempresas',
+                name: 'Maestría en Ciencias en Estudios Interdisciplinarios para Pequeñas y Medianas Empresas',
+            },
+        ],
+        maestriaenadministracioneinnovaciondelturismo: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'turismoydesarrollosostenible',
+                name: 'Turismo y Desarrollo Sostenible',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'negociosturisticos',
+                name: 'Negocios Turísticos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'turismo',
+                name: 'Turismo',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'gestiondelturismoculturalynatural',
+                name: 'Gestión del Turismo Cultural y Natural',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'turismosustentable',
+                name: 'Turismo Sustentable',
+            },
+        ],
+        maestriaenadministracionengestionydesarrollodelaeducacion: [
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendocenciaparalaeducacionmediasuperior',
+                name: 'Maestría en Docencia para la Educación Media Superior',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaendesarrolloyplaneaciondelaeducacion',
+                name: 'Maestría en Desarrollo y Planeación de la Educación',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencreacioneducativa',
+                name: 'Maestría en Creación Educativa',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName:
+                    'especialidadengestiondeinstitucioneseducativas',
+                name: 'Especialidad en Gestión de Instituciones Educativas',
+            },
+        ],
+        maestriaenadministracionypoliticaspublicas: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'politicaspublicas',
+                name: 'Políticas Públicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciaspoliticasyadministracionpublica',
+                name: 'Ciencias Políticas y Administración Pública',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenpoliticaspublicas',
+                name: 'Maestría en Políticas Públicas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministracionpublicaestatalymunicipal',
+                name: 'Maestría en Administración Pública Estatal y Municipal',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaengestioneinnovacionpublica',
+                name: 'Maestría en Gestión e Innovación Pública',
+            },
+        ],
+        maestriaenbiociencias: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+        ],
+        maestriaenbioetica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'filosofia',
+                name: 'Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofia',
+                name: 'Maestría en Filosofía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenfilosofiadelaciencia',
+                name: 'Maestría en Filosofía de la Ciencia',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofia',
+                name: 'Doctorado en Filosofía',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenfilosofiadelaciencia',
+                name: 'Doctorado en Filosofía de la Ciencia',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenfilosofiacontemporaneaaplicada',
+                name: 'Maestría en Filosofía Contemporánea Aplicada',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaeneticaaplicadaybioetica',
+                name: 'Maestría en Ética Aplicada y Bioética',
+            },
+        ],
+        maestriaenbiotecnologiaaplicada: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenbiotecnologia',
+                name: 'Ingeniería en Biotecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenagrobiotecnologia',
+                name: 'Ingeniería en Agrobiotecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriabiotecnologica',
+                name: 'Ingeniería Biotecnológica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologia',
+                name: 'Maestría en Biotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologiaproductiva',
+                name: 'Maestría en Biotecnología Productiva',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiomedicinaybiotecnologiamolecular',
+                name: 'Maestría en Ciencias en Biomedicina y Biotecnología Molecular',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenbiotecnologia',
+                name: 'Doctorado en Biotecnología',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidadenbiotecnologia',
+                name: 'Especialidad en Biotecnología',
+            },
+        ],
+        maestriaenbiotecnologiaproductiva: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenbiotecnologia',
+                name: 'Ingeniería en Biotecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenagrobiotecnologia',
+                name: 'Ingeniería en Agrobiotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologia',
+                name: 'Maestría en Biotecnología',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenbiotecnologia',
+                name: 'Doctorado en Biotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiotecnologiagenomica',
+                name: 'Maestría en Ciencias en Biotecnología Genómica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiotecnologiaaplicada',
+                name: 'Maestría en Biotecnología Aplicada',
+            },
+            {
+                degreeLevel: 'esp',
+                normalizedDegreeName: 'especialidadenbiotecnologia',
+                name: 'Especialidad en Biotecnología',
+            },
+        ],
+        maestriaencienciaytecnologiadevacunasybioterapeuticos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'farmacia',
+                name: 'Farmacia',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicafarmaceuticobiologica',
+                name: 'Química Farmacéutico Biológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicofarmaceuticobiologo',
+                name: 'Químico Farmacéutico Biólogo',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicafarmaceuticabiologica',
+                name: 'Química Farmacéutica Biológica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriafarmaceutica',
+                name: 'Ingeniería Farmacéutica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicofarmaceuticoindustrial',
+                name: 'Quimico Farmacéutico Industrial',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasfarmaceuticas',
+                name: 'Maestría en Ciencias Farmacéuticas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasenfarmacologia',
+                name: 'Maestría en Ciencias en Farmacología',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasfarmaceuticas',
+                name: 'Doctorado en Ciencias Farmacéuticas',
+            },
+        ],
+        maestriaencienciasdeingenieriaenmicroelectronica: [
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName:
+                    'doctoradoennanocienciasymicronanotecnologia',
+                name: 'Doctorado en Nanociencias y Micro-Nanotecnología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasnanotecnologia',
+                name: 'Maestría en Ciencias (Nanotecnología)',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaennanotecnologia',
+                name: 'Ingeniería en Nanotecnología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaelectronica',
+                name: 'Ingeniería Electrónica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaelectromecanica',
+                name: 'Ingeniería Electromecánica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciaseningenieriaelectronica',
+                name: 'Maestría en Ciencias en Ingeniería Electrónica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciaseningenieriaelectromagnetica',
+                name: 'Maestría en Ciencias en Ingeniería Electromagnética',
+            },
+        ],
+        maestriaencienciasdeingenieriaensistemasenergeticos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenenergia',
+                name: 'Ingeniería en Energía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasdelaenergia',
+                name: 'Maestría en Ciencias de la Energía',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenenergiaymedioambiente',
+                name: 'Maestría en Energía y Medio Ambiente',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaeningenieriadehidrocarburosysusenergeticosasociados',
+                name: 'Maestría en Ingeniería de Hidrocarburos y sus Energéticos Asociados',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenenergiaymedioambiente',
+                name: 'Doctorado en Energía y Medio Ambiente',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenenergia',
+                name: 'Doctorado en Energía',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName:
+                    'ingenieriaensistemasenergeticosyredesinteligentes',
+                name: 'Ingeniería en Sistemas Energéticos y Redes Inteligentes',
+            },
+        ],
+        maestriaencienciasdelasalud: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicina',
+                name: 'Medicina',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicinageneral',
+                name: 'Medicina General',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicocirujanopartero',
+                name: 'Médico Cirujano Partero',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'medicocirujano',
+                name: 'Médico Cirujano',
+            },
+        ],
+        maestriaencienciasenadministraciondenegocios: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'negociosturisticos',
+                name: 'Negocios Turísticos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'negociosdigitales',
+                name: 'Negocios Digitales',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenestrategiadenegociosinternacionales',
+                name: 'Maestría en Estrategia de Negocios Internacionales',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'administracion',
+                name: 'Administración',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenadministracion',
+                name: 'Maestría en Administración',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'posgradointegralencienciasadministrativaspica',
+                name: 'Posgrado Integral en Ciencias Administrativas (PICA)',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaenadministraciondeempresasparalasustentabilidad',
+                name: 'Maestría en Administración de Empresas para la Sustentabilidad',
+            },
+        ],
+        maestriaencienciasenalimentos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'quimicadealimentos',
+                name: 'Química de Alimentos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciaytecnologiadealimentos',
+                name: 'Ciencia y Tecnología de Alimentos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaenalimentos',
+                name: 'Ingeniería en Alimentos',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciaytecnologiadealimentos',
+                name: 'Maestría en Ciencia y Tecnología de Alimentos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriaquimicaenalimentos',
+                name: 'Ingeniería Química en Alimentos',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriadelosalimentos',
+                name: 'Ingeniería de los Alimentos',
+            },
+        ],
+        maestriaencienciasenarquitecturayurbanismo: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'arquitectura',
+                name: 'Arquitectura',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'arquitecturadepaisaje',
+                name: 'Arquitectura de Paisaje',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieroarquitecto',
+                name: 'Ingeniero Arquitecto',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenarquitectura',
+                name: 'Maestría en Arquitectura',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoenarquitectura',
+                name: 'Doctorado en Arquitectura',
+            },
+        ],
+        maestriaencienciasenbiomedicinamolecular: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologiamolecular',
+                name: 'Biología Molecular',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName:
+                    'maestriaencienciasenbiomedicinaybiotecnologiamolecular',
+                name: 'Maestría en Ciencias en Biomedicina y Biotecnología Molecular',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologiaexperimental',
+                name: 'Biología Experimental',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+        ],
+        maestriaencienciasenbiomedicinaybiotecnologiamolecular: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologiaexperimental',
+                name: 'Biología Experimental',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'ingenieriabiomedica',
+                name: 'Ingeniería Biomédica',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'psicologiabiomedica',
+                name: 'Psicología Biomédica',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasenbiomedicina',
+                name: 'Maestría en Ciencias en Biomedicina',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasbiomedicas',
+                name: 'Doctorado en Ciencias Biomédicas',
+            },
+        ],
+        maestriaencienciasenbioprocesos: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologiaexperimental',
+                name: 'Biología Experimental',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiologia',
+                name: 'Maestría en Biología',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaenbiologiaexperimental',
+                name: 'Maestría en Biología Experimental',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasbiologicas',
+                name: 'Doctorado en Ciencias Biológicas',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasbiologicas',
+                name: 'Maestría en Ciencias Biológicas',
+            },
+        ],
+        maestriaencienciasenbiotecnologiagenomica: [
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciasgenomicas',
+                name: 'Ciencias Genómicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'cienciasagrogenomicas',
+                name: 'Ciencias Agrogenómicas',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologia',
+                name: 'Biología',
+            },
+            {
+                degreeLevel: 'lic',
+                normalizedDegreeName: 'biologiaexperimental',
+                name: 'Biología Experimental',
+            },
+            {
+                degreeLevel: 'msc',
+                normalizedDegreeName: 'maestriaencienciasbiologicas',
+                name: 'Maestría en Ciencias Biológicas',
+            },
+            {
+                degreeLevel: 'phd',
+                normalizedDegreeName: 'doctoradoencienciasbiologicas',
+                name: 'Doctorado en Ciencias Biológicas',
+            },
+        ],
     },
     phd: {},
     esp: {},
     tsu: {},
+    postdoc: {},
 };
